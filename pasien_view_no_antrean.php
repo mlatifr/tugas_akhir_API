@@ -1,20 +1,13 @@
 <?php
+
 error_reporting(E_ALL | E_PARSE);
-header("Access-Control-Allow-Origin: *");
-$arr = null;
-$conn = new mysqli("localhost", "root", "", "klinik");
-if ($conn->connect_error) {
-    $arr = ["result" => "error", "message" => "unable to connect"];
-    echo json_encode($arr);
-    die();
-}
+require 'connect.php';
+?>
+<?php
+
 $namaPasien = "%{$_POST['namaPasien']}%";
-$sql =
-    "SELECT 
-NIK,nama,tempat_lahir,tgl_lahir,kelamin,golongan_darah,alamat,agama,
-status_kawin,pekerjaan,kewarganegaraan,tlp,hp 
-FROM pasien where nama like ? ";
-$stmt = $conn->prepare($sql);
+$sql = "SELECT *from antrean where nama like ? ";
+$stmt = $con->prepare($sql);
 $stmt->bind_param("s", $namaPasien);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -29,4 +22,4 @@ if ($result->num_rows > 0) {
 }
 echo json_encode($arr);
 $stmt->close();
-$conn->close();
+$con->close();
