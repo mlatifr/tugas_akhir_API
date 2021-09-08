@@ -8,7 +8,7 @@ require 'connect.php';
 $user_id = "%{$_POST['user_id']}%";
 $tgl_visit = "%{$_POST['tgl_visit']}%";
 // echo $user_id . ' ' . $tgl_visit;
-$sql = "SELECT user.id as pasien_nama, visit.nomor_antrean as no_antre from visit
+$sql = "SELECT user.id as id_pasien, visit.nomor_antrean as no_antre from visit
 join visit_has_user on visit.id=visit_has_user.visit_id
 join user on visit_has_user.user_id=user.id
  where user.id like ? and visit.tgl_visit like ? ";
