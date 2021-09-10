@@ -8,7 +8,12 @@ require 'connect.php';
 // $user_id = "%{$_POST['user_id']}%";
 // $tgl_visit = "%{$_POST['tgl_visit']}%";
 // echo $user_id . ' ' . $tgl_visit;
-$sql = "SELECT vhu.user_id as pasien_id,`tgl_visit`,user.username as username,`nomor_antrean`,`status_antrean` 
+$sql = "SELECT 
+vhu.user_id as pasien_id,
+`tgl_visit`,user.username as username,
+`nomor_antrean`,
+`status_antrean`,
+`keluhan`
 FROM `visit`vst 
 join visit_has_user vhu on vst.id=vhu.visit_id 
 join user on vhu.user_id=user.id ";

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 09, 2021 at 03:52 PM
+-- Generation Time: Sep 10, 2021 at 06:45 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -199,7 +199,7 @@ CREATE TABLE `antrean` (
 --
 
 INSERT INTO `antrean` (`id`, `user_id`, `status_antrean`, `antrean_sekarang`, `antrean_terakhir`) VALUES
-(1, 1, 'buka', 0, 3);
+(1, 1, 'buka', 0, 4);
 
 -- --------------------------------------------------------
 
@@ -334,6 +334,14 @@ CREATE TABLE `pasien` (
   `created` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `pasien`
+--
+
+INSERT INTO `pasien` (`id`, `user_id`, `no_rekam_medis`, `NIK`, `nama`, `tempat_lahir`, `tgl_lahir`, `kelamin`, `golongan_darah`, `alamat`, `agama`, `status_kawin`, `pekerjaan`, `kewarganegaraan`, `tlp`, `hp`, `created`) VALUES
+(6, 3, NULL, NULL, 'pasien 1', NULL, '2021-09-10 06:17:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 4, NULL, NULL, 'pasien 2', NULL, '2021-09-10 06:17:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -426,8 +434,8 @@ INSERT INTO `user` (`id`, `username`, `sandi`) VALUES
 (1, 'admin_antrean', 'admin_antrean'),
 (2, 'dokter1', 'dokter1'),
 (3, 'pasien1', 'pasien1'),
-(4, 'pasien2', NULL),
-(5, 'pasien3', NULL);
+(4, 'pasien2', 'pasien2'),
+(5, 'pasien3', 'pasien3');
 
 -- --------------------------------------------------------
 
@@ -447,7 +455,7 @@ CREATE TABLE `visit` (
   `anamnesis` varchar(5000) DEFAULT NULL,
   `keluhan` varchar(5000) DEFAULT NULL,
   `hasil_periksa` varchar(5000) DEFAULT NULL,
-  `status_antrean` enum('belum','sudah') DEFAULT 'belum'
+  `status_antrean` enum('belum','sudah','batal') DEFAULT 'belum'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
@@ -457,7 +465,8 @@ CREATE TABLE `visit` (
 INSERT INTO `visit` (`id`, `nomor_antrean`, `penjurnalan_id`, `perusahaan`, `tgl_visit`, `tensi_sistole`, `tensi_diastole`, `berat_badan`, `anamnesis`, `keluhan`, `hasil_periksa`, `status_antrean`) VALUES
 (1, 1, NULL, NULL, '2021-09-08 02:01:00', NULL, NULL, NULL, NULL, 'pasien 1 keluhan 1', NULL, 'sudah'),
 (2, 2, NULL, NULL, '2021-09-08 02:02:57', NULL, NULL, NULL, NULL, 'pasien 2 keluhan 1', NULL, 'belum'),
-(3, 3, NULL, NULL, '2021-09-08 02:12:14', NULL, NULL, NULL, NULL, 'pasien 3 keluhan 1', NULL, 'belum');
+(3, 3, NULL, NULL, '2021-09-08 02:12:14', NULL, NULL, NULL, NULL, 'pasien 3 keluhan 1', NULL, 'belum'),
+(4, 4, NULL, NULL, '2021-09-10 04:39:05', NULL, NULL, NULL, NULL, 'pasien 1 keluhan 2', NULL, 'belum');
 
 -- --------------------------------------------------------
 
@@ -478,7 +487,8 @@ CREATE TABLE `visit_has_user` (
 INSERT INTO `visit_has_user` (`id`, `visit_id`, `user_id`) VALUES
 (1, 1, 3),
 (2, 2, 4),
-(3, 3, 5);
+(3, 3, 5),
+(4, 4, 3);
 
 --
 -- Indexes for dumped tables
@@ -675,7 +685,7 @@ ALTER TABLE `obat`
 -- AUTO_INCREMENT for table `pasien`
 --
 ALTER TABLE `pasien`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `resep`
@@ -699,13 +709,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `visit`
 --
 ALTER TABLE `visit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `visit_has_user`
 --
 ALTER TABLE `visit_has_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
