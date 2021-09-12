@@ -10,6 +10,7 @@ $tgl_visit = "%{$_POST['tgl_visit']}%";
 // echo $user_id . ' ' . $tgl_visit;
 // echo ' ' . $tgl_visit;
 $sql = "SELECT 
+vst.id as visit_id,
 vhu.id as vhu_id,
 vhu.user_id as pasien_id,
 `tgl_visit`,user.username as username,
