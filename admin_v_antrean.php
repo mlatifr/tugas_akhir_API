@@ -20,7 +20,7 @@ vhu.user_id as pasien_id,
 FROM `visit`vst 
 join visit_has_user vhu on vst.id=vhu.visit_id 
 join user on vhu.user_id=user.id 
-where tgl_visit like ? ";
+where tgl_visit like ? AND user.username NOT LIKE '%dokter%' ";
 $stmt = $con->prepare($sql);
 $stmt->bind_param("s", $tgl_visit);
 $stmt->execute();
