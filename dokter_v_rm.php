@@ -1,16 +1,24 @@
 <?php require 'connect.php';
 ?>
 <?php
-$userPasien = "%{$_POST['userPasien']}%";
-echo $userPasien;
+$idPasien = "%{$_POST['idPasien']}%";
+echo $idPasien;
 $sql =
-    "SELECT visit.tgl_visit as tgl,user.username, anamnesis, keluhan, hasil_periksa FROM `visit` 
+    "SELECT 
+    user.username,
+    visit.tgl_visit as tgl,
+    keluhan,
+    vod,vos,tod,tos,
+    palpebra,konjungtiva,kornea,bmd,lensa,
+    fundus_od as f_od,
+    diagnosa, terapi
+    FROM `visit` 
     join visit_has_user on visit.id=visit_has_user.visit_id
     join user on visit_has_user.user_id=user.id
     where user.id like ? 
     ORDER BY `visit`.`tgl_visit` DESC";
 $stmt = $con->prepare($sql);
-$stmt->bind_param("s", $userPasien);
+$stmt->bind_param("s", $idPasien);
 $stmt->execute();
 $result = $stmt->get_result();
 $data = [];
