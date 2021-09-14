@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 10, 2021 at 06:45 AM
+-- Generation Time: Sep 14, 2021 at 04:03 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -199,7 +199,7 @@ CREATE TABLE `antrean` (
 --
 
 INSERT INTO `antrean` (`id`, `user_id`, `status_antrean`, `antrean_sekarang`, `antrean_terakhir`) VALUES
-(1, 1, 'buka', 0, 4);
+(1, 1, 'buka', 2, 4);
 
 -- --------------------------------------------------------
 
@@ -466,7 +466,8 @@ INSERT INTO `visit` (`id`, `nomor_antrean`, `penjurnalan_id`, `perusahaan`, `tgl
 (1, 1, NULL, NULL, '2021-09-08 02:01:00', NULL, NULL, NULL, NULL, 'pasien 1 keluhan 1', NULL, 'sudah'),
 (2, 2, NULL, NULL, '2021-09-08 02:02:57', NULL, NULL, NULL, NULL, 'pasien 2 keluhan 1', NULL, 'belum'),
 (3, 3, NULL, NULL, '2021-09-08 02:12:14', NULL, NULL, NULL, NULL, 'pasien 3 keluhan 1', NULL, 'belum'),
-(4, 4, NULL, NULL, '2021-09-10 04:39:05', NULL, NULL, NULL, NULL, 'pasien 1 keluhan 2', NULL, 'belum');
+(4, 4, NULL, NULL, '2021-09-10 04:39:05', NULL, NULL, NULL, NULL, 'pasien 1 keluhan 2', NULL, 'belum'),
+(5, 4, NULL, NULL, '2021-09-13 06:26:14', NULL, NULL, NULL, NULL, 'pasien 1 keluhan 3', NULL, 'belum');
 
 -- --------------------------------------------------------
 
@@ -485,10 +486,13 @@ CREATE TABLE `visit_has_user` (
 --
 
 INSERT INTO `visit_has_user` (`id`, `visit_id`, `user_id`) VALUES
-(1, 1, 3),
-(2, 2, 4),
-(3, 3, 5),
-(4, 4, 3);
+(1, 1, 2),
+(2, 1, 3),
+(9, 2, 2),
+(10, 2, 4),
+(11, 3, 2),
+(12, 3, 5),
+(13, 5, 3);
 
 --
 -- Indexes for dumped tables
@@ -709,13 +713,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `visit`
 --
 ALTER TABLE `visit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `visit_has_user`
 --
 ALTER TABLE `visit_has_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
