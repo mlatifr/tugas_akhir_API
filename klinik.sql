@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 14, 2021 at 04:03 AM
+-- Generation Time: Sep 15, 2021 at 06:49 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -446,28 +446,36 @@ INSERT INTO `user` (`id`, `username`, `sandi`) VALUES
 CREATE TABLE `visit` (
   `id` int(11) NOT NULL,
   `nomor_antrean` int(11) DEFAULT NULL,
+  `status_antrean` enum('belum','sudah','batal') DEFAULT 'belum',
   `penjurnalan_id` int(11) DEFAULT NULL,
   `perusahaan` varchar(500) DEFAULT NULL,
   `tgl_visit` timestamp NULL DEFAULT current_timestamp(),
-  `tensi_sistole` varchar(3) DEFAULT NULL,
-  `tensi_diastole` varchar(3) DEFAULT NULL,
-  `berat_badan` varchar(3) DEFAULT NULL,
-  `anamnesis` varchar(5000) DEFAULT NULL,
-  `keluhan` varchar(5000) DEFAULT NULL,
-  `hasil_periksa` varchar(5000) DEFAULT NULL,
-  `status_antrean` enum('belum','sudah','batal') DEFAULT 'belum'
+  `keluhan` varchar(1000) DEFAULT NULL,
+  `vod` varchar(100) DEFAULT NULL,
+  `vos` varchar(100) DEFAULT NULL,
+  `tod` varchar(100) DEFAULT NULL,
+  `tos` varchar(100) DEFAULT NULL,
+  `palpebra` varchar(100) DEFAULT NULL,
+  `konjungtiva` varchar(100) DEFAULT NULL,
+  `kornea` varchar(100) DEFAULT NULL,
+  `bmd` varchar(100) DEFAULT NULL,
+  `lensa` varchar(100) DEFAULT NULL,
+  `fundus_od` varchar(100) DEFAULT NULL,
+  `diagnosa` varchar(1000) DEFAULT NULL,
+  `terapi` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `visit`
 --
 
-INSERT INTO `visit` (`id`, `nomor_antrean`, `penjurnalan_id`, `perusahaan`, `tgl_visit`, `tensi_sistole`, `tensi_diastole`, `berat_badan`, `anamnesis`, `keluhan`, `hasil_periksa`, `status_antrean`) VALUES
-(1, 1, NULL, NULL, '2021-09-08 02:01:00', NULL, NULL, NULL, NULL, 'pasien 1 keluhan 1', NULL, 'sudah'),
-(2, 2, NULL, NULL, '2021-09-08 02:02:57', NULL, NULL, NULL, NULL, 'pasien 2 keluhan 1', NULL, 'belum'),
-(3, 3, NULL, NULL, '2021-09-08 02:12:14', NULL, NULL, NULL, NULL, 'pasien 3 keluhan 1', NULL, 'belum'),
-(4, 4, NULL, NULL, '2021-09-10 04:39:05', NULL, NULL, NULL, NULL, 'pasien 1 keluhan 2', NULL, 'belum'),
-(5, 4, NULL, NULL, '2021-09-13 06:26:14', NULL, NULL, NULL, NULL, 'pasien 1 keluhan 3', NULL, 'belum');
+INSERT INTO `visit` (`id`, `nomor_antrean`, `status_antrean`, `penjurnalan_id`, `perusahaan`, `tgl_visit`, `keluhan`, `vod`, `vos`, `tod`, `tos`, `palpebra`, `konjungtiva`, `kornea`, `bmd`, `lensa`, `fundus_od`, `diagnosa`, `terapi`) VALUES
+(1, 1, 'sudah', NULL, NULL, '2021-09-08 02:01:00', 'pasien 1 keluhan 1', '', '', '', '', '', '', '', '', '', '', '', ''),
+(2, 2, 'belum', NULL, NULL, '2021-09-08 02:02:57', 'pasien 2 keluhan 1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 3, 'belum', NULL, NULL, '2021-09-08 02:12:14', 'pasien 3 keluhan 1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(4, 4, 'belum', NULL, NULL, '2021-09-10 04:39:05', 'pasien 1 keluhan 2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(5, 4, 'belum', NULL, NULL, '2021-09-13 06:26:14', 'pasien 1 keluhan 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(6, 4, 'belum', NULL, NULL, '2021-09-14 02:49:41', 'pasien 1 keluhan 2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -492,7 +500,8 @@ INSERT INTO `visit_has_user` (`id`, `visit_id`, `user_id`) VALUES
 (10, 2, 4),
 (11, 3, 2),
 (12, 3, 5),
-(13, 5, 3);
+(13, 5, 3),
+(14, 6, 3);
 
 --
 -- Indexes for dumped tables
@@ -713,13 +722,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `visit`
 --
 ALTER TABLE `visit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `visit_has_user`
 --
 ALTER TABLE `visit_has_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
