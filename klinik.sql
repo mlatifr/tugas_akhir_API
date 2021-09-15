@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 15, 2021 at 06:49 AM
+-- Generation Time: Sep 15, 2021 at 09:29 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -256,6 +256,17 @@ CREATE TABLE `kartu_stok_obat` (
   `harga_jual` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `kartu_stok_obat`
+--
+
+INSERT INTO `kartu_stok_obat` (`id`, `user_id`, `tgl_beli`, `kategori`, `beli_jual_saldo`, `jmlh`, `hrg_unit`, `total_hrg`, `saldo_akhir`, `harga_beli`, `harga_jual`) VALUES
+(1, NULL, NULL, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL),
+(2, NULL, NULL, NULL, NULL, 2, 2, NULL, NULL, NULL, NULL),
+(3, NULL, NULL, NULL, 'beli', 2, NULL, NULL, NULL, NULL, NULL),
+(4, NULL, '2021-09-01 06:47:41', NULL, 'beli', 5, NULL, NULL, NULL, NULL, NULL),
+(5, NULL, '2021-09-02 07:03:46', NULL, 'beli', 3, NULL, NULL, NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -302,11 +313,22 @@ CREATE TABLE `mata` (
 
 CREATE TABLE `obat` (
   `id` int(11) NOT NULL,
-  `ob_nama` varchar(45) DEFAULT NULL,
+  `nama` varchar(45) DEFAULT NULL,
   `kartu_stok_obat_id` int(11) NOT NULL,
   `resep_id` int(11) DEFAULT NULL,
   `kadaluarsa` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `obat`
+--
+
+INSERT INTO `obat` (`id`, `nama`, `kartu_stok_obat_id`, `resep_id`, `kadaluarsa`) VALUES
+(2, 'obat 1', 1, 1, NULL),
+(3, 'obat 2', 2, 2, NULL),
+(4, 'obat 1', 3, NULL, NULL),
+(5, 'obat 2', 4, NULL, NULL),
+(6, 'obat 3', 5, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -390,6 +412,14 @@ CREATE TABLE `resep` (
   `dosis` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `resep`
+--
+
+INSERT INTO `resep` (`id`, `visit_id`, `dosis`) VALUES
+(1, 1, '1x1'),
+(2, 1, '2x1');
+
 -- --------------------------------------------------------
 
 --
@@ -470,7 +500,7 @@ CREATE TABLE `visit` (
 --
 
 INSERT INTO `visit` (`id`, `nomor_antrean`, `status_antrean`, `penjurnalan_id`, `perusahaan`, `tgl_visit`, `keluhan`, `vod`, `vos`, `tod`, `tos`, `palpebra`, `konjungtiva`, `kornea`, `bmd`, `lensa`, `fundus_od`, `diagnosa`, `terapi`) VALUES
-(1, 1, 'sudah', NULL, NULL, '2021-09-08 02:01:00', 'pasien 1 keluhan 1', '', '', '', '', '', '', '', '', '', '', '', ''),
+(1, 1, 'sudah', NULL, NULL, '2021-09-08 02:01:00', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (2, 2, 'belum', NULL, NULL, '2021-09-08 02:02:57', 'pasien 2 keluhan 1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (3, 3, 'belum', NULL, NULL, '2021-09-08 02:12:14', 'pasien 3 keluhan 1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (4, 4, 'belum', NULL, NULL, '2021-09-10 04:39:05', 'pasien 1 keluhan 2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -668,7 +698,7 @@ ALTER TABLE `dokter`
 -- AUTO_INCREMENT for table `kartu_stok_obat`
 --
 ALTER TABLE `kartu_stok_obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `kasir`
@@ -692,7 +722,7 @@ ALTER TABLE `mata`
 -- AUTO_INCREMENT for table `obat`
 --
 ALTER TABLE `obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `pasien`
@@ -704,7 +734,7 @@ ALTER TABLE `pasien`
 -- AUTO_INCREMENT for table `resep`
 --
 ALTER TABLE `resep`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tindakan`
