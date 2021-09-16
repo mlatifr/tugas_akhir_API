@@ -2,9 +2,14 @@
 ?>
 <?php
 // $tgl_visit = "%{$_POST['tgl_visit']}%";
-$sql = "SELECT * FROM `resep` 
+$sql = "SELECT 
+obat.nama as obat, 
+resep_has_obat.dosis as dosis 
+FROM `resep` 
+JOIN resep_has_obat
+ON resep_has_obat.resep_id=resep.id
 JOIN obat 
-ON resep.id=obat.resep_id
+ON resep_has_obat.obat_id=obat.id
 JOIN visit 
 ON resep.visit_id=visit.id
 ";
