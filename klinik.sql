@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 15, 2021 at 09:29 AM
+-- Generation Time: Sep 16, 2021 at 04:20 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -256,17 +256,6 @@ CREATE TABLE `kartu_stok_obat` (
   `harga_jual` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
---
--- Dumping data for table `kartu_stok_obat`
---
-
-INSERT INTO `kartu_stok_obat` (`id`, `user_id`, `tgl_beli`, `kategori`, `beli_jual_saldo`, `jmlh`, `hrg_unit`, `total_hrg`, `saldo_akhir`, `harga_beli`, `harga_jual`) VALUES
-(1, NULL, NULL, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL),
-(2, NULL, NULL, NULL, NULL, 2, 2, NULL, NULL, NULL, NULL),
-(3, NULL, NULL, NULL, 'beli', 2, NULL, NULL, NULL, NULL, NULL),
-(4, NULL, '2021-09-01 06:47:41', NULL, 'beli', 5, NULL, NULL, NULL, NULL, NULL),
-(5, NULL, '2021-09-02 07:03:46', NULL, 'beli', 3, NULL, NULL, NULL, NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -315,20 +304,8 @@ CREATE TABLE `obat` (
   `id` int(11) NOT NULL,
   `nama` varchar(45) DEFAULT NULL,
   `kartu_stok_obat_id` int(11) NOT NULL,
-  `resep_id` int(11) DEFAULT NULL,
   `kadaluarsa` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
-
---
--- Dumping data for table `obat`
---
-
-INSERT INTO `obat` (`id`, `nama`, `kartu_stok_obat_id`, `resep_id`, `kadaluarsa`) VALUES
-(2, 'obat 1', 1, 1, NULL),
-(3, 'obat 2', 2, 2, NULL),
-(4, 'obat 1', 3, NULL, NULL),
-(5, 'obat 2', 4, NULL, NULL),
-(6, 'obat 3', 5, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -408,17 +385,29 @@ CREATE TABLE `penyakit` (
 
 CREATE TABLE `resep` (
   `id` int(11) NOT NULL,
-  `visit_id` int(11) DEFAULT NULL,
-  `dosis` varchar(45) DEFAULT NULL
+  `visit_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `resep`
 --
 
-INSERT INTO `resep` (`id`, `visit_id`, `dosis`) VALUES
-(1, 1, '1x1'),
-(2, 1, '2x1');
+INSERT INTO `resep` (`id`, `visit_id`) VALUES
+(1, 1),
+(2, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `resep_has_obat`
+--
+
+CREATE TABLE `resep_has_obat` (
+  `id` int(11) NOT NULL,
+  `resep_id` int(11) DEFAULT NULL,
+  `obat_id` int(11) DEFAULT NULL,
+  `dosis` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -608,8 +597,7 @@ ALTER TABLE `mata`
 ALTER TABLE `obat`
   ADD PRIMARY KEY (`id`) USING BTREE,
   ADD UNIQUE KEY `id_UNIQUE` (`id`) USING BTREE,
-  ADD KEY `fk_obat_kartu_stok_obat1_idx` (`kartu_stok_obat_id`),
-  ADD KEY `fk_obat_resep1_idx` (`resep_id`);
+  ADD KEY `fk_obat_kartu_stok_obat1_idx` (`kartu_stok_obat_id`);
 
 --
 -- Indexes for table `pasien`
@@ -640,6 +628,14 @@ ALTER TABLE `resep`
   ADD PRIMARY KEY (`id`) USING BTREE,
   ADD UNIQUE KEY `id_UNIQUE` (`id`) USING BTREE,
   ADD KEY `fk_resep_visit1_idx` (`visit_id`) USING BTREE;
+
+--
+-- Indexes for table `resep_has_obat`
+--
+ALTER TABLE `resep_has_obat`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_resep_has_obat_resep1_idx` (`resep_id`),
+  ADD KEY `fk_resep_has_obat_obat1_idx` (`obat_id`);
 
 --
 -- Indexes for table `tindakan`
@@ -737,6 +733,12 @@ ALTER TABLE `resep`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `resep_has_obat`
+--
+ALTER TABLE `resep_has_obat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `tindakan`
 --
 ALTER TABLE `tindakan`
@@ -812,8 +814,7 @@ ALTER TABLE `komentar`
 -- Constraints for table `obat`
 --
 ALTER TABLE `obat`
-  ADD CONSTRAINT `fk_obat_kartu_stok_obat1` FOREIGN KEY (`kartu_stok_obat_id`) REFERENCES `kartu_stok_obat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_obat_resep1` FOREIGN KEY (`resep_id`) REFERENCES `resep` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_obat_kartu_stok_obat1` FOREIGN KEY (`kartu_stok_obat_id`) REFERENCES `kartu_stok_obat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `pasien`
@@ -838,6 +839,13 @@ ALTER TABLE `penyakit`
 --
 ALTER TABLE `resep`
   ADD CONSTRAINT `fk_resep_visit1` FOREIGN KEY (`visit_id`) REFERENCES `visit` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `resep_has_obat`
+--
+ALTER TABLE `resep_has_obat`
+  ADD CONSTRAINT `fk_resep_has_obat_obat1` FOREIGN KEY (`obat_id`) REFERENCES `obat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_resep_has_obat_resep1` FOREIGN KEY (`resep_id`) REFERENCES `resep` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `tindakan`
