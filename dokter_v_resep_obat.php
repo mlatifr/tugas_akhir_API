@@ -1,8 +1,9 @@
 <?php require 'connect.php';
 ?>
 <?php
-// $tgl_visit = "%{$_POST['tgl_visit']}%";
+$visit_id = "%{$_POST['visit_id']}%";
 $sql = "SELECT 
+visit.id as visit_id,
 obat.nama as obat, 
 resep_has_obat.dosis as dosis 
 FROM `resep` 
@@ -12,9 +13,10 @@ JOIN obat
 ON resep_has_obat.obat_id=obat.id
 JOIN visit 
 ON resep.visit_id=visit.id
+WHERE visit.id like ?
 ";
 $stmt = $con->prepare($sql);
-$stmt->bind_param("s", $tgl_visit);
+$stmt->bind_param("s", $visit_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $data = [];
@@ -24,7 +26,7 @@ if ($result->num_rows > 0) {
     }
     $arr = ["result" => "success", "data" => $data];
 } else {
-    $arr = ["result" => "error", "message" => "sql error: $sql"];
+    $arr = ["result" => "error", "data" => 'tidak ditemukan', "message" => "sql error: $sql"];
 }
 echo json_encode($arr);
 $stmt->close();
