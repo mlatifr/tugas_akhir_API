@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 23, 2021 at 02:40 AM
+-- Generation Time: Sep 23, 2021 at 04:17 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -200,6 +200,27 @@ CREATE TABLE `antrean` (
 
 INSERT INTO `antrean` (`id`, `user_id`, `status_antrean`, `antrean_sekarang`, `antrean_terakhir`) VALUES
 (1, 1, 'buka', 2, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `apoteker`
+--
+
+CREATE TABLE `apoteker` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `nama` varchar(45) DEFAULT NULL,
+  `alamat` varchar(200) DEFAULT NULL,
+  `tlp` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `apoteker`
+--
+
+INSERT INTO `apoteker` (`id`, `user_id`, `nama`, `alamat`, `tlp`) VALUES
+(1, 6, 'apoteker', 'jl apoteker', '0811122233456');
 
 -- --------------------------------------------------------
 
@@ -406,6 +427,31 @@ INSERT INTO `resep` (`id`, `visit_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `resep_apoteker`
+--
+
+CREATE TABLE `resep_apoteker` (
+  `id` int(11) NOT NULL,
+  `apoteker_id` int(11) DEFAULT NULL,
+  `resep_id` int(11) DEFAULT NULL,
+  `obat_id` int(11) DEFAULT NULL,
+  `dosis` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `resep_apoteker`
+--
+
+INSERT INTO `resep_apoteker` (`id`, `apoteker_id`, `resep_id`, `obat_id`, `dosis`) VALUES
+(1, 1, 4, 7, '000'),
+(2, 1, 4, 7, '111'),
+(3, 1, 4, 7, '222'),
+(4, 1, 4, 7, '333'),
+(5, 1, 4, 7, '444');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `resep_has_obat`
 --
 
@@ -457,7 +503,7 @@ INSERT INTO `resep_has_obat` (`id`, `resep_id`, `obat_id`, `dosis`) VALUES
 CREATE TABLE `tindakan` (
   `id` int(11) NOT NULL,
   `visit_id` int(11) DEFAULT NULL,
-  `nama` varchar(100) DEFAULT NULL,
+  `nama` varchar(45) DEFAULT NULL,
   `mt_sisi` enum('kanan','kiri','') DEFAULT NULL,
   `harga` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
@@ -499,7 +545,8 @@ INSERT INTO `user` (`id`, `username`, `sandi`) VALUES
 (2, 'dokter1', 'dokter1'),
 (3, 'pasien1', 'pasien1'),
 (4, 'pasien2', 'pasien2'),
-(5, 'pasien3', 'pasien3');
+(5, 'pasien3', 'pasien3'),
+(6, 'apoteker', NULL);
 
 -- --------------------------------------------------------
 
@@ -586,6 +633,13 @@ ALTER TABLE `antrean`
   ADD KEY `fk_antrean_user1_idx` (`user_id`);
 
 --
+-- Indexes for table `apoteker`
+--
+ALTER TABLE `apoteker`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_apoteker_user1_idx` (`user_id`);
+
+--
 -- Indexes for table `daftar_akun`
 --
 ALTER TABLE `daftar_akun`
@@ -668,6 +722,15 @@ ALTER TABLE `resep`
   ADD KEY `fk_resep_visit1_idx` (`visit_id`) USING BTREE;
 
 --
+-- Indexes for table `resep_apoteker`
+--
+ALTER TABLE `resep_apoteker`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_resep_apoteker_resep1_idx` (`resep_id`),
+  ADD KEY `fk_resep_apoteker_obat1_idx` (`obat_id`),
+  ADD KEY `fk_resep_apoteker_apoteker1_idx` (`apoteker_id`);
+
+--
 -- Indexes for table `resep_has_obat`
 --
 ALTER TABLE `resep_has_obat`
@@ -716,6 +779,12 @@ ALTER TABLE `antrean`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `apoteker`
+--
+ALTER TABLE `apoteker`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `dokter`
 --
 ALTER TABLE `dokter`
@@ -758,6 +827,12 @@ ALTER TABLE `resep`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `resep_apoteker`
+--
+ALTER TABLE `resep_apoteker`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `resep_has_obat`
 --
 ALTER TABLE `resep_has_obat`
@@ -773,7 +848,7 @@ ALTER TABLE `tindakan`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `visit`
@@ -802,6 +877,12 @@ ALTER TABLE `alergi`
 --
 ALTER TABLE `antrean`
   ADD CONSTRAINT `fk_antrean_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `apoteker`
+--
+ALTER TABLE `apoteker`
+  ADD CONSTRAINT `fk_apoteker_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `dftr_akun_has_penjurnalan`
@@ -864,6 +945,14 @@ ALTER TABLE `penyakit`
 --
 ALTER TABLE `resep`
   ADD CONSTRAINT `fk_resep_visit1` FOREIGN KEY (`visit_id`) REFERENCES `visit` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `resep_apoteker`
+--
+ALTER TABLE `resep_apoteker`
+  ADD CONSTRAINT `fk_resep_apoteker_apoteker1` FOREIGN KEY (`apoteker_id`) REFERENCES `apoteker` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_resep_apoteker_obat1` FOREIGN KEY (`obat_id`) REFERENCES `obat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_resep_apoteker_resep1` FOREIGN KEY (`resep_id`) REFERENCES `resep` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `resep_has_obat`
