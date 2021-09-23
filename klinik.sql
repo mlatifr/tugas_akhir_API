@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2021 at 04:20 AM
+-- Generation Time: Sep 23, 2021 at 02:40 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -256,6 +256,14 @@ CREATE TABLE `kartu_stok_obat` (
   `harga_jual` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `kartu_stok_obat`
+--
+
+INSERT INTO `kartu_stok_obat` (`id`, `user_id`, `tgl_beli`, `kategori`, `beli_jual_saldo`, `jmlh`, `hrg_unit`, `total_hrg`, `saldo_akhir`, `harga_beli`, `harga_jual`) VALUES
+(6, NULL, NULL, NULL, 'beli', 1, 1, NULL, NULL, NULL, NULL),
+(7, NULL, NULL, NULL, 'beli', 2, 2, NULL, NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -286,17 +294,6 @@ CREATE TABLE `komentar` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mata`
---
-
-CREATE TABLE `mata` (
-  `id` int(11) NOT NULL,
-  `mt_sisi` enum('kanan','kiri','') DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `obat`
 --
 
@@ -306,6 +303,14 @@ CREATE TABLE `obat` (
   `kartu_stok_obat_id` int(11) NOT NULL,
   `kadaluarsa` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `obat`
+--
+
+INSERT INTO `obat` (`id`, `nama`, `kartu_stok_obat_id`, `kadaluarsa`) VALUES
+(7, 'obat 1', 6, NULL),
+(8, 'obat 2', 7, NULL);
 
 -- --------------------------------------------------------
 
@@ -394,7 +399,9 @@ CREATE TABLE `resep` (
 
 INSERT INTO `resep` (`id`, `visit_id`) VALUES
 (1, 1),
-(2, 2);
+(4, 1),
+(2, 2),
+(3, 3);
 
 -- --------------------------------------------------------
 
@@ -409,6 +416,38 @@ CREATE TABLE `resep_has_obat` (
   `dosis` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `resep_has_obat`
+--
+
+INSERT INTO `resep_has_obat` (`id`, `resep_id`, `obat_id`, `dosis`) VALUES
+(1, 4, 7, '000'),
+(2, 4, 7, '111'),
+(3, 4, 7, '222'),
+(4, 4, 7, '333'),
+(5, 4, 7, '444'),
+(6, 4, 7, '000'),
+(7, 4, 7, '111'),
+(8, 4, 7, '222'),
+(9, 4, 7, '333'),
+(10, 4, 7, '444'),
+(11, 4, 7, '444'),
+(12, 4, 7, '444'),
+(13, 4, 7, '444'),
+(14, 4, 7, '000'),
+(15, 4, 7, '111'),
+(16, 4, 7, '000'),
+(17, 4, 7, '111'),
+(18, 4, 7, '222'),
+(19, 4, 7, '333'),
+(20, 4, 7, '444'),
+(21, 4, 7, '444'),
+(22, 4, 7, '000'),
+(23, 4, 7, '111'),
+(24, 4, 7, '222'),
+(25, 4, 7, '333'),
+(26, 4, 7, '444');
+
 -- --------------------------------------------------------
 
 --
@@ -418,20 +457,26 @@ CREATE TABLE `resep_has_obat` (
 CREATE TABLE `tindakan` (
   `id` int(11) NOT NULL,
   `visit_id` int(11) DEFAULT NULL,
-  `nama` varchar(45) DEFAULT NULL,
+  `nama` varchar(100) DEFAULT NULL,
+  `mt_sisi` enum('kanan','kiri','') DEFAULT NULL,
   `harga` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `tindakan_has_mata`
+-- Dumping data for table `tindakan`
 --
 
-CREATE TABLE `tindakan_has_mata` (
-  `tindakan_id` int(11) DEFAULT NULL,
-  `mata_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+INSERT INTO `tindakan` (`id`, `visit_id`, `nama`, `mt_sisi`, `harga`) VALUES
+(1, 1, 'operasi_mata1', 'kiri', 1000000),
+(2, 1, 'operasi_mata2', 'kanan', 2000000),
+(3, 1, 'operasi_mata3', 'kiri', 3000000),
+(4, 1, 'operasi_mata4', 'kanan', 4000000),
+(5, 1, 'operasi_mata5', 'kiri', 5000000),
+(6, 1, 'operasi_mata1', 'kiri', 1000000),
+(7, 1, 'operasi_mata2', 'kanan', 2000000),
+(8, 1, 'operasi_mata3', 'kiri', 3000000),
+(9, 1, 'operasi_mata4', 'kanan', 4000000),
+(10, 1, 'operasi_mata5', 'kiri', 5000000);
 
 -- --------------------------------------------------------
 
@@ -585,13 +630,6 @@ ALTER TABLE `komentar`
   ADD KEY `fk_komentar_user1_idx` (`user_id`);
 
 --
--- Indexes for table `mata`
---
-ALTER TABLE `mata`
-  ADD PRIMARY KEY (`id`) USING BTREE,
-  ADD UNIQUE KEY `id_UNIQUE` (`id`) USING BTREE;
-
---
 -- Indexes for table `obat`
 --
 ALTER TABLE `obat`
@@ -645,13 +683,6 @@ ALTER TABLE `tindakan`
   ADD KEY `fk_tindakan_visit1_idx` (`visit_id`);
 
 --
--- Indexes for table `tindakan_has_mata`
---
-ALTER TABLE `tindakan_has_mata`
-  ADD KEY `fk_tindakan_has_mata_tindakan1_idx` (`tindakan_id`),
-  ADD KEY `fk_tindakan_has_mata_mata1` (`mata_id`);
-
---
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -694,7 +725,7 @@ ALTER TABLE `dokter`
 -- AUTO_INCREMENT for table `kartu_stok_obat`
 --
 ALTER TABLE `kartu_stok_obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `kasir`
@@ -709,16 +740,10 @@ ALTER TABLE `komentar`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `mata`
---
-ALTER TABLE `mata`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT for table `obat`
 --
 ALTER TABLE `obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `pasien`
@@ -730,19 +755,19 @@ ALTER TABLE `pasien`
 -- AUTO_INCREMENT for table `resep`
 --
 ALTER TABLE `resep`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `resep_has_obat`
 --
 ALTER TABLE `resep_has_obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `tindakan`
 --
 ALTER TABLE `tindakan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -852,13 +877,6 @@ ALTER TABLE `resep_has_obat`
 --
 ALTER TABLE `tindakan`
   ADD CONSTRAINT `fk_tindakan_visit1` FOREIGN KEY (`visit_id`) REFERENCES `visit` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `tindakan_has_mata`
---
-ALTER TABLE `tindakan_has_mata`
-  ADD CONSTRAINT `fk_tindakan_has_mata_mata1` FOREIGN KEY (`mata_id`) REFERENCES `mata` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tindakan_has_mata_tindakan1` FOREIGN KEY (`tindakan_id`) REFERENCES `tindakan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `visit`
