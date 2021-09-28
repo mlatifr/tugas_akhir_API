@@ -2,10 +2,10 @@
 ?>
 <?php
 $nama_obat = "%{$_POST['nama_obat']}%";
-$sql = "SELECT obat.id, nama, sum(obat.stok) as stok
+$sql = "SELECT 
+obat.id, nama, obat.stok as stok, obat.kadaluarsa
 FROM obat 
-where nama like ?
-GROUP BY nama ";
+where nama like ?";
 $stmt = $con->prepare($sql);
 $stmt->bind_param("s", $nama_obat);
 $stmt->execute();
