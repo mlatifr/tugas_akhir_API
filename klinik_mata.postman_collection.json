@@ -1,0 +1,642 @@
+{
+	"info": {
+		"_postman_id": "14a9e505-25dc-4193-9072-a4ec4a80b292",
+		"name": "klinik_mata",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "admin_antrean",
+							"type": "text"
+						},
+						{
+							"key": "sandi",
+							"value": "admin_antrean",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost/tugas_akhir/login.php"
+			},
+			"response": []
+		},
+		{
+			"name": "pasien_biodata",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "namaPasien",
+							"value": "pasien",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost/tugas_akhir/pasien_biodata.php"
+			},
+			"response": []
+		},
+		{
+			"name": "pasien_view_antrean_sekarang",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_id",
+							"value": "pasien1",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tgl_visit",
+							"value": "2021-09-01",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": "http://localhost/tugas_akhir/pasien_view_antrean_sekarang.php"
+			},
+			"response": []
+		},
+		{
+			"name": "pasien_input_keluhan",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_id",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "keluhan",
+							"value": "pasien 1 keluhan 2",
+							"type": "text"
+						},
+						{
+							"key": "no_antrean",
+							"value": "4",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost/tugas_akhir/pasien_input_keluhan.php"
+			},
+			"response": []
+		},
+		{
+			"name": "pasien_view_antrean_user_tgl",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_id",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "tgl_visit",
+							"value": "2021-09-08",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost/tugas_akhir/pasien_view_antrean_user_tgl.php"
+			},
+			"response": []
+		},
+		{
+			"name": "dokter_v_antrean",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_id",
+							"value": "4",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tgl_visit",
+							"value": "2021-09-08",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost/tugas_akhir/dokter_v_antrean.php"
+			},
+			"response": []
+		},
+		{
+			"name": "dokter_v_rm",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "idPasien",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "tgl_visit",
+							"value": "2021-09-08",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": "http://localhost/tugas_akhir/dokter_v_rm.php"
+			},
+			"response": []
+		},
+		{
+			"name": "dokter_v_resep_obat",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "idPasien",
+							"value": "3",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "visit_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost/tugas_akhir/dokter_v_resep_obat.php"
+			},
+			"response": []
+		},
+		{
+			"name": "dokter_v_list_obat",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nama_obat",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "tgl_visit",
+							"value": "2021-09-08",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": "http://localhost/tugas_akhir/dokter_v_list_obat.php"
+			},
+			"response": []
+		},
+		{
+			"name": "dokter_input_resep",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "idPasien",
+							"value": "3",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "visit_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost/tugas_akhir/dokter_input_resep.php"
+			},
+			"response": []
+		},
+		{
+			"name": "dokter_input_tindakan",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "idPasien",
+							"value": "3",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "visit_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost/tugas_akhir/dokter_input_tindakan.php"
+			},
+			"response": []
+		},
+		{
+			"name": "dokter_input_tindakan Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tindakan_array[tindakan_1][visit_id]",
+							"value": "a",
+							"type": "text"
+						},
+						{
+							"key": "tindakan_array[tindakan_1][nama_tindakan]",
+							"value": "b",
+							"type": "text"
+						},
+						{
+							"key": "tindakan_array[tindakan_1][mt_sisi]",
+							"value": "c",
+							"type": "text"
+						},
+						{
+							"key": "tindakan_array[tindakan_1][harga]",
+							"value": "d",
+							"type": "text"
+						},
+						{
+							"key": "tindakan_array[tindakan_2][visit_id]",
+							"value": "a",
+							"type": "text"
+						},
+						{
+							"key": "tindakan_array[tindakan_2][nama_tindakan]",
+							"value": "f",
+							"type": "text"
+						},
+						{
+							"key": "tindakan_array[tindakan_2][mt_sisi]",
+							"value": "g",
+							"type": "text"
+						},
+						{
+							"key": "tindakan_array[tindakan_2][harga]",
+							"value": "h",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost/tugas_akhir/dokter_input_tindakan_copy.php"
+			},
+			"response": []
+		},
+		{
+			"name": "dokter_input_resep_has_obat",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "resep_id",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "obat_id",
+							"value": "8",
+							"type": "text"
+						},
+						{
+							"key": "dosis",
+							"value": "3x1",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost/tugas_akhir/dokter_input_resep_has_obat.php"
+			},
+			"response": []
+		},
+		{
+			"name": "dokter_input_resep_has_obat_array",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "resep_id",
+							"value": "4",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "obat_id",
+							"value": "8",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "dosis",
+							"value": "3x1",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": "http://localhost/tugas_akhir/dokter_input_resep_has_obat_array.php"
+			},
+			"response": []
+		},
+		{
+			"name": "dokter_update_rm",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "keluhan",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "vod",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "vos",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "tod",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "tos",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "palpebra",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "konjungtiva",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "kornea",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "bmd",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "lensa",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "fundus_od",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "diagnosa",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "terapi",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "idVisit",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost/tugas_akhir/dokter_upd_rm.php"
+			},
+			"response": []
+		},
+		{
+			"name": "apoteker_input_resep",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "resep_id",
+							"value": "4",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "obat_id",
+							"value": "8",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "dosis",
+							"value": "3x1",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": "http://localhost/tugas_akhir/apoteker_input_resep.php"
+			},
+			"response": []
+		},
+		{
+			"name": "apoteker_v_list_obat",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nama_obat",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost/tugas_akhir/apoteker_v_list_obat.php"
+			},
+			"response": []
+		},
+		{
+			"name": "admin_v_antrean",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_id",
+							"value": "4",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tgl_visit",
+							"value": "2021-09-08",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost/tugas_akhir/admin_v_antrean.php"
+			},
+			"response": []
+		},
+		{
+			"name": "admin_dlt_antrean",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "vhu_id",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "tgl_visit",
+							"value": "2021-09-08",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": "http://localhost/tugas_akhir/admin_dlt_antrean.php"
+			},
+			"response": []
+		},
+		{
+			"name": "admin_upd_antrean_now",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "antrean_sekarang",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "tgl_visit",
+							"value": "2021-09-08",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": "http://localhost/tugas_akhir/admin_upd_antrean_now.php"
+			},
+			"response": []
+		},
+		{
+			"name": "kasir_v_antrean",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_id",
+							"value": "4",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tgl_visit",
+							"value": "2021-09-08",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost/tugas_akhir/dokter_v_antrean.php"
+			},
+			"response": []
+		}
+	]
+}
