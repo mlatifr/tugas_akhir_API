@@ -24,7 +24,7 @@ $sql =
         join visit_has_user vhu on vst.id=vhu.visit_id 
         join user on vhu.user_id=user.id 
         join pasien on user.id=pasien.user_id 
-    WHERE tgl_visit like '%2021-09-28%' 
+    WHERE tgl_visit like ?
         AND user.username NOT LIKE '%dokter%' 
     ORDER BY `vst`.`nomor_antrean` ASC";
 $stmt = $con->prepare($sql);
