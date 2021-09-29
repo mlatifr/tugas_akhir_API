@@ -8,8 +8,8 @@ extract($_POST);
 // }
 // echo print_r($tindakan_array, true);
 // echo count($tindakan_array);
-echo json_encode($tindakan_array);
-echo ("\n");
+// echo json_encode($tindakan_array);
+// echo ("\n");
 // $tindakan_array = array(
 //     'tindakan0' => array('1', 'operasi_mata1', 'kiri', '1000000'),
 //     'tindakan1' => array('1', 'operasi_mata2', 'kanan', '2000000'),
@@ -34,13 +34,13 @@ foreach ($tindakan_array as $row => $value) {
 $arr = [];
 $data = [];
 if ($stmt->affected_rows > 0) {
-    foreach ($tindakan_array as $row => $value) {
-        $data += [
-            "visit_id$row" => $value[0], "nama_tindakan$row" => $value[1],
-            "mt_sisi$row" => $value[2], "harga$row" => $value[3],
-        ];
-    }
-    $arr = ["result" => "success", "data" => $data];
+    // foreach ($tindakan_array as $row => $value) {
+    //     $data += [
+    //         "visit_id$row" => $value[0], "nama_tindakan$row" => $value[1],
+    //         "mt_sisi$row" => $value[2], "harga$row" => $value[3],
+    //     ];
+    // }
+    $arr = ["result" => "success", "data" => $tindakan_array];
 } else {
     $arr = ["result" => "fail", "Error" => $con->error, 'jumlah_array' => count($tindakan_array)];
 }
