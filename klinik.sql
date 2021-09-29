@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 28, 2021 at 07:06 AM
+-- Generation Time: Sep 29, 2021 at 05:57 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -298,10 +298,11 @@ CREATE TABLE `nota_pembelian` (
 
 CREATE TABLE `nota_penjualan` (
   `id` int(11) NOT NULL,
-  `visit_id` int(11) DEFAULT NULL,
-  `tgl_transaksi` timestamp NULL DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `penjurnalan_id` int(11) DEFAULT NULL
+  `visit_id` int(11) DEFAULT NULL,
+  `resep_apoteker_id` int(11) DEFAULT NULL,
+  `tgl_transaksi` timestamp NULL DEFAULT NULL,
+  `uang_pembayaran` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -315,17 +316,18 @@ CREATE TABLE `obat` (
   `nama` varchar(45) DEFAULT NULL,
   `stok` int(11) DEFAULT NULL,
   `kadaluarsa` timestamp NULL DEFAULT NULL,
-  `harga_jual` varchar(45) DEFAULT NULL
+  `harga_jual` varchar(45) DEFAULT NULL,
+  `harga_beli` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `obat`
 --
 
-INSERT INTO `obat` (`id`, `nama`, `stok`, `kadaluarsa`, `harga_jual`) VALUES
-(7, 'obat 1', 4, '2021-10-01 08:05:48', '1000'),
-(8, 'obat 2', 3, '2021-10-01 08:05:48', '2000'),
-(9, 'obat 1', 5, '2021-09-02 08:05:48', '3000');
+INSERT INTO `obat` (`id`, `nama`, `stok`, `kadaluarsa`, `harga_jual`, `harga_beli`) VALUES
+(7, 'obat 1', 4, '2021-10-01 08:05:48', '1000', NULL),
+(8, 'obat 2', 3, '2021-10-01 08:05:48', '2000', NULL),
+(9, 'obat 1', 5, '2021-09-02 08:05:48', '3000', NULL);
 
 -- --------------------------------------------------------
 
@@ -337,19 +339,6 @@ CREATE TABLE `obat_has_pembelian` (
   `obat_id` int(11) DEFAULT NULL,
   `nota_pembelian_id` int(11) DEFAULT NULL,
   `penjurnalan_id` int(11) DEFAULT NULL,
-  `harga_beli` int(11) DEFAULT NULL,
-  `jumlah` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `obat_has_penjualan`
---
-
-CREATE TABLE `obat_has_penjualan` (
-  `obat_id` int(11) DEFAULT NULL,
-  `nota_penjualan_id` int(11) DEFAULT NULL,
   `jumlah` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -397,6 +386,7 @@ INSERT INTO `pasien` (`id`, `user_id`, `no_rekam_medis`, `NIK`, `nama`, `tempat_
 CREATE TABLE `penjurnalan` (
   `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
+  `nota_penjualan_id` int(11) DEFAULT NULL,
   `tgl` timestamp NULL DEFAULT NULL,
   `debit` int(11) DEFAULT NULL,
   `kredit` int(11) DEFAULT NULL,
@@ -472,7 +462,12 @@ INSERT INTO `resep_apoteker` (`id`, `user_id_apoteker`, `resep_id`, `obat_id`, `
 (62, 1, 1, 8, '444', '5'),
 (63, 1, 1, 9, '555', '6'),
 (64, 1, 1, 8, '666', '7'),
-(65, 1, 1, 7, '777', '8');
+(65, 1, 1, 7, '777', '8'),
+(66, 1, 4, 7, '000', '7'),
+(67, 1, 4, 7, '111', '7'),
+(68, 1, 4, 7, '222', '7'),
+(69, 1, 4, 7, '333', '7'),
+(70, 1, 4, 7, '444', '1000');
 
 -- --------------------------------------------------------
 
@@ -497,7 +492,7 @@ CREATE TABLE `resep_has_obat` (
 CREATE TABLE `tindakan` (
   `id` int(11) NOT NULL,
   `visit_id` int(11) DEFAULT NULL,
-  `nama` varchar(45) DEFAULT NULL,
+  `nama_tindakan` varchar(45) DEFAULT NULL,
   `mt_sisi` enum('kanan','kiri','') DEFAULT NULL,
   `harga` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
@@ -506,7 +501,7 @@ CREATE TABLE `tindakan` (
 -- Dumping data for table `tindakan`
 --
 
-INSERT INTO `tindakan` (`id`, `visit_id`, `nama`, `mt_sisi`, `harga`) VALUES
+INSERT INTO `tindakan` (`id`, `visit_id`, `nama_tindakan`, `mt_sisi`, `harga`) VALUES
 (1, 1, 'operasi_mata1', 'kiri', 1000000),
 (2, 1, 'operasi_mata2', 'kanan', 2000000),
 (3, 1, 'operasi_mata3', 'kiri', 3000000),
@@ -516,7 +511,17 @@ INSERT INTO `tindakan` (`id`, `visit_id`, `nama`, `mt_sisi`, `harga`) VALUES
 (7, 1, 'operasi_mata2', 'kanan', 2000000),
 (8, 1, 'operasi_mata3', 'kiri', 3000000),
 (9, 1, 'operasi_mata4', 'kanan', 4000000),
-(10, 1, 'operasi_mata5', 'kiri', 5000000);
+(10, 1, 'operasi_mata5', 'kiri', 5000000),
+(11, 1, 'operasi_mata1', 'kiri', 1000000),
+(12, 1, 'operasi_mata2', 'kanan', 2000000),
+(13, 1, 'operasi_mata3', 'kiri', 3000000),
+(14, 1, 'operasi_mata4', 'kanan', 4000000),
+(15, 1, 'operasi_mata5', 'kiri', 5000000),
+(16, 1, 'operasi_mata1', 'kiri', 1000000),
+(17, 1, 'operasi_mata2', 'kanan', 2000000),
+(18, 1, 'operasi_mata3', 'kiri', 3000000),
+(19, 1, 'operasi_mata4', 'kanan', 4000000),
+(20, 1, 'operasi_mata5', 'kiri', 5000000);
 
 -- --------------------------------------------------------
 
@@ -690,7 +695,7 @@ ALTER TABLE `nota_penjualan`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_nota_penjualan_visit1_idx` (`visit_id`),
   ADD KEY `fk_nota_penjualan_user1_idx` (`user_id`),
-  ADD KEY `fk_nota_penjualan_penjurnalan1_idx` (`penjurnalan_id`);
+  ADD KEY `fk_nota_penjualan_resep_apoteker1_idx` (`resep_apoteker_id`);
 
 --
 -- Indexes for table `obat`
@@ -708,13 +713,6 @@ ALTER TABLE `obat_has_pembelian`
   ADD KEY `fk_obat_has_pembelian_penjurnalan1_idx` (`penjurnalan_id`);
 
 --
--- Indexes for table `obat_has_penjualan`
---
-ALTER TABLE `obat_has_penjualan`
-  ADD KEY `fk_obat_has_penjualan_obat1_idx` (`obat_id`),
-  ADD KEY `fk_obat_has_penjualan_nota_penjualan1_idx` (`nota_penjualan_id`);
-
---
 -- Indexes for table `pasien`
 --
 ALTER TABLE `pasien`
@@ -727,7 +725,8 @@ ALTER TABLE `pasien`
 --
 ALTER TABLE `penjurnalan`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_penjurnalan_user1_idx` (`user_id`);
+  ADD KEY `fk_penjurnalan_user1_idx` (`user_id`),
+  ADD KEY `fk_penjurnalan_nota_penjualan1_idx` (`nota_penjualan_id`);
 
 --
 -- Indexes for table `penyakit`
@@ -846,7 +845,7 @@ ALTER TABLE `resep`
 -- AUTO_INCREMENT for table `resep_apoteker`
 --
 ALTER TABLE `resep_apoteker`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `resep_has_obat`
@@ -858,7 +857,7 @@ ALTER TABLE `resep_has_obat`
 -- AUTO_INCREMENT for table `tindakan`
 --
 ALTER TABLE `tindakan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -936,7 +935,7 @@ ALTER TABLE `nota_pembelian`
 -- Constraints for table `nota_penjualan`
 --
 ALTER TABLE `nota_penjualan`
-  ADD CONSTRAINT `fk_nota_penjualan_penjurnalan1` FOREIGN KEY (`penjurnalan_id`) REFERENCES `penjurnalan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_nota_penjualan_resep_apoteker1` FOREIGN KEY (`resep_apoteker_id`) REFERENCES `resep_apoteker` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_nota_penjualan_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_nota_penjualan_visit1` FOREIGN KEY (`visit_id`) REFERENCES `visit` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
@@ -949,13 +948,6 @@ ALTER TABLE `obat_has_pembelian`
   ADD CONSTRAINT `fk_obat_has_pembelian_penjurnalan1` FOREIGN KEY (`penjurnalan_id`) REFERENCES `penjurnalan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `obat_has_penjualan`
---
-ALTER TABLE `obat_has_penjualan`
-  ADD CONSTRAINT `fk_obat_has_penjualan_nota_penjualan1` FOREIGN KEY (`nota_penjualan_id`) REFERENCES `nota_penjualan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_obat_has_penjualan_obat1` FOREIGN KEY (`obat_id`) REFERENCES `obat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Constraints for table `pasien`
 --
 ALTER TABLE `pasien`
@@ -965,6 +957,7 @@ ALTER TABLE `pasien`
 -- Constraints for table `penjurnalan`
 --
 ALTER TABLE `penjurnalan`
+  ADD CONSTRAINT `fk_penjurnalan_nota_penjualan1` FOREIGN KEY (`nota_penjualan_id`) REFERENCES `nota_penjualan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_penjurnalan_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
