@@ -298,7 +298,7 @@
 					"formdata": [
 						{
 							"key": "tindakan_array[tindakan_1][visit_id]",
-							"value": "a",
+							"value": "1",
 							"type": "text"
 						},
 						{
@@ -308,7 +308,7 @@
 						},
 						{
 							"key": "tindakan_array[tindakan_1][mt_sisi]",
-							"value": "c",
+							"value": "kanan",
 							"type": "text"
 						},
 						{
@@ -318,7 +318,7 @@
 						},
 						{
 							"key": "tindakan_array[tindakan_2][visit_id]",
-							"value": "a",
+							"value": "1",
 							"type": "text"
 						},
 						{
@@ -328,7 +328,7 @@
 						},
 						{
 							"key": "tindakan_array[tindakan_2][mt_sisi]",
-							"value": "g",
+							"value": "kiri",
 							"type": "text"
 						},
 						{
@@ -634,7 +634,32 @@
 						}
 					]
 				},
-				"url": "http://localhost/tugas_akhir/dokter_v_antrean.php"
+				"url": "http://localhost/tugas_akhir/kasir_v_antrean.php"
+			},
+			"response": []
+		},
+		{
+			"name": "kasir_v_tindakan",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_id",
+							"value": "4",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "visit_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost/tugas_akhir/kasir_v_tindakan.php"
 			},
 			"response": []
 		}
