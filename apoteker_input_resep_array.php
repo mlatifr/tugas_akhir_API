@@ -3,14 +3,20 @@
 <?php
 extract($_POST);
 foreach ($obat_array as $row => $value) {
+
     $visit_id = mysqli_real_escape_string($con, $value['visit_id']);
     $nama_pembeli = mysqli_real_escape_string($con, $value['nama_pembeli']);
     $user_id_apoteker = mysqli_real_escape_string($con, $value['user_id_apoteker']);
     $obat_id = mysqli_real_escape_string($con, $value['obat_id']);
     $dosis = mysqli_real_escape_string($con, $value['dosis']);
     $jumlah = mysqli_real_escape_string($con, $value['jumlah']);
-    $sql = "INSERT INTO `resep_apoteker` ( `visit_id`, `nama_pembeli`, `user_id_apoteker`, `obat_id`, `dosis`, `jumlah`)
+    if ($visit_id) {
+        $sql = "INSERT INTO `resep_apoteker` ( `visit_id`, `nama_pembeli`, `user_id_apoteker`, `obat_id`, `dosis`, `jumlah`)
         VALUES ('" . $visit_id . "','" .  $nama_pembeli . "',  '" . $user_id_apoteker . "', '" . $obat_id . "', '" . $dosis . "', '" . $jumlah . "')";
+    } else {
+        $sql = "INSERT INTO `resep_apoteker` (`nama_pembeli`, `user_id_apoteker`, `obat_id`, `dosis`, `jumlah`)
+        VALUES ('" .  $nama_pembeli . "',  '" . $user_id_apoteker . "', '" . $obat_id . "', '" . $dosis . "', '" . $jumlah . "')";
+    }
     $stmt = $con->prepare($sql);
     $stmt->execute();
 };
