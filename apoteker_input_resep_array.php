@@ -13,7 +13,7 @@ foreach ($obat_array as $row => $value) {
     if ($visit_id) {
         $sql = "INSERT INTO `resep_apoteker` ( `visit_id`, `nama_pembeli`, `user_id_apoteker`, `obat_id`, `dosis`, `jumlah`)
         VALUES ('" . $visit_id . "','" .  $nama_pembeli . "',  '" . $user_id_apoteker . "', '" . $obat_id . "', '" . $dosis . "', '" . $jumlah . "')";
-    } else {
+    } elseif ($nama_pembeli) {
         $sql = "INSERT INTO `resep_apoteker` (`nama_pembeli`, `user_id_apoteker`, `obat_id`, `dosis`, `jumlah`)
         VALUES ('" .  $nama_pembeli . "',  '" . $user_id_apoteker . "', '" . $obat_id . "', '" . $dosis . "', '" . $jumlah . "')";
     }

@@ -15,17 +15,17 @@ $sql =
         vhu.id as vhu_id, 
         vhu.user_id as pasien_id, 
         `tgl_visit`, 
-        user.username as username, 
+        user_klinik.username as username, 
         pasien.nama as nama, 
         `nomor_antrean`, 
         `status_antrean`, 
         `keluhan` 
     FROM `visit`vst 
         join visit_has_user vhu on vst.id=vhu.visit_id 
-        join user on vhu.user_id=user.id 
-        join pasien on user.id=pasien.user_id 
+        join user_klinik on vhu.user_id=user_klinik.id 
+        join pasien on user_klinik.id=pasien.user_id 
     WHERE tgl_visit like ?
-        AND user.username NOT LIKE '%dokter%' 
+        AND user_klinik.username NOT LIKE '%dokter%' 
     ORDER BY `vst`.`nomor_antrean` ASC";
 $stmt = $con->prepare($sql);
 $stmt->bind_param("s", $tgl_visit);

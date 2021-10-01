@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2021 at 06:19 AM
+-- Generation Time: Oct 01, 2021 at 09:13 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -194,6 +194,13 @@ CREATE TABLE `antrean_admin` (
   `antrean_terakhir` int(11) NOT NULL,
   `batas_antrean` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `antrean_admin`
+--
+
+INSERT INTO `antrean_admin` (`id`, `user_id`, `status_antrean`, `antrean_sekarang`, `antrean_terakhir`, `batas_antrean`) VALUES
+(1, 1, 'buka', 0, 1, 12);
 
 -- --------------------------------------------------------
 
@@ -425,19 +432,8 @@ CREATE TABLE `resep_apoteker` (
   `visit_id` int(11) DEFAULT NULL,
   `nama_pembeli` varchar(50) DEFAULT 'pembeli_non_visit',
   `user_id_apoteker` int(11) DEFAULT NULL,
-  `obat_id` int(11) DEFAULT NULL,
-  `dosis` varchar(45) DEFAULT NULL,
-  `jumlah` varchar(45) DEFAULT NULL
+  `tgl_penulisan_resep` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `resep_apoteker`
---
-
-INSERT INTO `resep_apoteker` (`id`, `visit_id`, `nama_pembeli`, `user_id_apoteker`, `obat_id`, `dosis`, `jumlah`) VALUES
-(1, 1, '', 6, 7, '3x1', '30'),
-(2, 1, '', 6, 8, '3x1', '30'),
-(3, 1, '', 6, 9, '3x1', '30');
 
 -- --------------------------------------------------------
 
@@ -451,6 +447,32 @@ CREATE TABLE `resep_has_obat` (
   `dosis` varchar(45) DEFAULT NULL,
   `jumlah` varchar(45) DEFAULT NULL,
   `visit_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `resep_has_obat`
+--
+
+INSERT INTO `resep_has_obat` (`id`, `obat_id`, `dosis`, `jumlah`, `visit_id`) VALUES
+(38, 7, '3x1', '10', 1),
+(39, 8, '1x1', '20', 1),
+(40, 7, '3x1', '10', 4),
+(41, 8, '1x1', '20', 4),
+(42, 7, '3x1', '10', 5),
+(43, 8, '1x1', '20', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rsp_aptkr_has_obat`
+--
+
+CREATE TABLE `rsp_aptkr_has_obat` (
+  `idrsp_aptkr_has_obat` int(11) NOT NULL,
+  `resep_apoteker_id` int(11) DEFAULT NULL,
+  `obat_id` int(11) DEFAULT NULL,
+  `jumlah` varchar(45) DEFAULT NULL,
+  `dosis` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -478,20 +500,20 @@ INSERT INTO `tindakan` (`id`, `visit_id`, `nama`, `mt_sisi`, `harga`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Table structure for table `user_klinik`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE `user_klinik` (
   `id` int(11) NOT NULL,
   `username` varchar(45) DEFAULT NULL,
   `sandi` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `user_klinik`
 --
 
-INSERT INTO `user` (`id`, `username`, `sandi`) VALUES
+INSERT INTO `user_klinik` (`id`, `username`, `sandi`) VALUES
 (1, 'admin_antrean', 'admin_antrean'),
 (2, 'dokter1', 'dokter1'),
 (3, 'pasien1', 'pasien1'),
@@ -531,16 +553,11 @@ CREATE TABLE `visit` (
 --
 
 INSERT INTO `visit` (`id`, `nomor_antrean`, `status_antrean`, `perusahaan`, `tgl_visit`, `keluhan`, `vod`, `vos`, `tod`, `tos`, `palpebra`, `konjungtiva`, `kornea`, `bmd`, `lensa`, `fundus_od`, `diagnosa`, `terapi`) VALUES
-(1, 1, 'sudah', NULL, '2021-09-08 02:01:00', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(2, 2, 'belum', NULL, '2021-09-08 02:02:57', 'pasien 2 keluhan 1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(3, 3, 'belum', NULL, '2021-09-08 02:12:14', 'pasien 3 keluhan 1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(4, 4, 'belum', NULL, '2021-09-10 04:39:05', 'pasien 1 keluhan 2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(5, 4, 'belum', NULL, '2021-09-13 06:26:14', 'pasien 1 keluhan 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(6, 4, 'belum', NULL, '2021-09-14 02:49:41', 'pasien 1 keluhan 2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(7, 5, 'belum', NULL, '2021-09-24 07:20:21', 'pasien 1 keluhan 2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(8, 1, 'belum', NULL, '2021-09-27 22:56:01', 'pasien 1 keluhan 1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(9, 2, 'belum', NULL, '2021-09-27 22:56:38', 'pasien 2 keluhan 1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(10, 3, 'belum', NULL, '2021-09-27 22:57:19', 'pasien 3 keluhan 1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(1, 1, 'belum', NULL, '2021-10-01 05:13:31', '1 1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 2, 'belum', NULL, '2021-10-01 05:13:44', '2 1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 3, 'belum', NULL, '2021-10-01 05:13:54', '3 1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(4, 1, 'belum', NULL, '2021-10-02 05:14:40', '1 2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(5, 1, 'belum', NULL, '2021-10-03 05:15:17', '1 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -559,18 +576,11 @@ CREATE TABLE `visit_has_user` (
 --
 
 INSERT INTO `visit_has_user` (`id`, `visit_id`, `user_id`) VALUES
-(1, 1, 2),
-(2, 1, 3),
-(9, 2, 2),
-(10, 2, 4),
-(11, 3, 2),
-(12, 3, 5),
-(13, 5, 3),
-(14, 6, 3),
-(15, 7, 3),
-(16, 8, 3),
-(17, 9, 4),
-(18, 10, 5);
+(1, 1, 3),
+(2, 2, 4),
+(3, 3, 5),
+(4, 4, 3),
+(5, 5, 3);
 
 --
 -- Indexes for dumped tables
@@ -692,7 +702,6 @@ ALTER TABLE `penyakit`
 --
 ALTER TABLE `resep_apoteker`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_resep_apoteker_obat1_idx` (`obat_id`),
   ADD KEY `fk_resep_apoteker_user1_idx` (`user_id_apoteker`),
   ADD KEY `fk_resep_apoteker_visit1_idx` (`visit_id`);
 
@@ -705,6 +714,14 @@ ALTER TABLE `resep_has_obat`
   ADD KEY `fk_resep_has_obat_visit1_idx` (`visit_id`);
 
 --
+-- Indexes for table `rsp_aptkr_has_obat`
+--
+ALTER TABLE `rsp_aptkr_has_obat`
+  ADD PRIMARY KEY (`idrsp_aptkr_has_obat`),
+  ADD KEY `fk_rsp_aptkr_has_obat_resep_apoteker1_idx` (`resep_apoteker_id`),
+  ADD KEY `fk_rsp_aptkr_has_obat_obat1_idx` (`obat_id`);
+
+--
 -- Indexes for table `tindakan`
 --
 ALTER TABLE `tindakan`
@@ -712,9 +729,9 @@ ALTER TABLE `tindakan`
   ADD KEY `fk_tindakan_visit1_idx` (`visit_id`);
 
 --
--- Indexes for table `user`
+-- Indexes for table `user_klinik`
 --
-ALTER TABLE `user`
+ALTER TABLE `user_klinik`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `iduser_UNIQUE` (`id`);
 
@@ -741,7 +758,7 @@ ALTER TABLE `visit_has_user`
 -- AUTO_INCREMENT for table `antrean_admin`
 --
 ALTER TABLE `antrean_admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `apoteker`
@@ -783,13 +800,13 @@ ALTER TABLE `pasien`
 -- AUTO_INCREMENT for table `resep_apoteker`
 --
 ALTER TABLE `resep_apoteker`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `resep_has_obat`
 --
 ALTER TABLE `resep_has_obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `tindakan`
@@ -798,22 +815,22 @@ ALTER TABLE `tindakan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT for table `user_klinik`
 --
-ALTER TABLE `user`
+ALTER TABLE `user_klinik`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `visit`
 --
 ALTER TABLE `visit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `visit_has_user`
 --
 ALTER TABLE `visit_has_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
@@ -829,13 +846,13 @@ ALTER TABLE `alergi`
 -- Constraints for table `antrean_admin`
 --
 ALTER TABLE `antrean_admin`
-  ADD CONSTRAINT `fk_antrean_admin_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_antrean_admin_user1` FOREIGN KEY (`user_id`) REFERENCES `user_klinik` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `apoteker`
 --
 ALTER TABLE `apoteker`
-  ADD CONSTRAINT `fk_apoteker_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_apoteker_user1` FOREIGN KEY (`user_id`) REFERENCES `user_klinik` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `dftr_akun_has_penjurnalan`
@@ -848,33 +865,33 @@ ALTER TABLE `dftr_akun_has_penjurnalan`
 -- Constraints for table `dokter`
 --
 ALTER TABLE `dokter`
-  ADD CONSTRAINT `fk_dokter_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_dokter_user1` FOREIGN KEY (`user_id`) REFERENCES `user_klinik` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `kasir`
 --
 ALTER TABLE `kasir`
-  ADD CONSTRAINT `fk_kasir_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_kasir_user1` FOREIGN KEY (`user_id`) REFERENCES `user_klinik` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `komentar`
 --
 ALTER TABLE `komentar`
   ADD CONSTRAINT `fk_komentar_nota_pembelian1` FOREIGN KEY (`nota_pembelian_id`) REFERENCES `nota_pembelian` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_komentar_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_komentar_user1` FOREIGN KEY (`user_id`) REFERENCES `user_klinik` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `nota_pembelian`
 --
 ALTER TABLE `nota_pembelian`
-  ADD CONSTRAINT `fk_nota_pembelian_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_nota_pembelian_user1` FOREIGN KEY (`user_id`) REFERENCES `user_klinik` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `nota_penjualan`
 --
 ALTER TABLE `nota_penjualan`
   ADD CONSTRAINT `fk_nota_penjualan_resep_apoteker1` FOREIGN KEY (`resep_apoteker_id`) REFERENCES `resep_apoteker` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_nota_penjualan_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_nota_penjualan_user1` FOREIGN KEY (`user_id`) REFERENCES `user_klinik` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_nota_penjualan_visit1` FOREIGN KEY (`visit_id`) REFERENCES `visit` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
@@ -889,14 +906,14 @@ ALTER TABLE `obat_has_pembelian`
 -- Constraints for table `pasien`
 --
 ALTER TABLE `pasien`
-  ADD CONSTRAINT `fk_pasien_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_pasien_user1` FOREIGN KEY (`user_id`) REFERENCES `user_klinik` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `penjurnalan`
 --
 ALTER TABLE `penjurnalan`
   ADD CONSTRAINT `fk_penjurnalan_nota_penjualan1` FOREIGN KEY (`nota_penjualan_id`) REFERENCES `nota_penjualan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_penjurnalan_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_penjurnalan_user1` FOREIGN KEY (`user_id`) REFERENCES `user_klinik` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `penyakit`
@@ -908,8 +925,7 @@ ALTER TABLE `penyakit`
 -- Constraints for table `resep_apoteker`
 --
 ALTER TABLE `resep_apoteker`
-  ADD CONSTRAINT `fk_resep_apoteker_obat1` FOREIGN KEY (`obat_id`) REFERENCES `obat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_resep_apoteker_user1` FOREIGN KEY (`user_id_apoteker`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_resep_apoteker_user1` FOREIGN KEY (`user_id_apoteker`) REFERENCES `user_klinik` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_resep_apoteker_visit1` FOREIGN KEY (`visit_id`) REFERENCES `visit` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
@@ -918,6 +934,13 @@ ALTER TABLE `resep_apoteker`
 ALTER TABLE `resep_has_obat`
   ADD CONSTRAINT `fk_resep_has_obat_obat1` FOREIGN KEY (`obat_id`) REFERENCES `obat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_resep_has_obat_visit1` FOREIGN KEY (`visit_id`) REFERENCES `visit` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `rsp_aptkr_has_obat`
+--
+ALTER TABLE `rsp_aptkr_has_obat`
+  ADD CONSTRAINT `fk_rsp_aptkr_has_obat_obat1` FOREIGN KEY (`obat_id`) REFERENCES `obat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_rsp_aptkr_has_obat_resep_apoteker1` FOREIGN KEY (`resep_apoteker_id`) REFERENCES `resep_apoteker` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `tindakan`
@@ -929,7 +952,7 @@ ALTER TABLE `tindakan`
 -- Constraints for table `visit_has_user`
 --
 ALTER TABLE `visit_has_user`
-  ADD CONSTRAINT `fk_visit_has_user_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_visit_has_user_user1` FOREIGN KEY (`user_id`) REFERENCES `user_klinik` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_visit_has_user_visit1` FOREIGN KEY (`visit_id`) REFERENCES `visit` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 

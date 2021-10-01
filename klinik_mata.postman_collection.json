@@ -100,12 +100,12 @@
 						},
 						{
 							"key": "keluhan",
-							"value": "pasien 1 keluhan 2",
+							"value": "1 3",
 							"type": "text"
 						},
 						{
 							"key": "no_antrean",
-							"value": "4",
+							"value": "1",
 							"type": "text"
 						}
 					]
@@ -124,7 +124,7 @@
 					"formdata": [
 						{
 							"key": "user_id",
-							"value": "3",
+							"value": "14",
 							"type": "text"
 						},
 						{
@@ -154,7 +154,7 @@
 						},
 						{
 							"key": "tgl_visit",
-							"value": "2021-09-08",
+							"value": "2021-10-01",
 							"type": "text"
 						}
 					]
@@ -203,8 +203,8 @@
 							"disabled": true
 						},
 						{
-							"key": "visit_id",
-							"value": "1",
+							"key": "user_id",
+							"value": "3",
 							"type": "text"
 						}
 					]
@@ -239,57 +239,7 @@
 			"response": []
 		},
 		{
-			"name": "dokter_input_resep",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "idPasien",
-							"value": "3",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "visit_id",
-							"value": "1",
-							"type": "text"
-						}
-					]
-				},
-				"url": "http://localhost/tugas_akhir/dokter_input_resep.php"
-			},
-			"response": []
-		},
-		{
-			"name": "dokter_input_tindakan",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "idPasien",
-							"value": "3",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "visit_id",
-							"value": "1",
-							"type": "text"
-						}
-					]
-				},
-				"url": "http://localhost/tugas_akhir/dokter_input_tindakan.php"
-			},
-			"response": []
-		},
-		{
-			"name": "dokter_input_tindakan Copy",
+			"name": "dokter_input_tindakan_array",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -338,36 +288,7 @@
 						}
 					]
 				},
-				"url": "http://localhost/tugas_akhir/dokter_input_tindakan_copy.php"
-			},
-			"response": []
-		},
-		{
-			"name": "dokter_input_resep_has_obat",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "resep_id",
-							"value": "4",
-							"type": "text"
-						},
-						{
-							"key": "obat_id",
-							"value": "8",
-							"type": "text"
-						},
-						{
-							"key": "dosis",
-							"value": "3x1",
-							"type": "text"
-						}
-					]
-				},
-				"url": "http://localhost/tugas_akhir/dokter_input_resep_has_obat.php"
+				"url": "http://localhost/tugas_akhir/dokter_input_tindakan_array.php"
 			},
 			"response": []
 		},
@@ -380,22 +301,44 @@
 					"mode": "formdata",
 					"formdata": [
 						{
-							"key": "resep_id",
-							"value": "4",
-							"type": "text",
-							"disabled": true
+							"key": "obat_array[obat_1][obat_id]",
+							"value": "7",
+							"type": "text"
 						},
 						{
-							"key": "obat_id",
-							"value": "8",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "dosis",
+							"key": "obat_array[obat_1][dosis]",
 							"value": "3x1",
-							"type": "text",
-							"disabled": true
+							"type": "text"
+						},
+						{
+							"key": "obat_array[obat_1][jumlah]",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "obat_array[obat_1][visit_id]",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "obat_array[obat_2][obat_id]",
+							"value": "8",
+							"type": "text"
+						},
+						{
+							"key": "obat_array[obat_2][dosis]",
+							"value": "1x1",
+							"type": "text"
+						},
+						{
+							"key": "obat_array[obat_2][jumlah]",
+							"value": "20",
+							"type": "text"
+						},
+						{
+							"key": "obat_array[obat_2][visit_id]",
+							"value": "5",
+							"type": "text"
 						}
 					]
 				},
@@ -404,7 +347,7 @@
 			"response": []
 		},
 		{
-			"name": "dokter_update_rm",
+			"name": "dokter_input_rm",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -483,39 +426,7 @@
 						}
 					]
 				},
-				"url": "http://localhost/tugas_akhir/dokter_upd_rm.php"
-			},
-			"response": []
-		},
-		{
-			"name": "apoteker_input_resep",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "resep_id",
-							"value": "4",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "obat_id",
-							"value": "8",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "dosis",
-							"value": "3x1",
-							"type": "text",
-							"disabled": true
-						}
-					]
-				},
-				"url": "http://localhost/tugas_akhir/apoteker_input_resep.php"
+				"url": "http://localhost/tugas_akhir/dokter_input_rm.php"
 			},
 			"response": []
 		},
@@ -734,7 +645,7 @@
 						},
 						{
 							"key": "tgl_visit",
-							"value": "2021-09-08",
+							"value": "2021-10-01",
 							"type": "text"
 						}
 					]
@@ -753,12 +664,13 @@
 					"formdata": [
 						{
 							"key": "visit_id",
-							"value": "2",
+							"value": "",
+							"description": "kosongi jika pembeli obat tdk visit",
 							"type": "text"
 						},
 						{
 							"key": "nama_pembeli",
-							"value": "",
+							"value": "2",
 							"type": "text"
 						}
 					]

@@ -2,20 +2,20 @@
 ?>
 <?php
 $idPasien = "%{$_POST['idPasien']}%";
-echo $idPasien;
+// echo $idPasien;
 $sql =
     "SELECT 
-    user.username,
-    visit.tgl_visit as tgl,
-    keluhan,
-    vod,vos,tod,tos,
-    palpebra,konjungtiva,kornea,bmd,lensa,
-    fundus_od as f_od,
-    diagnosa, terapi
+        user_klinik.username,
+        visit.tgl_visit as tgl,
+        keluhan,
+        vod,vos,tod,tos,
+        palpebra,konjungtiva,kornea,bmd,lensa,
+        fundus_od as f_od,
+        diagnosa, terapi
     FROM `visit` 
     join visit_has_user on visit.id=visit_has_user.visit_id
-    join user on visit_has_user.user_id=user.id
-    where user.id like ? 
+    join user_klinik on visit_has_user.user_id=user_klinik.id
+    where user_klinik.id like ? 
     ORDER BY `visit`.`tgl_visit` DESC";
 $stmt = $con->prepare($sql);
 $stmt->bind_param("s", $idPasien);

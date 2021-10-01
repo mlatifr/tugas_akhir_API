@@ -9,18 +9,21 @@ require 'connect.php';
 $tgl_visit = "%{$_POST['tgl_visit']}%";
 // echo $user_id . ' ' . $tgl_visit;
 // echo ' ' . $tgl_visit;
-$sql = "SELECT 
-vst.id as visit_id,
-vhu.id as vhu_id,
-vhu.user_id as pasien_id,
-`tgl_visit`,user.username as username,
-`nomor_antrean`,
-`status_antrean`,
-`keluhan`
-FROM `visit`vst 
-join visit_has_user vhu on vst.id=vhu.visit_id 
-join user on vhu.user_id=user.id 
-where tgl_visit like ? AND user.username NOT LIKE '%dokter%' ";
+$sql =
+    "SELECT 
+        vst.id AS visit_id,
+        vhu.id AS vhu_id,
+        vhu.user_id AS pasien_id,
+        `tgl_visit`,
+        user_klinik.username AS username,
+        `nomor_antrean`,
+        `status_antrean`,
+        `keluhan`
+    FROM `visit` vst 
+    JOIN visit_has_user vhu ON vst.id=vhu.visit_id 
+    JOIN user_klinik ON vhu.user_id=user_klinik.id 
+    WHERE tgl_visit LIKE ?
+        AND user_klinik.username NOT LIKE '%dokter%'";
 $stmt = $con->prepare($sql);
 $stmt->bind_param("s", $tgl_visit);
 $stmt->execute();

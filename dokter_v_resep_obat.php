@@ -1,22 +1,25 @@
 <?php require 'connect.php';
 ?>
 <?php
-$visit_id = "%{$_POST['visit_id']}%";
-$sql = "SELECT 
-visit.id as visit_id,
-obat.nama as obat, 
-resep_has_obat.dosis as dosis 
-FROM `resep` 
-JOIN resep_has_obat
-ON resep_has_obat.resep_id=resep.id
-JOIN obat 
-ON resep_has_obat.obat_id=obat.id
-JOIN visit 
-ON resep.visit_id=visit.id
-WHERE visit.id like ?
+$user_id = "{$_POST['user_id']}";
+$sql =
+    "SELECT 
+        p.nama as pasien, 
+        v.tgl_visit, 
+        obt.nama as obat, 
+        rho.dosis, 
+        rho. jumlah
+    FROM pasien p
+    INNER JOIN user_klinik uk ON p.user_id=uk.id
+    INNER JOIN visit_has_user vhu 
+    INNER JOIN visit v ON vhu.visit_id=v.id 
+    INNER JOIN resep_has_obat rho ON v.id=rho.visit_id
+    INNER JOIN obat obt on rho.obat_id=obt.id
+    WHERE uk.id = ?
+    ORDER BY v.tgl_visit DESC
 ";
 $stmt = $con->prepare($sql);
-$stmt->bind_param("s", $visit_id);
+$stmt->bind_param("s", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $data = [];
