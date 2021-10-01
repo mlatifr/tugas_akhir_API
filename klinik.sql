@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 01, 2021 at 09:13 AM
+-- Generation Time: Oct 02, 2021 at 01:10 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -435,6 +435,14 @@ CREATE TABLE `resep_apoteker` (
   `tgl_penulisan_resep` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `resep_apoteker`
+--
+
+INSERT INTO `resep_apoteker` (`id`, `visit_id`, `nama_pembeli`, `user_id_apoteker`, `tgl_penulisan_resep`) VALUES
+(1, 1, '', 6, '2021-09-30 17:00:00'),
+(2, 1, '', 6, '2021-09-30 17:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -454,12 +462,8 @@ CREATE TABLE `resep_has_obat` (
 --
 
 INSERT INTO `resep_has_obat` (`id`, `obat_id`, `dosis`, `jumlah`, `visit_id`) VALUES
-(38, 7, '3x1', '10', 1),
-(39, 8, '1x1', '20', 1),
-(40, 7, '3x1', '10', 4),
-(41, 8, '1x1', '20', 4),
-(42, 7, '3x1', '10', 5),
-(43, 8, '1x1', '20', 5);
+(44, 7, '3x1', '30', 1),
+(45, 8, '3x1', '30', 2);
 
 -- --------------------------------------------------------
 
@@ -468,12 +472,23 @@ INSERT INTO `resep_has_obat` (`id`, `obat_id`, `dosis`, `jumlah`, `visit_id`) VA
 --
 
 CREATE TABLE `rsp_aptkr_has_obat` (
-  `idrsp_aptkr_has_obat` int(11) NOT NULL,
-  `resep_apoteker_id` int(11) DEFAULT NULL,
-  `obat_id` int(11) DEFAULT NULL,
+  `resep_apoteker_id` int(11) NOT NULL,
+  `obat_id` int(11) NOT NULL,
   `jumlah` varchar(45) DEFAULT NULL,
   `dosis` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `rsp_aptkr_has_obat`
+--
+
+INSERT INTO `rsp_aptkr_has_obat` (`resep_apoteker_id`, `obat_id`, `jumlah`, `dosis`) VALUES
+(1, 7, '30', '3x1'),
+(1, 8, '30', '3x1'),
+(1, 9, '30', '3x1'),
+(2, 7, '30', '3x1'),
+(2, 8, '30', '3x1'),
+(2, 9, '30', '3x1');
 
 -- --------------------------------------------------------
 
@@ -717,9 +732,9 @@ ALTER TABLE `resep_has_obat`
 -- Indexes for table `rsp_aptkr_has_obat`
 --
 ALTER TABLE `rsp_aptkr_has_obat`
-  ADD PRIMARY KEY (`idrsp_aptkr_has_obat`),
-  ADD KEY `fk_rsp_aptkr_has_obat_resep_apoteker1_idx` (`resep_apoteker_id`),
-  ADD KEY `fk_rsp_aptkr_has_obat_obat1_idx` (`obat_id`);
+  ADD PRIMARY KEY (`resep_apoteker_id`,`obat_id`),
+  ADD KEY `fk_resep_apoteker_has_obat_obat1_idx` (`obat_id`),
+  ADD KEY `fk_resep_apoteker_has_obat_resep_apoteker1_idx` (`resep_apoteker_id`);
 
 --
 -- Indexes for table `tindakan`
@@ -800,13 +815,13 @@ ALTER TABLE `pasien`
 -- AUTO_INCREMENT for table `resep_apoteker`
 --
 ALTER TABLE `resep_apoteker`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `resep_has_obat`
 --
 ALTER TABLE `resep_has_obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `tindakan`
@@ -939,8 +954,8 @@ ALTER TABLE `resep_has_obat`
 -- Constraints for table `rsp_aptkr_has_obat`
 --
 ALTER TABLE `rsp_aptkr_has_obat`
-  ADD CONSTRAINT `fk_rsp_aptkr_has_obat_obat1` FOREIGN KEY (`obat_id`) REFERENCES `obat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_rsp_aptkr_has_obat_resep_apoteker1` FOREIGN KEY (`resep_apoteker_id`) REFERENCES `resep_apoteker` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_resep_apoteker_has_obat_obat1` FOREIGN KEY (`obat_id`) REFERENCES `obat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_resep_apoteker_has_obat_resep_apoteker1` FOREIGN KEY (`resep_apoteker_id`) REFERENCES `resep_apoteker` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `tindakan`
