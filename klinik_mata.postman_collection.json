@@ -317,7 +317,7 @@
 						},
 						{
 							"key": "obat_array[obat_1][visit_id]",
-							"value": "5",
+							"value": "1",
 							"type": "text"
 						},
 						{
@@ -337,7 +337,7 @@
 						},
 						{
 							"key": "obat_array[obat_2][visit_id]",
-							"value": "5",
+							"value": "1",
 							"type": "text"
 						}
 					]
@@ -450,6 +450,25 @@
 			"response": []
 		},
 		{
+			"name": "apoteker_v_rsp_dr",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "visit_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost/tugas_akhir/apoteker_v_rsp_dr.php"
+			},
+			"response": []
+		},
+		{
 			"name": "apoteker_input_resep",
 			"request": {
 				"method": "POST",
@@ -458,23 +477,23 @@
 					"mode": "formdata",
 					"formdata": [
 						{
-							"key": "obat_array[obat_1][visit_id]",
+							"key": "visit_id",
 							"value": "1",
 							"description": "dikosongi jika pembeli tidak visit, langsung beli di apotek",
 							"type": "text"
 						},
 						{
-							"key": "obat_array[obat_1][nama_pembeli]",
+							"key": "nama_pembeli",
 							"value": "",
 							"type": "text"
 						},
 						{
-							"key": "obat_array[obat_1][user_id_apoteker]",
+							"key": "user_id_apoteker",
 							"value": "6",
 							"type": "text"
 						},
 						{
-							"key": "obat_array[obat_1][tgl_penulisan_resep]",
+							"key": "tgl_penulisan_resep",
 							"value": "2021-10-01",
 							"type": "text"
 						}
@@ -494,7 +513,7 @@
 					"formdata": [
 						{
 							"key": "obat_array[obat_1][resep_id]",
-							"value": "1",
+							"value": "2",
 							"description": "dikosongi jika pembeli tidak visit, langsung beli di apotek",
 							"type": "text"
 						},
@@ -515,7 +534,7 @@
 						},
 						{
 							"key": "obat_array[obat_2][resep_id]",
-							"value": "1",
+							"value": "2",
 							"type": "text"
 						},
 						{
@@ -535,7 +554,7 @@
 						},
 						{
 							"key": "obat_array[obat_3][resep_id]",
-							"value": "1",
+							"value": "2",
 							"type": "text"
 						},
 						{
@@ -670,7 +689,6 @@
 						{
 							"key": "visit_id",
 							"value": "1",
-							"description": "kosongi jika pembeli obat tdk visit",
 							"type": "text"
 						},
 						{
@@ -706,6 +724,46 @@
 					]
 				},
 				"url": "http://localhost/tugas_akhir/kasir_v_tindakan.php"
+			},
+			"response": []
+		},
+		{
+			"name": "kasir_input_nota_jual",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_id",
+							"value": "7",
+							"description": "dikosongi jika pembeli tidak visit, langsung beli di apotek",
+							"type": "text"
+						},
+						{
+							"key": "visit_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "resep_apoteker_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "tgl_transaksi",
+							"value": "2021-10-01",
+							"type": "text"
+						},
+						{
+							"key": "total_harga",
+							"value": "5000",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost/tugas_akhir/kasir_input_nota_jual.php"
 			},
 			"response": []
 		}

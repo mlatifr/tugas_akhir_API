@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 02, 2021 at 01:10 AM
+-- Generation Time: Oct 04, 2021 at 01:24 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -312,6 +312,13 @@ CREATE TABLE `nota_penjualan` (
   `total_harga` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `nota_penjualan`
+--
+
+INSERT INTO `nota_penjualan` (`id`, `user_id`, `visit_id`, `resep_apoteker_id`, `tgl_transaksi`, `total_harga`) VALUES
+(1, 7, 1, 1, '2021-09-30 17:00:00', '5000');
+
 -- --------------------------------------------------------
 
 --
@@ -440,8 +447,8 @@ CREATE TABLE `resep_apoteker` (
 --
 
 INSERT INTO `resep_apoteker` (`id`, `visit_id`, `nama_pembeli`, `user_id_apoteker`, `tgl_penulisan_resep`) VALUES
-(1, 1, '', 6, '2021-09-30 17:00:00'),
-(2, 1, '', 6, '2021-09-30 17:00:00');
+(1, NULL, 'pembeli 1', 6, '2021-09-30 17:00:00'),
+(2, 1, 'pembeli_non_visit', 6, '2021-09-30 17:00:00');
 
 -- --------------------------------------------------------
 
@@ -463,7 +470,9 @@ CREATE TABLE `resep_has_obat` (
 
 INSERT INTO `resep_has_obat` (`id`, `obat_id`, `dosis`, `jumlah`, `visit_id`) VALUES
 (44, 7, '3x1', '30', 1),
-(45, 8, '3x1', '30', 2);
+(45, 8, '3x1', '30', 2),
+(46, 7, '3x1', '10', 1),
+(47, 8, '1x1', '20', 1);
 
 -- --------------------------------------------------------
 
@@ -534,7 +543,9 @@ INSERT INTO `user_klinik` (`id`, `username`, `sandi`) VALUES
 (3, 'pasien1', 'pasien1'),
 (4, 'pasien2', 'pasien2'),
 (5, 'pasien3', 'pasien3'),
-(6, 'apoteker', NULL);
+(6, 'apoteker', NULL),
+(7, 'kasir_visit', NULL),
+(8, 'kasir_obat', NULL);
 
 -- --------------------------------------------------------
 
@@ -800,6 +811,12 @@ ALTER TABLE `komentar`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `nota_penjualan`
+--
+ALTER TABLE `nota_penjualan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `obat`
 --
 ALTER TABLE `obat`
@@ -821,7 +838,7 @@ ALTER TABLE `resep_apoteker`
 -- AUTO_INCREMENT for table `resep_has_obat`
 --
 ALTER TABLE `resep_has_obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `tindakan`
@@ -833,7 +850,7 @@ ALTER TABLE `tindakan`
 -- AUTO_INCREMENT for table `user_klinik`
 --
 ALTER TABLE `user_klinik`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `visit`
