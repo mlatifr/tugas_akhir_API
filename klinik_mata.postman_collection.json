@@ -780,8 +780,13 @@
 							"type": "text"
 						},
 						{
+							"key": "obat_array[obat_1][stok_lama]",
+							"value": "10",
+							"type": "text"
+						},
+						{
 							"key": "obat_array[obat_1][terjual]",
-							"value": "1",
+							"value": "0",
 							"type": "text"
 						},
 						{
@@ -790,8 +795,13 @@
 							"type": "text"
 						},
 						{
+							"key": "obat_array[obat_2][stok_lama]",
+							"value": "10",
+							"type": "text"
+						},
+						{
 							"key": "obat_array[obat_2][terjual]",
-							"value": "1",
+							"value": "0",
 							"type": "text"
 						},
 						{
@@ -800,8 +810,13 @@
 							"type": "text"
 						},
 						{
+							"key": "obat_array[obat_3][stok_lama]",
+							"value": "10",
+							"type": "text"
+						},
+						{
 							"key": "obat_array[obat_3][terjual]",
-							"value": "1",
+							"value": "0",
 							"type": "text"
 						}
 					]
