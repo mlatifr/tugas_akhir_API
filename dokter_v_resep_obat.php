@@ -6,15 +6,14 @@ $sql =
     "SELECT 
         p.nama as pasien, 
         v.tgl_visit, 
-        obt.nama as obat, 
-        rho.dosis, 
-        rho. jumlah
+        obt.nama as obat
     FROM pasien p
     INNER JOIN user_klinik uk ON p.user_id=uk.id
     INNER JOIN visit_has_user vhu 
     INNER JOIN visit v ON vhu.visit_id=v.id 
-    INNER JOIN resep_has_obat rho ON v.id=rho.visit_id
-    INNER JOIN obat obt on rho.obat_id=obt.id
+    INNER JOIN resep_apoteker ra ON v.id=ra.visit_id
+    INNER JOIN rsp_aptkr_has_obat raho ON raho.resep_apoteker_id=ra.id 
+    INNER JOIN obat obt on raho.obat_id=obt.id
     WHERE uk.id = ?
     ORDER BY v.tgl_visit DESC
 ";
