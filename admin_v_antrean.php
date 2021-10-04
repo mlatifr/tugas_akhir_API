@@ -13,14 +13,14 @@ $sql = "SELECT
 vst.id as visit_id,
 vhu.id as vhu_id,
 vhu.user_id as pasien_id,
-`tgl_visit`,user.username as username,
+`tgl_visit`,user_klinik.username as username,
 `nomor_antrean`,
 `status_antrean`,
 `keluhan`
 FROM `visit`vst 
-join visit_has_user vhu on vst.id=vhu.visit_id 
-join user on vhu.user_id=user.id 
-where tgl_visit like ? AND user.username NOT LIKE '%dokter%' ";
+INNER JOIN visit_has_user vhu on vst.id=vhu.visit_id 
+INNER JOIN user_klinik on vhu.user_id=user_klinik.id 
+where tgl_visit like ? AND user_klinik.username NOT LIKE '%dokter%' ";
 $stmt = $con->prepare($sql);
 $stmt->bind_param("s", $tgl_visit);
 $stmt->execute();
