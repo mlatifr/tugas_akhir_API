@@ -764,6 +764,51 @@
 				"url": "http://localhost/tugas_akhir/kasir_input_nota_jual.php"
 			},
 			"response": []
+		},
+		{
+			"name": "kasir_updt_stok",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "obat_array[obat_1][obat_id]",
+							"value": "7",
+							"description": "dikosongi jika pembeli tidak visit, langsung beli di apotek",
+							"type": "text"
+						},
+						{
+							"key": "obat_array[obat_1][terjual]",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "obat_array[obat_2][obat_id]",
+							"value": "8",
+							"type": "text"
+						},
+						{
+							"key": "obat_array[obat_2][terjual]",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "obat_array[obat_3][obat_id]",
+							"value": "9",
+							"type": "text"
+						},
+						{
+							"key": "obat_array[obat_3][terjual]",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost/tugas_akhir/kasir_updt_stok.php"
+			},
+			"response": []
 		}
 	]
 }
