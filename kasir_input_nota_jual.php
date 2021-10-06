@@ -13,7 +13,7 @@ $stmt->bind_param("sssss", $user_id, $visit_id, $resep_apoteker_id, $tgl_transak
 $stmt->execute();
 if ($stmt->affected_rows > 0) {
     $last_id = $con->insert_id;
-    $arr = ["result" => "success", "nota_jual_id" => $qlast_id];
+    $arr = ["result" => "success", "nota_jual_id" => $last_id];
 } else {
     $arr = ["result" => "fail", "nota_jual_id" => $last_id, "Error" => $con->error];
 }
