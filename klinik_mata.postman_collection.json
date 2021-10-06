@@ -824,6 +824,119 @@
 				"url": "http://localhost/tugas_akhir/kasir_updt_stok.php"
 			},
 			"response": []
+		},
+		{
+			"name": "pemilik_input_order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_klinik_id",
+							"value": "9",
+							"type": "text"
+						},
+						{
+							"key": "tgl_transaksi",
+							"value": "2021-10-05",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost/tugas_akhir/pemilik_input_order.php"
+			},
+			"response": []
+		},
+		{
+			"name": "pemilik_input_order_item",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "obat_array[obat_1][order_obat_id]",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "obat_array[obat_1][obat_id]",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "obat_array[obat_1][jumlah_order]",
+							"value": "17",
+							"type": "text"
+						},
+						{
+							"key": "obat_array[obat_1][nama]",
+							"value": "obat order satu",
+							"type": "text"
+						},
+						{
+							"key": "obat_array[obat_1][harga_beli]",
+							"value": "30000",
+							"type": "text"
+						},
+						{
+							"key": "obat_array[obat_2][order_obat_id]",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "obat_array[obat_2][obat_id]",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "obat_array[obat_2][jumlah_order]",
+							"value": "17",
+							"type": "text"
+						},
+						{
+							"key": "obat_array[obat_2][nama]",
+							"value": "obat order dua",
+							"type": "text"
+						},
+						{
+							"key": "obat_array[obat_2][harga_beli]",
+							"value": "30000",
+							"type": "text"
+						},
+						{
+							"key": "obat_array[obat_3][order_obat_id]",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "obat_array[obat_3][obat_id]",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "obat_array[obat_3][jumlah_order]",
+							"value": "27",
+							"type": "text"
+						},
+						{
+							"key": "obat_array[obat_3][nama]",
+							"value": "obat order tiga",
+							"type": "text"
+						},
+						{
+							"key": "obat_array[obat_3][harga_beli]",
+							"value": "30000",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost/tugas_akhir/pemilik_input_order_item.php"
+			},
+			"response": []
 		}
 	]
 }
