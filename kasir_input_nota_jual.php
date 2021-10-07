@@ -1,15 +1,30 @@
 <?php require 'connect.php';
 ?>
 <?php
-extract($_POST);
 $last_id;
-$sql =
-    "INSERT INTO `nota_penjualan` 
+$visit_id = '';
+extract($_POST);
+
+if (!$visit_id) {
+    $sql =
+        "INSERT INTO `nota_penjualan` 
+    (`user_id`, `resep_apoteker_id`, `tgl_transaksi`, `total_harga`) 
+    VALUES 
+    (?,?,?,?)";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("ssss", $user_id,  $resep_apoteker_id, $tgl_transaksi, $total_harga);
+}
+if ($visit_id) {
+    $sql =
+        "INSERT INTO `nota_penjualan` 
         (`user_id`, `visit_id`, `resep_apoteker_id`, `tgl_transaksi`, `total_harga`) 
         VALUES 
         (?,?,?,?,?)";
-$stmt = $con->prepare($sql);
-$stmt->bind_param("sssss", $user_id, $visit_id, $resep_apoteker_id, $tgl_transaksi, $total_harga);
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("sssss", $user_id, $visit_id, $resep_apoteker_id, $tgl_transaksi, $total_harga);
+}
+
+
 $stmt->execute();
 if ($stmt->affected_rows > 0) {
     $last_id = $con->insert_id;

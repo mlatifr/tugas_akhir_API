@@ -10,7 +10,7 @@ $nama_pembeli = "{$_POST['nama_pembeli']}";
 // $visit_id = "%{$_POST['visit_id']}%";
 // echo $user_id . ' ' . $tgl_visit;
 // echo ' ' . $tgl_visit;
-if ($visit_id) {
+if ($visit_id && !$nama_pembeli) {
     $sql = "SELECT 
                 ra.id as resep_id,
                 ra.visit_id as visit_id,
@@ -31,7 +31,7 @@ if ($visit_id) {
             ORDER BY `obt`.`nama` ASC";
     $stmt = $con->prepare($sql);
     $stmt->bind_param("s", $visit_id);
-} elseif ($nama_pembeli) {
+} elseif ($nama_pembeli && !$visit_id) {
     $sql = "SELECT 
                 ra.id as resep_id,
                 ra.nama_pembeli,
