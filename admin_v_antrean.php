@@ -12,14 +12,14 @@ $tgl_visit = "%{$_POST['tgl_visit']}%";
 $sql = "SELECT 
 vst.id as visit_id,
 vhu.id as vhu_id,
-vhu.user_id as pasien_id,
+vhu.user_klinik_id as pasien_id,
 `tgl_visit`,user_klinik.username as username,
 `nomor_antrean`,
 `status_antrean`,
 `keluhan`
 FROM `visit`vst 
 INNER JOIN visit_has_user vhu on vst.id=vhu.visit_id 
-INNER JOIN user_klinik on vhu.user_id=user_klinik.id 
+INNER JOIN user_klinik on vhu.user_klinik_id=user_klinik.id 
 where tgl_visit like ? AND user_klinik.username NOT LIKE '%dokter%' ";
 $stmt = $con->prepare($sql);
 $stmt->bind_param("s", $tgl_visit);

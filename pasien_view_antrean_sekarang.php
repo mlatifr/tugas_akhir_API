@@ -8,7 +8,7 @@ require 'connect.php';
 // $user_id = "%{$_POST['user_id']}%";
 // $tgl_visit = "%{$_POST['tgl_visit']}%";
 // echo $user_id . ' ' . $tgl_visit;
-$sql = "SELECT * from antrean_admin where user_id=1";
+$sql = "SELECT * from antrean_admin where user_klinik_id=1";
 $stmt = $con->prepare($sql);
 // $stmt->bind_param("ss", $user_id, $tgl_visit);
 $stmt->execute();

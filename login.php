@@ -3,7 +3,7 @@
 <?php
 extract($_POST);
 echo $id . '_' . $sandi;
-$sql = "SELECT * FROM user where username=? and sandi=?";
+$sql = "SELECT * FROM user_klinik where username=? and sandi=?";
 $stmt = $con->prepare($sql);
 $stmt->bind_param("ss", $id, $sandi);
 $stmt->execute();

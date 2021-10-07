@@ -13,7 +13,7 @@ $sql =
     "SELECT 
         vst.id AS visit_id,
         vhu.id AS vhu_id,
-        vhu.user_id AS pasien_id,
+        vhu.user_klinik_id AS pasien_id,
         `tgl_visit`,
         user_klinik.username AS username,
         `nomor_antrean`,
@@ -21,7 +21,7 @@ $sql =
         `keluhan`
     FROM `visit` vst 
     JOIN visit_has_user vhu ON vst.id=vhu.visit_id 
-    JOIN user_klinik ON vhu.user_id=user_klinik.id 
+    JOIN user_klinik ON vhu.user_klinik_id=user_klinik.id 
     WHERE tgl_visit LIKE ?
         AND user_klinik.username NOT LIKE '%dokter%'";
 $stmt = $con->prepare($sql);

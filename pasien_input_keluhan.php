@@ -10,9 +10,9 @@ $stmt->execute();
 if ($stmt->affected_rows > 0) {
     echo "sql 1 success \n";
     $visit_id = $con->insert_id;
-    $sql2 = "INSERT INTO `visit_has_user` (`visit_id`, `user_id`) VALUES (?,?)";
+    $sql2 = "INSERT INTO `visit_has_user` (`visit_id`, `user_klinik_id`) VALUES (?,?)";
     $stmt2 = $con->prepare($sql2);
-    $stmt2->bind_param("ss", $visit_id, $user_id);
+    $stmt2->bind_param("ss", $visit_id, $user_klinik_id);
     $stmt2->execute();
     if ($stmt2->affected_rows > 0) {
         echo "sql 2 success \n";
@@ -21,9 +21,12 @@ if ($stmt->affected_rows > 0) {
         $stmt3->bind_param("s", $no_antrean);
         $stmt3->execute();
         $arr = [
-            "result" => "success", "visit_id" => $visit_id,
-            "user_id" => $user_id, "keluhan" => $keluhan,
-            'no_antrean' => $no_antrean
+            "result" => "success",
+            "visit_id" => $visit_id,
+            "user_klinik_id" => $user_klinik_id,
+            "keluhan" => $keluhan,
+            'no_antrean' => $no_antrean,
+            'tgl_visit' => date('Y-m-d H:i:s')
         ];
     }
 } else {

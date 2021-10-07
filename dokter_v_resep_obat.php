@@ -8,7 +8,7 @@ $sql =
         v.tgl_visit, 
         obt.nama as obat
     FROM pasien p
-    INNER JOIN user_klinik uk ON p.user_id=uk.id
+    INNER JOIN user_klinik uk ON p.user_klinik_id=uk.id
     INNER JOIN visit_has_user vhu 
     INNER JOIN visit v ON vhu.visit_id=v.id 
     INNER JOIN resep_apoteker ra ON v.id=ra.visit_id

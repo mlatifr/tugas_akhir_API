@@ -9,7 +9,6 @@ foreach ($obat_array as $row => $value) {
     $nama = mysqli_real_escape_string($con, $value['nama']);
     $harga_beli = mysqli_real_escape_string($con, $value['harga_beli']);
     $obat_id = mysqli_real_escape_string($con, $value['obat_id']);
-    // $obat_id['obat_id'];
     $sql =
         "INSERT INTO `obat` 
         (`order_obat_id`, `jumlah_order`, `nama`, `harga_beli`)
@@ -20,7 +19,6 @@ foreach ($obat_array as $row => $value) {
     $obat_array[$row]['obat_id'] = $con->insert_id;
     echo $obat_id;
     if ($stmt->affected_rows > 0) {
-        // $obat_id = 'oini id obat';
         $arr = ["result" => "success", "data" => $obat_array];
     } else {
         $arr = ["result" => "fail", "Error" => $con->error, 'jumlah_array' => count($obat_array)];

@@ -14,7 +14,7 @@ $sql =
         diagnosa, terapi
     FROM `visit` 
     join visit_has_user on visit.id=visit_has_user.visit_id
-    join user_klinik on visit_has_user.user_id=user_klinik.id
+    join user_klinik on visit_has_user.user_klinik_id=user_klinik.id
     where user_klinik.id like ? 
     ORDER BY `visit`.`tgl_visit` DESC";
 $stmt = $con->prepare($sql);

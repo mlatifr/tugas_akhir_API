@@ -5,16 +5,16 @@ require 'connect.php';
 ?>
 <?php
 
-$user_id = "%{$_POST['user_id']}%";
+$user_klinik_id = "%{$_POST['user_klinik_id']}%";
 $tgl_visit = "%{$_POST['tgl_visit']}%";
 // echo $user_id . ' ' . $tgl_visit;
-$sql = "SELECT user.id as id_user, visit.nomor_antrean as no_antre 
+$sql = "SELECT user_klinik.id as id_user, visit.nomor_antrean as no_antre , visit.tgl_visit
 from visit
 join visit_has_user on visit.id=visit_has_user.visit_id
-join user on visit_has_user.user_id=user.id
- where user.id like ? and visit.tgl_visit like ? ";
+join user_klinik on visit_has_user.user_klinik_id=user_klinik.id
+ where user_klinik.id like ? and visit.tgl_visit like ? ";
 $stmt = $con->prepare($sql);
-$stmt->bind_param("ss", $user_id, $tgl_visit);
+$stmt->bind_param("ss", $user_klinik_id, $tgl_visit);
 $stmt->execute();
 $result = $stmt->get_result();
 $data = [];
