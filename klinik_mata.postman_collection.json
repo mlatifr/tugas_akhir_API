@@ -932,6 +932,31 @@
 				"url": "http://localhost/tugas_akhir/pemilik_input_order_item.php"
 			},
 			"response": []
+		},
+		{
+			"name": "pemilik_v_order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tgl_order",
+							"value": "2021",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "order_obat_id",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost/tugas_akhir/pemilik_v_order.php"
+			},
+			"response": []
 		}
 	]
 }
