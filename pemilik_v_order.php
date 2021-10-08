@@ -3,29 +3,25 @@
 <?php
 $arr = [];
 $data = [];
-// extract($_POST);
-$order_obat_id;
-$tgl_order;
-$tgl_order = "%{$_POST['tgl_order']}%";
-$order_obat_id = "{$_POST['order_obat_id']}";
-echo $order_obat_id;
-if ($tgl_order) {
+if (isset($_POST['tgl_order'])) {
+    $tgl_order = "%{$_POST['tgl_order']}%";
     $sql =
         "SELECT oo.id as order_obat_id, obt.id, obt.nama, obt.jumlah_order, oo.tgl_order
-    FROM order_obat oo
-    INNER JOIN obat obt ON oo.id=obt.order_obat_id
-    WHERE oo.tgl_order LIKE ?";
+        FROM order_obat oo
+        INNER JOIN obat obt ON oo.id=obt.order_obat_id
+        WHERE oo.tgl_order LIKE ?";
     $stmt = $con->prepare($sql);
     $stmt->bind_param("s", $tgl_order);
 }
-if ($order_obat_id) {
+if (isset($_POST['order_obat_id'])) {
+    $order_obat_id = "%{$_POST['order_obat_id']}%";
     $sql =
         "SELECT oo.id as order_obat_id, obt.id, obt.nama, obt.jumlah_order, oo.tgl_order
         FROM order_obat oo
         INNER JOIN obat obt ON oo.id=obt.order_obat_id
         WHERE oo.id = ?";
     $stmt = $con->prepare($sql);
-    $stmt->bind_param("s", $order_obat_id);
+    $stmt->bind_param("s", $_POST['order_obat_id']);
 }
 $stmt->execute();
 $result = $stmt->get_result();

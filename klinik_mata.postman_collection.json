@@ -944,13 +944,13 @@
 						{
 							"key": "tgl_order",
 							"value": "2021",
-							"type": "text",
-							"disabled": true
+							"type": "text"
 						},
 						{
 							"key": "order_obat_id",
 							"value": "2",
-							"type": "text"
+							"type": "text",
+							"disabled": true
 						}
 					]
 				},
