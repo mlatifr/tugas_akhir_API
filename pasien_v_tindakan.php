@@ -5,10 +5,6 @@ require 'connect.php';
 ?>
 <?php
 extract($_POST);
-// $user_id = "%{$_POST['user_id']}%";
-// $visit_id = "%{$_POST['visit_id']}%";
-// echo $user_id . ' ' . $tgl_visit;
-// echo ' ' . $tgl_visit;
 $sql =
     "SELECT *
     FROM `tindakan` WHERE visit_id = ? ";
