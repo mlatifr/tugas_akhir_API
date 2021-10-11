@@ -5,12 +5,6 @@ require 'connect.php';
 ?>
 <?php
 $stmt = '';
-// extract($_POST);
-// $nama_pembeli = "{$_POST['nama_pembeli']}";
-// $user_id = "%{$_POST['user_id']}%";
-// $visit_id = "%{$_POST['visit_id']}%";
-// echo $user_id . ' ' . $tgl_visit;
-// echo ' ' . $tgl_visit;
 if (isset($_POST['visit_id']) && isset($_POST['tgl_resep'])) {
     $visit_id = "{$_POST['visit_id']}";
     $tgl_resep = "%{$_POST['tgl_resep']}%";
