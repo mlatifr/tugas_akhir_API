@@ -8,20 +8,20 @@ extract($_POST);
 if (!$visit_id) {
     $sql =
         "INSERT INTO `nota_penjualan` 
-    (`user_id`, `resep_apoteker_id`, `tgl_transaksi`, `total_harga`) 
+    (`user_id`, `resep_apoteker_id`, `tgl_transaksi`,  `jasa_medis`,`biaya_admin`,`total_harga`) 
     VALUES 
-    (?,?,?,?)";
+    (?,?,?,?,?,?)";
     $stmt = $con->prepare($sql);
-    $stmt->bind_param("ssss", $user_id,  $resep_apoteker_id, $tgl_transaksi, $total_harga);
+    $stmt->bind_param("ssss", $user_id,  $resep_apoteker_id, $jasa_medis, $biaya_admin, $total_harga);
 }
 if ($visit_id) {
     $sql =
         "INSERT INTO `nota_penjualan` 
-        (`user_id`, `visit_id`, `resep_apoteker_id`, `tgl_transaksi`, `total_harga`) 
+        (`user_id`, `visit_id`, `resep_apoteker_id`, `tgl_transaksi`, `jasa_medis`,`biaya_admin`,`total_harga`) 
         VALUES 
-        (?,?,?,?,?)";
+        (?,?,?,?,?,?,?)";
     $stmt = $con->prepare($sql);
-    $stmt->bind_param("sssss", $user_id, $visit_id, $resep_apoteker_id, $tgl_transaksi, $total_harga);
+    $stmt->bind_param("sssssss", $user_id, $visit_id, $resep_apoteker_id, $tgl_transaksi, $jasa_medis, $biaya_admin, $total_harga);
 }
 
 

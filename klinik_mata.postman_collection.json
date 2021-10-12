@@ -1042,6 +1042,16 @@
 							"key": "total_harga",
 							"value": "5000",
 							"type": "text"
+						},
+						{
+							"key": "jasa_medis",
+							"value": "200000",
+							"type": "text"
+						},
+						{
+							"key": "biaya_admin",
+							"value": "40000",
+							"type": "text"
 						}
 					]
 				},
@@ -1309,14 +1319,14 @@
 					"formdata": [
 						{
 							"key": "tgl_resep",
-							"value": "2021",
-							"type": "text",
-							"disabled": true
+							"value": "2021-10",
+							"type": "text"
 						},
 						{
 							"key": "tgl_resep_detail",
-							"value": "2021",
-							"type": "text"
+							"value": "2021-10",
+							"type": "text",
+							"disabled": true
 						}
 					]
 				},
@@ -1345,7 +1355,7 @@
 					"formdata": [
 						{
 							"key": "tgl_visit",
-							"value": "2021",
+							"value": "2021-10",
 							"type": "text"
 						},
 						{
@@ -1365,6 +1375,148 @@
 					"path": [
 						"tugas_akhir",
 						"akuntan_v_pjualan_tdkn.php"
+					]
+				},
+				"description": "tgl_resep: melihat penjualan obat pada tgl tertentu\ntgl_resep_detail: jika send tgl_resep_detail, maka diberi rincian, \n\njika tidak, hanya diberi total pendapatan uang obat pada tgl tersebut"
+			},
+			"response": []
+		},
+		{
+			"name": "akuntan_v_pjualan_jasmed",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tgl_transaksi",
+							"value": "2021-10",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/akuntan_v_pjualan_jasmed.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"akuntan_v_pjualan_jasmed.php"
+					]
+				},
+				"description": "tgl_resep: melihat penjualan obat pada tgl tertentu\ntgl_resep_detail: jika send tgl_resep_detail, maka diberi rincian, \n\njika tidak, hanya diberi total pendapatan uang obat pada tgl tersebut"
+			},
+			"response": []
+		},
+		{
+			"name": "akuntan_v_pjualan_admin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tgl_transaksi",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/akuntan_v_pjualan_admin.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"akuntan_v_pjualan_admin.php"
+					]
+				},
+				"description": "tgl_resep: melihat penjualan obat pada tgl tertentu\ntgl_resep_detail: jika send tgl_resep_detail, maka diberi rincian, \n\njika tidak, hanya diberi total pendapatan uang obat pada tgl tersebut"
+			},
+			"response": []
+		},
+		{
+			"name": "akuntan_v_piutang_obat",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tgl_resep",
+							"value": "2021-10",
+							"type": "text"
+						},
+						{
+							"key": "tgl_resep_detail",
+							"value": "2021-10",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "perusahaan",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/akuntan_v_piutang_obat.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"akuntan_v_piutang_obat.php"
+					]
+				},
+				"description": "tgl_resep: melihat penjualan obat pada tgl tertentu\ntgl_resep_detail: jika send tgl_resep_detail, maka diberi rincian, \n\njika tidak, hanya diberi total pendapatan uang obat pada tgl tersebut"
+			},
+			"response": []
+		},
+		{
+			"name": "akuntan_v_piutang_tdkn",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tgl_visit",
+							"value": "2021",
+							"type": "text"
+						},
+						{
+							"key": "tgl_visit_detail",
+							"value": "2021",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "perusahaan",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/akuntan_v_piutang_tdkn.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"akuntan_v_piutang_tdkn.php"
 					]
 				},
 				"description": "tgl_resep: melihat penjualan obat pada tgl tertentu\ntgl_resep_detail: jika send tgl_resep_detail, maka diberi rincian, \n\njika tidak, hanya diberi total pendapatan uang obat pada tgl tersebut"

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2021 at 05:37 AM
+-- Generation Time: Oct 12, 2021 at 09:04 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -188,7 +188,7 @@ CREATE TABLE `alergi` (
 
 CREATE TABLE `antrean_admin` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `user_klinik_id` int(11) DEFAULT NULL,
   `status_antrean` enum('buka','tutup') DEFAULT NULL,
   `antrean_sekarang` int(11) DEFAULT NULL,
   `antrean_terakhir` int(11) NOT NULL,
@@ -199,29 +199,8 @@ CREATE TABLE `antrean_admin` (
 -- Dumping data for table `antrean_admin`
 --
 
-INSERT INTO `antrean_admin` (`id`, `user_id`, `status_antrean`, `antrean_sekarang`, `antrean_terakhir`, `batas_antrean`) VALUES
-(1, 1, 'buka', 1, 1, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `apoteker`
---
-
-CREATE TABLE `apoteker` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `nama` varchar(45) DEFAULT NULL,
-  `alamat` varchar(200) DEFAULT NULL,
-  `tlp` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `apoteker`
---
-
-INSERT INTO `apoteker` (`id`, `user_id`, `nama`, `alamat`, `tlp`) VALUES
-(1, 6, 'apoteker', 'jl apoteker', '0811122233456');
+INSERT INTO `antrean_admin` (`id`, `user_klinik_id`, `status_antrean`, `antrean_sekarang`, `antrean_terakhir`, `batas_antrean`) VALUES
+(1, 1, 'buka', 1, 10, 1);
 
 -- --------------------------------------------------------
 
@@ -231,46 +210,32 @@ INSERT INTO `apoteker` (`id`, `user_id`, `nama`, `alamat`, `tlp`) VALUES
 
 CREATE TABLE `daftar_akun` (
   `id` int(11) NOT NULL,
-  `nama` varchar(45) DEFAULT NULL
+  `nama` varchar(45) DEFAULT NULL,
+  `saldo_awal` int(11) DEFAULT NULL,
+  `saldo_akhir` int(11) DEFAULT NULL,
+  `UTB_total_kredit` int(11) DEFAULT NULL,
+  `UTB_total_debit` int(11) DEFAULT NULL,
+  `ATB_debit` int(11) DEFAULT NULL,
+  `ATB_kredit` int(11) DEFAULT NULL,
+  `BS_debit` int(11) DEFAULT NULL,
+  `BS_kredit` int(11) DEFAULT NULL,
+  `PCTB_debit` int(11) DEFAULT NULL,
+  `PTCB_kredit` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `dftr_akun_has_penjurnalan`
+-- Dumping data for table `daftar_akun`
 --
 
-CREATE TABLE `dftr_akun_has_penjurnalan` (
-  `penjurnalan_id` int(11) DEFAULT NULL,
-  `daftar_akun_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `dokter`
---
-
-CREATE TABLE `dokter` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `dr_nama` varchar(50) DEFAULT NULL,
-  `spesialis` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='	' ROW_FORMAT=DYNAMIC;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `kasir`
---
-
-CREATE TABLE `kasir` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `nama` varchar(50) DEFAULT NULL,
-  `alamat` varchar(100) DEFAULT NULL,
-  `tlp` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+INSERT INTO `daftar_akun` (`id`, `nama`, `saldo_awal`, `saldo_akhir`, `UTB_total_kredit`, `UTB_total_debit`, `ATB_debit`, `ATB_kredit`, `BS_debit`, `BS_kredit`, `PCTB_debit`, `PTCB_kredit`) VALUES
+(1, 'jasa medis', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 'obat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 'tindakan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(4, 'admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(5, 'piutang jasa medis', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(6, 'piutang obat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 'hutang obat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(8, 'hutang barang habis pakai', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -298,17 +263,31 @@ CREATE TABLE `nota_penjualan` (
   `visit_id` int(11) DEFAULT NULL,
   `resep_apoteker_id` int(11) DEFAULT NULL,
   `tgl_transaksi` timestamp NULL DEFAULT NULL,
-  `total_harga` varchar(45) DEFAULT NULL
+  `jasa_medis` int(11) DEFAULT NULL,
+  `biaya_admin` int(11) DEFAULT NULL,
+  `total_harga` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `nota_penjualan`
 --
 
-INSERT INTO `nota_penjualan` (`id`, `user_id`, `visit_id`, `resep_apoteker_id`, `tgl_transaksi`, `total_harga`) VALUES
-(1, 7, 1, 1, '2021-09-30 17:00:00', '5000'),
-(2, 7, 1, 1, '2021-10-01 17:00:00', '5000'),
-(3, 7, 1, 1, '2021-10-01 17:00:00', '5000');
+INSERT INTO `nota_penjualan` (`id`, `user_id`, `visit_id`, `resep_apoteker_id`, `tgl_transaksi`, `jasa_medis`, `biaya_admin`, `total_harga`) VALUES
+(1, 7, 1, 1, '2021-09-30 17:00:00', NULL, NULL, 5000),
+(2, 7, 1, 1, '2021-10-01 17:00:00', NULL, NULL, 5000),
+(3, 7, 1, 1, '2021-10-01 17:00:00', NULL, NULL, 5000),
+(4, 7, 1, 1, '2021-09-30 17:00:00', NULL, NULL, 5000),
+(5, 7, 1, 1, '2021-09-30 17:00:00', NULL, NULL, 5000),
+(6, 7, 1, 1, '2021-09-30 17:00:00', NULL, NULL, 5000),
+(7, 7, NULL, 1, '2021-09-30 17:00:00', NULL, NULL, 5000),
+(8, 7, NULL, 1, '2021-09-30 17:00:00', NULL, NULL, 5000),
+(9, 7, NULL, 1, '2021-09-30 17:00:00', NULL, NULL, 5000),
+(10, 7, NULL, 1, '2021-09-30 17:00:00', NULL, NULL, 5000),
+(11, 7, NULL, 1, '2021-09-30 17:00:00', NULL, NULL, 5000),
+(12, 7, NULL, 1, '2021-09-30 17:00:00', NULL, NULL, 5000),
+(13, 7, 2, 1, '2021-09-30 17:00:00', NULL, NULL, 5000),
+(14, 7, 2, 1, '2021-09-30 17:00:00', 200000, 40000, 5000),
+(15, 7, 2, 1, '2021-09-30 17:00:00', 200000, 40000, 5000);
 
 -- --------------------------------------------------------
 
@@ -319,6 +298,8 @@ INSERT INTO `nota_penjualan` (`id`, `user_id`, `visit_id`, `resep_apoteker_id`, 
 CREATE TABLE `obat` (
   `id` int(11) NOT NULL,
   `order_obat_id` int(11) DEFAULT NULL,
+  `jumlah_order` int(11) DEFAULT NULL,
+  `jumlah_diterima` int(11) DEFAULT NULL,
   `nama` varchar(45) DEFAULT NULL,
   `stok` int(11) DEFAULT NULL,
   `kadaluarsa` timestamp NULL DEFAULT NULL,
@@ -330,10 +311,58 @@ CREATE TABLE `obat` (
 -- Dumping data for table `obat`
 --
 
-INSERT INTO `obat` (`id`, `order_obat_id`, `nama`, `stok`, `kadaluarsa`, `harga_jual`, `harga_beli`) VALUES
-(7, 0, 'obat 1', 10, '2021-10-01 08:05:48', '1000', NULL),
-(8, 0, 'obat 2', 10, '2021-10-01 08:05:48', '2000', NULL),
-(9, 0, 'obat 1', 10, '2021-09-02 08:05:48', '3000', NULL);
+INSERT INTO `obat` (`id`, `order_obat_id`, `jumlah_order`, `jumlah_diterima`, `nama`, `stok`, `kadaluarsa`, `harga_jual`, `harga_beli`) VALUES
+(7, 1, 15, 15, 'obat 1', 10, '2021-10-01 08:05:48', '1000', NULL),
+(8, 1, 13, 13, 'obat 2', 10, '2021-10-01 08:05:48', '2000', NULL),
+(9, 1, 12, 12, 'obat 1', 10, '2021-09-02 08:05:48', '3000', NULL),
+(30, 2, 17, NULL, 'obat order satu', NULL, NULL, NULL, '30000'),
+(31, 2, 17, NULL, 'obat order dua', NULL, NULL, NULL, '30000'),
+(32, 2, 27, NULL, 'obat order tiga', NULL, NULL, NULL, '30000'),
+(33, 2, 17, NULL, 'obat order satu', NULL, NULL, NULL, '30000'),
+(34, 2, 17, NULL, 'obat order dua', NULL, NULL, NULL, '30000'),
+(35, 2, 27, NULL, 'obat order tiga', NULL, NULL, NULL, '30000'),
+(36, 2, 17, NULL, 'obat order satu', NULL, NULL, NULL, '30000'),
+(37, 2, 17, NULL, 'obat order dua', NULL, NULL, NULL, '30000'),
+(38, 2, 27, NULL, 'obat order tiga', NULL, NULL, NULL, '30000'),
+(39, 2, 17, NULL, 'obat order satu', NULL, NULL, NULL, '30000'),
+(40, 2, 17, NULL, 'obat order dua', NULL, NULL, NULL, '30000'),
+(41, 2, 27, NULL, 'obat order tiga', NULL, NULL, NULL, '30000'),
+(42, 2, 17, NULL, 'obat order satu', NULL, NULL, NULL, '30000'),
+(43, 2, 17, NULL, 'obat order dua', NULL, NULL, NULL, '30000'),
+(44, 2, 27, NULL, 'obat order tiga', NULL, NULL, NULL, '30000'),
+(45, 2, 17, NULL, 'obat order satu', NULL, NULL, NULL, '30000'),
+(46, 2, 17, NULL, 'obat order dua', NULL, NULL, NULL, '30000'),
+(47, 2, 27, NULL, 'obat order tiga', NULL, NULL, NULL, '30000'),
+(48, 2, 17, NULL, 'obat order satu', NULL, NULL, NULL, '30000'),
+(49, 2, 17, NULL, 'obat order dua', NULL, NULL, NULL, '30000'),
+(50, 2, 27, NULL, 'obat order tiga', NULL, NULL, NULL, '30000'),
+(51, 2, 17, NULL, 'obat order satu', NULL, NULL, NULL, '30000'),
+(52, 2, 17, NULL, 'obat order dua', NULL, NULL, NULL, '30000'),
+(53, 2, 27, NULL, 'obat order tiga', NULL, NULL, NULL, '30000'),
+(54, 2, 17, NULL, 'obat order satu', NULL, NULL, NULL, '30000'),
+(55, 2, 17, NULL, 'obat order dua', NULL, NULL, NULL, '30000'),
+(56, 2, 27, NULL, 'obat order tiga', NULL, NULL, NULL, '30000'),
+(57, 2, 17, NULL, 'obat order satu', NULL, NULL, NULL, '30000'),
+(58, 2, 17, NULL, 'obat order dua', NULL, NULL, NULL, '30000'),
+(59, 2, 27, NULL, 'obat order tiga', NULL, NULL, NULL, '30000'),
+(60, 2, 17, NULL, 'obat order satu', NULL, NULL, NULL, '30000'),
+(61, 2, 17, NULL, 'obat order dua', NULL, NULL, NULL, '30000'),
+(62, 2, 27, NULL, 'obat order tiga', NULL, NULL, NULL, '30000'),
+(63, 2, 17, NULL, 'obat order satu', NULL, NULL, NULL, '30000'),
+(64, 2, 17, NULL, 'obat order dua', NULL, NULL, NULL, '30000'),
+(65, 2, 27, NULL, 'obat order tiga', NULL, NULL, NULL, '30000'),
+(66, 2, 17, NULL, 'obat order satu', NULL, NULL, NULL, '30000'),
+(67, 2, 17, NULL, 'obat order dua', NULL, NULL, NULL, '30000'),
+(68, 2, 27, NULL, 'obat order tiga', NULL, NULL, NULL, '30000'),
+(69, 2, 17, NULL, 'obat order satu', NULL, NULL, NULL, '30000'),
+(70, 2, 17, NULL, 'obat order dua', NULL, NULL, NULL, '30000'),
+(71, 2, 27, NULL, 'obat order tiga', NULL, NULL, NULL, '30000'),
+(72, 2, 17, NULL, 'obat order satu', NULL, NULL, NULL, '30000'),
+(73, 2, 17, NULL, 'obat order dua', NULL, NULL, NULL, '30000'),
+(74, 2, 27, NULL, 'obat order tiga', NULL, NULL, NULL, '30000'),
+(75, 4, 17, NULL, 'bimbingan ke 4', NULL, NULL, NULL, '40000'),
+(76, 4, 17, NULL, 'bimbingan ke 4.1', NULL, NULL, NULL, '410000'),
+(77, 4, 27, NULL, 'bimbingan ke 4.2', NULL, NULL, NULL, '420000');
 
 -- --------------------------------------------------------
 
@@ -344,9 +373,18 @@ INSERT INTO `obat` (`id`, `order_obat_id`, `nama`, `stok`, `kadaluarsa`, `harga_
 CREATE TABLE `order_obat` (
   `id` int(11) NOT NULL,
   `user_klinik_id` int(11) DEFAULT NULL,
-  `tgl_transaksi` timestamp NULL DEFAULT NULL,
-  `jumlah` int(11) DEFAULT NULL
+  `tgl_order` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `order_obat`
+--
+
+INSERT INTO `order_obat` (`id`, `user_klinik_id`, `tgl_order`) VALUES
+(1, 9, '2021-09-30 18:00:00'),
+(2, 9, '2021-10-04 17:00:00'),
+(3, 9, '2021-10-04 17:00:00'),
+(4, 9, '2021-10-04 17:00:00');
 
 -- --------------------------------------------------------
 
@@ -356,7 +394,7 @@ CREATE TABLE `order_obat` (
 
 CREATE TABLE `pasien` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `user_klinik_id` int(11) DEFAULT NULL,
   `no_rekam_medis` varchar(45) DEFAULT NULL,
   `NIK` varchar(45) DEFAULT NULL,
   `nama` varchar(45) DEFAULT NULL,
@@ -378,7 +416,7 @@ CREATE TABLE `pasien` (
 -- Dumping data for table `pasien`
 --
 
-INSERT INTO `pasien` (`id`, `user_id`, `no_rekam_medis`, `NIK`, `nama`, `tempat_lahir`, `tgl_lahir`, `kelamin`, `golongan_darah`, `alamat`, `agama`, `status_kawin`, `pekerjaan`, `kewarganegaraan`, `tlp`, `hp`, `created`) VALUES
+INSERT INTO `pasien` (`id`, `user_klinik_id`, `no_rekam_medis`, `NIK`, `nama`, `tempat_lahir`, `tgl_lahir`, `kelamin`, `golongan_darah`, `alamat`, `agama`, `status_kawin`, `pekerjaan`, `kewarganegaraan`, `tlp`, `hp`, `created`) VALUES
 (6, 3, NULL, NULL, 'pasien 1', NULL, '2021-09-10 06:17:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (7, 4, NULL, NULL, 'pasien 2', NULL, '2021-09-10 06:17:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (8, 5, '003', '315151654888352', 'pasien 3', NULL, '2021-09-01 06:13:11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
@@ -391,10 +429,8 @@ INSERT INTO `pasien` (`id`, `user_id`, `no_rekam_medis`, `NIK`, `nama`, `tempat_
 
 CREATE TABLE `penjurnalan` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `tgl` timestamp NULL DEFAULT NULL,
-  `debit` int(11) DEFAULT NULL,
-  `kredit` int(11) DEFAULT NULL,
+  `user_klinik_id` int(11) DEFAULT NULL,
+  `tgl_penjurnalan` timestamp NULL DEFAULT NULL,
   `saldo_awal` int(11) DEFAULT NULL,
   `saldo_akhir` int(11) DEFAULT NULL,
   `UTB_total_kredit` int(11) DEFAULT NULL,
@@ -406,6 +442,39 @@ CREATE TABLE `penjurnalan` (
   `PCTB_debit` int(11) DEFAULT NULL,
   `PTCB_kredit` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `penjurnalan`
+--
+
+INSERT INTO `penjurnalan` (`id`, `user_klinik_id`, `tgl_penjurnalan`, `saldo_awal`, `saldo_akhir`, `UTB_total_kredit`, `UTB_total_debit`, `ATB_debit`, `ATB_kredit`, `BS_debit`, `BS_kredit`, `PCTB_debit`, `PTCB_kredit`) VALUES
+(1, 10, '2021-10-01 02:19:17', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `penjurnalan_has_akun`
+--
+
+CREATE TABLE `penjurnalan_has_akun` (
+  `id` int(11) NOT NULL,
+  `penjurnalan_id` int(11) DEFAULT NULL,
+  `daftar_akun_id` int(11) DEFAULT NULL,
+  `tgl_catat` timestamp NULL DEFAULT NULL,
+  `debet` int(11) DEFAULT NULL,
+  `kredit` int(11) DEFAULT NULL,
+  `ket_transaksi` varchar(1000) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `penjurnalan_has_akun`
+--
+
+INSERT INTO `penjurnalan_has_akun` (`id`, `penjurnalan_id`, `daftar_akun_id`, `tgl_catat`, `debet`, `kredit`, `ket_transaksi`) VALUES
+(1, 1, 1, '2021-10-01 05:59:35', NULL, NULL, NULL),
+(2, 1, 2, '2021-10-01 05:59:35', NULL, NULL, NULL),
+(3, 1, 1, '2021-10-02 05:59:59', NULL, NULL, NULL),
+(4, 1, 2, '2021-10-02 05:59:59', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -439,7 +508,20 @@ CREATE TABLE `resep_apoteker` (
 
 INSERT INTO `resep_apoteker` (`id`, `visit_id`, `nama_pembeli`, `user_id_apoteker`, `tgl_penulisan_resep`) VALUES
 (1, NULL, 'pembeli 1', 6, '2021-09-30 17:00:00'),
-(2, 1, 'pembeli_non_visit', 6, '2021-09-30 17:00:00');
+(2, 1, 'pembeli_non_visit', 6, '2021-10-01 17:00:00'),
+(3, 1, 'pembeli_non_visit', 6, '2021-10-02 17:00:00'),
+(4, 1, 'pembeli_non_visit', 6, '2021-10-03 17:00:00'),
+(5, 2, 'pembeli_non_visit', 6, '2021-10-04 17:00:00'),
+(6, NULL, 'budi', 6, '2021-10-05 17:00:00'),
+(7, NULL, 'budi', 6, '2021-10-06 17:00:00'),
+(8, NULL, 'budi', 6, '2021-10-07 17:00:00'),
+(9, NULL, 'budi', 6, '2021-10-08 17:00:00'),
+(10, NULL, 'budi', 6, '2021-10-09 17:00:00'),
+(11, NULL, 'budi', 6, '2021-10-10 17:00:00'),
+(12, NULL, 'budi', 6, '2021-10-11 17:00:00'),
+(13, 2, 'pembeli_non_visit', 6, '2021-10-12 17:00:00'),
+(14, 2, 'pembeli_non_visit', 6, '2021-10-13 17:00:00'),
+(15, 2, 'pembeli_non_visit', 6, '2021-10-14 17:00:00');
 
 -- --------------------------------------------------------
 
@@ -463,7 +545,11 @@ INSERT INTO `resep_has_obat` (`id`, `obat_id`, `dosis`, `jumlah`, `visit_id`) VA
 (44, 7, '3x1', '30', 1),
 (45, 8, '3x1', '30', 2),
 (46, 7, '3x1', '10', 1),
-(47, 8, '1x1', '20', 1);
+(47, 8, '1x1', '20', 1),
+(48, 7, '3x1', '10', 1),
+(49, 8, '1x1', '20', 1),
+(50, 7, '3x1', '10', 1),
+(51, 8, '1x1', '20', 1);
 
 -- --------------------------------------------------------
 
@@ -488,7 +574,12 @@ INSERT INTO `rsp_aptkr_has_obat` (`resep_apoteker_id`, `obat_id`, `jumlah`, `dos
 (1, 9, '30', '3x1'),
 (2, 7, '30', '3x1'),
 (2, 8, '30', '3x1'),
-(2, 9, '30', '3x1');
+(2, 9, '30', '3x1'),
+(4, 7, '30', '3x1'),
+(4, 8, '30', '3x1'),
+(4, 9, '30', '3x1'),
+(5, 7, '30', '3x1'),
+(5, 9, '30', '3x1');
 
 -- --------------------------------------------------------
 
@@ -510,7 +601,11 @@ CREATE TABLE `tindakan` (
 
 INSERT INTO `tindakan` (`id`, `visit_id`, `nama`, `mt_sisi`, `harga`) VALUES
 (1, 1, NULL, 'kanan', 1000),
-(2, 1, NULL, 'kiri', 2000);
+(2, 1, NULL, 'kiri', 2000),
+(3, 1, 'b', 'kanan', 0),
+(4, 1, 'f', 'kiri', 0),
+(5, 1, 'b', 'kanan', 0),
+(6, 1, 'f', 'kiri', 0);
 
 -- --------------------------------------------------------
 
@@ -537,7 +632,8 @@ INSERT INTO `user_klinik` (`id`, `username`, `sandi`) VALUES
 (6, 'apoteker', NULL),
 (7, 'kasir_visit', NULL),
 (8, 'kasir_obat', NULL),
-(9, 'pemilik', NULL);
+(9, 'pemilik', NULL),
+(10, 'akuntan', NULL);
 
 -- --------------------------------------------------------
 
@@ -571,11 +667,21 @@ CREATE TABLE `visit` (
 --
 
 INSERT INTO `visit` (`id`, `nomor_antrean`, `status_antrean`, `perusahaan`, `tgl_visit`, `keluhan`, `vod`, `vos`, `tod`, `tos`, `palpebra`, `konjungtiva`, `kornea`, `bmd`, `lensa`, `fundus_od`, `diagnosa`, `terapi`) VALUES
-(1, 1, 'belum', NULL, '2021-10-01 05:13:31', '1 1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 2, 'belum', NULL, '2021-10-01 05:13:44', '2 1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1, 1, 'batal', 'perusahaan 1', '2021-10-01 05:13:31', '', '', '', '', '', '', '', '', '', '', '', '', 'belum ada'),
+(2, 2, 'belum', NULL, '2021-10-01 05:13:44', 'tidak ada', '', '', '', '', '', '', '', '', '', '', '', 'belum ada'),
 (3, 3, 'belum', NULL, '2021-10-01 05:13:54', '3 1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (4, 1, 'belum', NULL, '2021-10-02 05:14:40', '1 2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(5, 1, 'belum', NULL, '2021-10-03 05:15:17', '1 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(5, 1, 'belum', NULL, '2021-10-03 05:15:17', '1 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(6, 1, 'belum', NULL, '2021-10-06 23:17:23', '1 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 1, 'belum', NULL, '2021-10-07 02:30:24', '1 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(8, 1, 'belum', NULL, '2021-10-07 02:31:22', '1 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(9, 1, 'belum', NULL, '2021-10-07 02:31:33', '1 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(10, 1, 'belum', NULL, '2021-10-07 02:31:56', '1 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(11, 2, 'belum', NULL, '2021-10-07 02:35:54', '1 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(12, 10, 'belum', NULL, '2021-10-07 02:37:20', '1 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(13, 10, 'belum', NULL, '2021-10-07 02:41:11', '1 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(14, 10, 'belum', NULL, '2021-10-07 04:01:21', '1 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(15, 10, 'belum', NULL, '2021-10-07 04:01:28', '1 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -586,19 +692,28 @@ INSERT INTO `visit` (`id`, `nomor_antrean`, `status_antrean`, `perusahaan`, `tgl
 CREATE TABLE `visit_has_user` (
   `id` int(11) NOT NULL,
   `visit_id` int(11) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL
+  `user_klinik_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `visit_has_user`
 --
 
-INSERT INTO `visit_has_user` (`id`, `visit_id`, `user_id`) VALUES
+INSERT INTO `visit_has_user` (`id`, `visit_id`, `user_klinik_id`) VALUES
 (1, 1, 3),
 (2, 2, 4),
 (3, 3, 5),
-(4, 4, 3),
-(5, 5, 3);
+(4, 4, 2),
+(5, 5, 2),
+(6, 6, 2),
+(7, 8, 3),
+(8, 9, 3),
+(9, 10, 3),
+(10, 11, 3),
+(11, 12, 3),
+(12, 13, 3),
+(13, 14, 3),
+(14, 15, 3);
 
 --
 -- Indexes for dumped tables
@@ -616,42 +731,13 @@ ALTER TABLE `alergi`
 --
 ALTER TABLE `antrean_admin`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_antrean_admin_user1_idx` (`user_id`);
-
---
--- Indexes for table `apoteker`
---
-ALTER TABLE `apoteker`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_apoteker_user1_idx` (`user_id`);
+  ADD KEY `fk_antrean_admin_user_klinik1_idx` (`user_klinik_id`);
 
 --
 -- Indexes for table `daftar_akun`
 --
 ALTER TABLE `daftar_akun`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `dftr_akun_has_penjurnalan`
---
-ALTER TABLE `dftr_akun_has_penjurnalan`
-  ADD KEY `fk_dftr_akun_has_penjurnalan_penjurnalan1_idx` (`penjurnalan_id`),
-  ADD KEY `fk_dftr_akun_has_penjurnalan_daftar_akun1_idx` (`daftar_akun_id`);
-
---
--- Indexes for table `dokter`
---
-ALTER TABLE `dokter`
-  ADD PRIMARY KEY (`id`) USING BTREE,
-  ADD KEY `fk_dokter_user1_idx` (`user_id`);
-
---
--- Indexes for table `kasir`
---
-ALTER TABLE `kasir`
-  ADD PRIMARY KEY (`id`) USING BTREE,
-  ADD UNIQUE KEY `id_UNIQUE` (`id`) USING BTREE,
-  ADD KEY `fk_kasir_user1_idx` (`user_id`);
 
 --
 -- Indexes for table `komentar`
@@ -691,14 +777,22 @@ ALTER TABLE `order_obat`
 ALTER TABLE `pasien`
   ADD PRIMARY KEY (`id`) USING BTREE,
   ADD UNIQUE KEY `id_UNIQUE` (`id`) USING BTREE,
-  ADD KEY `fk_pasien_user1_idx` (`user_id`);
+  ADD KEY `fk_pasien_user_klinik1_idx` (`user_klinik_id`);
 
 --
 -- Indexes for table `penjurnalan`
 --
 ALTER TABLE `penjurnalan`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_penjurnalan_user1_idx` (`user_id`);
+  ADD KEY `fk_penjurnalan_user_klinik1_idx` (`user_klinik_id`);
+
+--
+-- Indexes for table `penjurnalan_has_akun`
+--
+ALTER TABLE `penjurnalan_has_akun`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_penjurnalan_has_akun_penjurnalan1_idx` (`penjurnalan_id`),
+  ADD KEY `fk_penjurnalan_has_akun_daftar_akun1_idx` (`daftar_akun_id`);
 
 --
 -- Indexes for table `penyakit`
@@ -758,7 +852,7 @@ ALTER TABLE `visit`
 ALTER TABLE `visit_has_user`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_visit_has_user_visit1_idx` (`visit_id`),
-  ADD KEY `fk_visit_has_user_user1_idx` (`user_id`);
+  ADD KEY `fk_visit_has_user_user_klinik1_idx` (`user_klinik_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -771,22 +865,10 @@ ALTER TABLE `antrean_admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `apoteker`
+-- AUTO_INCREMENT for table `daftar_akun`
 --
-ALTER TABLE `apoteker`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `dokter`
---
-ALTER TABLE `dokter`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `kasir`
---
-ALTER TABLE `kasir`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `daftar_akun`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `komentar`
@@ -798,13 +880,19 @@ ALTER TABLE `komentar`
 -- AUTO_INCREMENT for table `nota_penjualan`
 --
 ALTER TABLE `nota_penjualan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `obat`
 --
 ALTER TABLE `obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+
+--
+-- AUTO_INCREMENT for table `order_obat`
+--
+ALTER TABLE `order_obat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `pasien`
@@ -813,40 +901,52 @@ ALTER TABLE `pasien`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `penjurnalan`
+--
+ALTER TABLE `penjurnalan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `penjurnalan_has_akun`
+--
+ALTER TABLE `penjurnalan_has_akun`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `resep_apoteker`
 --
 ALTER TABLE `resep_apoteker`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `resep_has_obat`
 --
 ALTER TABLE `resep_has_obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `tindakan`
 --
 ALTER TABLE `tindakan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user_klinik`
 --
 ALTER TABLE `user_klinik`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `visit`
 --
 ALTER TABLE `visit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `visit_has_user`
 --
 ALTER TABLE `visit_has_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
@@ -862,32 +962,7 @@ ALTER TABLE `alergi`
 -- Constraints for table `antrean_admin`
 --
 ALTER TABLE `antrean_admin`
-  ADD CONSTRAINT `fk_antrean_admin_user1` FOREIGN KEY (`user_id`) REFERENCES `user_klinik` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `apoteker`
---
-ALTER TABLE `apoteker`
-  ADD CONSTRAINT `fk_apoteker_user1` FOREIGN KEY (`user_id`) REFERENCES `user_klinik` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `dftr_akun_has_penjurnalan`
---
-ALTER TABLE `dftr_akun_has_penjurnalan`
-  ADD CONSTRAINT `fk_dftr_akun_has_penjurnalan_daftar_akun1` FOREIGN KEY (`daftar_akun_id`) REFERENCES `daftar_akun` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_dftr_akun_has_penjurnalan_penjurnalan1` FOREIGN KEY (`penjurnalan_id`) REFERENCES `penjurnalan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `dokter`
---
-ALTER TABLE `dokter`
-  ADD CONSTRAINT `fk_dokter_user1` FOREIGN KEY (`user_id`) REFERENCES `user_klinik` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `kasir`
---
-ALTER TABLE `kasir`
-  ADD CONSTRAINT `fk_kasir_user1` FOREIGN KEY (`user_id`) REFERENCES `user_klinik` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_antrean_admin_user_klinik1` FOREIGN KEY (`user_klinik_id`) REFERENCES `user_klinik` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `komentar`
@@ -920,13 +995,20 @@ ALTER TABLE `order_obat`
 -- Constraints for table `pasien`
 --
 ALTER TABLE `pasien`
-  ADD CONSTRAINT `fk_pasien_user1` FOREIGN KEY (`user_id`) REFERENCES `user_klinik` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_pasien_user_klinik1` FOREIGN KEY (`user_klinik_id`) REFERENCES `user_klinik` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `penjurnalan`
 --
 ALTER TABLE `penjurnalan`
-  ADD CONSTRAINT `fk_penjurnalan_user1` FOREIGN KEY (`user_id`) REFERENCES `user_klinik` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_penjurnalan_user_klinik1` FOREIGN KEY (`user_klinik_id`) REFERENCES `user_klinik` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `penjurnalan_has_akun`
+--
+ALTER TABLE `penjurnalan_has_akun`
+  ADD CONSTRAINT `fk_penjurnalan_has_akun_daftar_akun1` FOREIGN KEY (`daftar_akun_id`) REFERENCES `daftar_akun` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_penjurnalan_has_akun_penjurnalan1` FOREIGN KEY (`penjurnalan_id`) REFERENCES `penjurnalan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `penyakit`
@@ -965,7 +1047,7 @@ ALTER TABLE `tindakan`
 -- Constraints for table `visit_has_user`
 --
 ALTER TABLE `visit_has_user`
-  ADD CONSTRAINT `fk_visit_has_user_user1` FOREIGN KEY (`user_id`) REFERENCES `user_klinik` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_visit_has_user_user_klinik1` FOREIGN KEY (`user_klinik_id`) REFERENCES `user_klinik` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_visit_has_user_visit1` FOREIGN KEY (`visit_id`) REFERENCES `visit` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
