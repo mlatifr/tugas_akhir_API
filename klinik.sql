@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 12, 2021 at 09:04 AM
+-- Generation Time: Oct 13, 2021 at 11:35 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -210,32 +210,24 @@ INSERT INTO `antrean_admin` (`id`, `user_klinik_id`, `status_antrean`, `antrean_
 
 CREATE TABLE `daftar_akun` (
   `id` int(11) NOT NULL,
-  `nama` varchar(45) DEFAULT NULL,
-  `saldo_awal` int(11) DEFAULT NULL,
-  `saldo_akhir` int(11) DEFAULT NULL,
-  `UTB_total_kredit` int(11) DEFAULT NULL,
-  `UTB_total_debit` int(11) DEFAULT NULL,
-  `ATB_debit` int(11) DEFAULT NULL,
-  `ATB_kredit` int(11) DEFAULT NULL,
-  `BS_debit` int(11) DEFAULT NULL,
-  `BS_kredit` int(11) DEFAULT NULL,
-  `PCTB_debit` int(11) DEFAULT NULL,
-  `PTCB_kredit` int(11) DEFAULT NULL
+  `nama` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `daftar_akun`
 --
 
-INSERT INTO `daftar_akun` (`id`, `nama`, `saldo_awal`, `saldo_akhir`, `UTB_total_kredit`, `UTB_total_debit`, `ATB_debit`, `ATB_kredit`, `BS_debit`, `BS_kredit`, `PCTB_debit`, `PTCB_kredit`) VALUES
-(1, 'jasa medis', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 'obat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(3, 'tindakan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(4, 'admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(5, 'piutang jasa medis', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(6, 'piutang obat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(7, 'hutang obat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(8, 'hutang barang habis pakai', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `daftar_akun` (`id`, `nama`) VALUES
+(1, 'jasa medis'),
+(2, 'obat'),
+(3, 'tindakan'),
+(4, 'kas'),
+(5, 'piutang jasa medis'),
+(6, 'piutang obat'),
+(7, 'hutang obat'),
+(8, 'hutang barang habis pakai'),
+(9, 'admin'),
+(10, 'barang habis pakai');
 
 -- --------------------------------------------------------
 
@@ -273,12 +265,12 @@ CREATE TABLE `nota_penjualan` (
 --
 
 INSERT INTO `nota_penjualan` (`id`, `user_id`, `visit_id`, `resep_apoteker_id`, `tgl_transaksi`, `jasa_medis`, `biaya_admin`, `total_harga`) VALUES
-(1, 7, 1, 1, '2021-09-30 17:00:00', NULL, NULL, 5000),
-(2, 7, 1, 1, '2021-10-01 17:00:00', NULL, NULL, 5000),
-(3, 7, 1, 1, '2021-10-01 17:00:00', NULL, NULL, 5000),
-(4, 7, 1, 1, '2021-09-30 17:00:00', NULL, NULL, 5000),
-(5, 7, 1, 1, '2021-09-30 17:00:00', NULL, NULL, 5000),
-(6, 7, 1, 1, '2021-09-30 17:00:00', NULL, NULL, 5000),
+(1, 7, 1, 1, '2021-09-30 17:00:00', 200000, 40000, 5000),
+(2, 7, 1, 1, '2021-10-01 17:00:00', 200000, 40000, 5000),
+(3, 7, 1, 1, '2021-10-01 17:00:00', 200000, 40000, 5000),
+(4, 7, 1, 1, '2021-09-30 17:00:00', 200000, 40000, 5000),
+(5, 7, 1, 1, '2021-09-30 17:00:00', 200000, 40000, 5000),
+(6, 7, 1, 1, '2021-09-30 17:00:00', 200000, 40000, 5000),
 (7, 7, NULL, 1, '2021-09-30 17:00:00', NULL, NULL, 5000),
 (8, 7, NULL, 1, '2021-09-30 17:00:00', NULL, NULL, 5000),
 (9, 7, NULL, 1, '2021-09-30 17:00:00', NULL, NULL, 5000),
@@ -430,25 +422,16 @@ INSERT INTO `pasien` (`id`, `user_klinik_id`, `no_rekam_medis`, `NIK`, `nama`, `
 CREATE TABLE `penjurnalan` (
   `id` int(11) NOT NULL,
   `user_klinik_id` int(11) DEFAULT NULL,
-  `tgl_penjurnalan` timestamp NULL DEFAULT NULL,
-  `saldo_awal` int(11) DEFAULT NULL,
-  `saldo_akhir` int(11) DEFAULT NULL,
-  `UTB_total_kredit` int(11) DEFAULT NULL,
-  `UTB_total_debit` int(11) DEFAULT NULL,
-  `ATB_debit` int(11) DEFAULT NULL,
-  `ATB_kredit` int(11) DEFAULT NULL,
-  `BS_debit` int(11) DEFAULT NULL,
-  `BS_kredit` int(11) DEFAULT NULL,
-  `PCTB_debit` int(11) DEFAULT NULL,
-  `PTCB_kredit` int(11) DEFAULT NULL
+  `tgl_penjurnalan` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `penjurnalan`
 --
 
-INSERT INTO `penjurnalan` (`id`, `user_klinik_id`, `tgl_penjurnalan`, `saldo_awal`, `saldo_akhir`, `UTB_total_kredit`, `UTB_total_debit`, `ATB_debit`, `ATB_kredit`, `BS_debit`, `BS_kredit`, `PCTB_debit`, `PTCB_kredit`) VALUES
-(1, 10, '2021-10-01 02:19:17', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `penjurnalan` (`id`, `user_klinik_id`, `tgl_penjurnalan`) VALUES
+(1, 10, '2021-10-01 02:19:17'),
+(2, 10, '2021-09-30 17:00:00');
 
 -- --------------------------------------------------------
 
@@ -471,10 +454,13 @@ CREATE TABLE `penjurnalan_has_akun` (
 --
 
 INSERT INTO `penjurnalan_has_akun` (`id`, `penjurnalan_id`, `daftar_akun_id`, `tgl_catat`, `debet`, `kredit`, `ket_transaksi`) VALUES
-(1, 1, 1, '2021-10-01 05:59:35', NULL, NULL, NULL),
-(2, 1, 2, '2021-10-01 05:59:35', NULL, NULL, NULL),
-(3, 1, 1, '2021-10-02 05:59:59', NULL, NULL, NULL),
-(4, 1, 2, '2021-10-02 05:59:59', NULL, NULL, NULL);
+(1, 1, 6, '2021-09-30 17:00:00', 40000, 0, ''),
+(2, 1, 6, '2021-09-30 17:00:00', 40000, 0, 'piutang obat'),
+(3, 1, 6, '2021-09-30 17:00:00', 40000, 0, 'piutang obat'),
+(4, 1, 1, '2021-09-30 17:00:00', 1000000, 0, 'pendapatan jasa medis'),
+(5, 1, 4, '2021-09-30 17:00:00', 0, 1000000, 'pendapatan jasa medis'),
+(6, 1, 2, '2021-09-30 17:00:00', 0, 40000, 'piutang obat'),
+(7, 1, 6, '2021-09-30 17:00:00', 40000, 0, 'piutang obat');
 
 -- --------------------------------------------------------
 
@@ -580,6 +566,28 @@ INSERT INTO `rsp_aptkr_has_obat` (`resep_apoteker_id`, `obat_id`, `jumlah`, `dos
 (4, 9, '30', '3x1'),
 (5, 7, '30', '3x1'),
 (5, 9, '30', '3x1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `saldo_akun`
+--
+
+CREATE TABLE `saldo_akun` (
+  `id` int(11) NOT NULL,
+  `daftar_akun_id` int(11) DEFAULT NULL,
+  `tgl_catat` timestamp NULL DEFAULT NULL,
+  `saldo_awal` int(11) DEFAULT NULL,
+  `saldo_akhir` int(11) DEFAULT NULL,
+  `UTB_total_kredit` int(11) DEFAULT NULL,
+  `UTB_total_debit` int(11) DEFAULT NULL,
+  `ATB_debit` int(11) DEFAULT NULL,
+  `ATB_kredit` int(11) DEFAULT NULL,
+  `BS_debit` int(11) DEFAULT NULL,
+  `BS_kredit` int(11) DEFAULT NULL,
+  `PCTB_debit` int(11) DEFAULT NULL,
+  `PTCB_kredit` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -826,6 +834,13 @@ ALTER TABLE `rsp_aptkr_has_obat`
   ADD KEY `fk_resep_apoteker_has_obat_resep_apoteker1_idx` (`resep_apoteker_id`);
 
 --
+-- Indexes for table `saldo_akun`
+--
+ALTER TABLE `saldo_akun`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_saldo_akun_daftar_akun1_idx` (`daftar_akun_id`);
+
+--
 -- Indexes for table `tindakan`
 --
 ALTER TABLE `tindakan`
@@ -868,7 +883,7 @@ ALTER TABLE `antrean_admin`
 -- AUTO_INCREMENT for table `daftar_akun`
 --
 ALTER TABLE `daftar_akun`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `komentar`
@@ -904,13 +919,13 @@ ALTER TABLE `pasien`
 -- AUTO_INCREMENT for table `penjurnalan`
 --
 ALTER TABLE `penjurnalan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `penjurnalan_has_akun`
 --
 ALTER TABLE `penjurnalan_has_akun`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `resep_apoteker`
@@ -1036,6 +1051,12 @@ ALTER TABLE `resep_has_obat`
 ALTER TABLE `rsp_aptkr_has_obat`
   ADD CONSTRAINT `fk_resep_apoteker_has_obat_obat1` FOREIGN KEY (`obat_id`) REFERENCES `obat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_resep_apoteker_has_obat_resep_apoteker1` FOREIGN KEY (`resep_apoteker_id`) REFERENCES `resep_apoteker` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `saldo_akun`
+--
+ALTER TABLE `saldo_akun`
+  ADD CONSTRAINT `fk_saldo_akun_daftar_akun1` FOREIGN KEY (`daftar_akun_id`) REFERENCES `daftar_akun` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `tindakan`

@@ -1483,42 +1483,6 @@
 			"response": []
 		},
 		{
-			"name": "akuntan_v_hutang_obat",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "tgl_transaksi",
-							"value": "2021-10",
-							"type": "text"
-						},
-						{
-							"key": "tgl_transaksi_detail",
-							"value": "2021-10",
-							"type": "text",
-							"disabled": true
-						}
-					]
-				},
-				"url": {
-					"raw": "http://localhost/tugas_akhir/akuntan_v_hutang_obat.php",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"tugas_akhir",
-						"akuntan_v_hutang_obat.php"
-					]
-				},
-				"description": "pilih salah satu: \ntgl_transaksi or tgl_transaksi_detail\n\nuntuk melihat hutang order obat\n\njumlah diterma=null berarti obat belum diterima tapi sudah dipesan"
-			},
-			"response": []
-		},
-		{
 			"name": "akuntan_v_piutang_tdkn",
 			"request": {
 				"method": "POST",
@@ -1628,6 +1592,223 @@
 					]
 				},
 				"description": "pilih salah satu: tgl_transaksi or tgl_transaksi_detail"
+			},
+			"response": []
+		},
+		{
+			"name": "akuntan_v_hutang_obat",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tgl_transaksi",
+							"value": "2021-10",
+							"type": "text"
+						},
+						{
+							"key": "tgl_transaksi_detail",
+							"value": "2021-10",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/akuntan_v_hutang_obat.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"akuntan_v_hutang_obat.php"
+					]
+				},
+				"description": "pilih salah satu: \ntgl_transaksi or tgl_transaksi_detail\n\nuntuk melihat hutang order obat\n\njumlah diterma=null berarti obat belum diterima tapi sudah dipesan"
+			},
+			"response": []
+		},
+		{
+			"name": "akuntan_inpt_penjurnalan",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_klinik",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "tgl_penjurnalan",
+							"value": "2021-10-01",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/akuntan_inpt_penjurnalan.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"akuntan_inpt_penjurnalan.php"
+					]
+				},
+				"description": "setelah mendapat resep_id dari \napoteker_input_resep\nmaka apoteker bisa mengisi obat sesuai yg diresepkan dokter pada:\napoteker_v_rsp_dr"
+			},
+			"response": []
+		},
+		{
+			"name": "akuntan_inpt_penjurnalan_akun",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "transaksi_array[transaksi_1][penjurnalan_id]",
+							"value": "1",
+							"description": "dikosongi jika pembeli tidak visit, langsung beli di apotek",
+							"type": "text"
+						},
+						{
+							"key": "transaksi_array[transaksi_1][daftar_akun_id]",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "transaksi_array[transaksi_1][tgl_catat]",
+							"value": "2021-10-01",
+							"type": "text"
+						},
+						{
+							"key": "transaksi_array[transaksi_1][debet]",
+							"value": "1000000",
+							"type": "text"
+						},
+						{
+							"key": "transaksi_array[transaksi_1][kredit]",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "transaksi_array[transaksi_1][ket_transaksi]",
+							"value": "pendapatan jasa medis",
+							"type": "text"
+						},
+						{
+							"key": "transaksi_array[transaksi_2][penjurnalan_id]",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "transaksi_array[transaksi_2][daftar_akun_id]",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "transaksi_array[transaksi_2][tgl_catat]",
+							"value": "2021-10-01",
+							"type": "text"
+						},
+						{
+							"key": "transaksi_array[transaksi_2][debet]",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "transaksi_array[transaksi_2][kredit]",
+							"value": "1000000",
+							"type": "text"
+						},
+						{
+							"key": "transaksi_array[transaksi_2][ket_transaksi]",
+							"value": "pendapatan jasa medis",
+							"type": "text"
+						},
+						{
+							"key": "transaksi_array[transaksi_3][penjurnalan_id]",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "transaksi_array[transaksi_3][daftar_akun_id]",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "transaksi_array[transaksi_3][tgl_catat]",
+							"value": "2021-10-01",
+							"type": "text"
+						},
+						{
+							"key": "transaksi_array[transaksi_3][debet]",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "transaksi_array[transaksi_3][kredit]",
+							"value": "40000",
+							"type": "text"
+						},
+						{
+							"key": "transaksi_array[transaksi_3][ket_transaksi]",
+							"value": "piutang obat",
+							"type": "text"
+						},
+						{
+							"key": "transaksi_array[transaksi_4][penjurnalan_id]",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "transaksi_array[transaksi_4][daftar_akun_id]",
+							"value": "6",
+							"type": "text"
+						},
+						{
+							"key": "transaksi_array[transaksi_4][tgl_catat]",
+							"value": "2021-10-01",
+							"type": "text"
+						},
+						{
+							"key": "transaksi_array[transaksi_4][debet]",
+							"value": "40000",
+							"type": "text"
+						},
+						{
+							"key": "transaksi_array[transaksi_4][kredit]",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "transaksi_array[transaksi_4][ket_transaksi]",
+							"value": "piutang obat",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/akuntan_inpt_penjurnalan_akun.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"akuntan_inpt_penjurnalan_akun.php"
+					]
+				},
+				"description": "setelah mendapat resep_id dari \napoteker_input_resep\nmaka apoteker bisa mengisi obat sesuai yg diresepkan dokter pada:\napoteker_v_rsp_dr"
 			},
 			"response": []
 		}
