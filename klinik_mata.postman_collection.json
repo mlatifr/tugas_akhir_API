@@ -1483,6 +1483,42 @@
 			"response": []
 		},
 		{
+			"name": "akuntan_v_hutang_obat",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tgl_transaksi",
+							"value": "2021-10",
+							"type": "text"
+						},
+						{
+							"key": "tgl_transaksi_detail",
+							"value": "2021-10",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/akuntan_v_hutang_obat.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"akuntan_v_hutang_obat.php"
+					]
+				},
+				"description": "pilih salah satu: \ntgl_transaksi or tgl_transaksi_detail\n\nuntuk melihat hutang order obat\n\njumlah diterma=null berarti obat belum diterima tapi sudah dipesan"
+			},
+			"response": []
+		},
+		{
 			"name": "akuntan_v_piutang_tdkn",
 			"request": {
 				"method": "POST",
@@ -1520,6 +1556,78 @@
 					]
 				},
 				"description": "tgl_resep: melihat penjualan obat pada tgl tertentu\ntgl_resep_detail: jika send tgl_resep_detail, maka diberi rincian, \n\njika tidak, hanya diberi total pendapatan uang obat pada tgl tersebut"
+			},
+			"response": []
+		},
+		{
+			"name": "akuntan_v_piutang_admin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tgl_transaksi",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "tgl_transaksi_detail",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/akuntan_v_piutang_admin.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"akuntan_v_piutang_admin.php"
+					]
+				},
+				"description": "pilih salah satu: tgl_transaksi or tgl_transaksi_detail"
+			},
+			"response": []
+		},
+		{
+			"name": "akuntan_v_piutang_jasmed",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tgl_transaksi",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "tgl_transaksi_detail",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/akuntan_v_piutang_jasmed.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"akuntan_v_piutang_jasmed.php"
+					]
+				},
+				"description": "pilih salah satu: tgl_transaksi or tgl_transaksi_detail"
 			},
 			"response": []
 		}
