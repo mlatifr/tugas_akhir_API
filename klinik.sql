@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 13, 2021 at 11:35 AM
+-- Generation Time: Oct 14, 2021 at 04:44 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -454,13 +454,21 @@ CREATE TABLE `penjurnalan_has_akun` (
 --
 
 INSERT INTO `penjurnalan_has_akun` (`id`, `penjurnalan_id`, `daftar_akun_id`, `tgl_catat`, `debet`, `kredit`, `ket_transaksi`) VALUES
-(1, 1, 6, '2021-09-30 17:00:00', 40000, 0, ''),
-(2, 1, 6, '2021-09-30 17:00:00', 40000, 0, 'piutang obat'),
-(3, 1, 6, '2021-09-30 17:00:00', 40000, 0, 'piutang obat'),
-(4, 1, 1, '2021-09-30 17:00:00', 1000000, 0, 'pendapatan jasa medis'),
-(5, 1, 4, '2021-09-30 17:00:00', 0, 1000000, 'pendapatan jasa medis'),
-(6, 1, 2, '2021-09-30 17:00:00', 0, 40000, 'piutang obat'),
-(7, 1, 6, '2021-09-30 17:00:00', 40000, 0, 'piutang obat');
+(1, 1, 6, '2021-09-30 17:00:00', 40000, NULL, ''),
+(2, 1, 6, '2021-09-30 17:00:00', 40000, NULL, 'piutang obat'),
+(3, 1, 6, '2021-09-30 17:00:00', 40000, NULL, 'piutang obat'),
+(4, 1, 1, '2021-09-30 17:00:00', 1000000, NULL, 'pendapatan jasa medis'),
+(5, 1, 4, '2021-09-30 17:00:00', NULL, 1000000, 'pendapatan jasa medis'),
+(6, 1, 2, '2021-09-30 17:00:00', NULL, 40000, 'piutang obat'),
+(7, 1, 6, '2021-09-30 17:00:00', 40000, NULL, 'piutang obat'),
+(8, 1, 2, '2021-09-30 17:00:00', 1000000, NULL, 'pendapatan jasa medis'),
+(9, 1, 7, '2021-09-30 17:00:00', NULL, 1000000, 'pendapatan jasa medis'),
+(10, 1, 5, '2021-09-30 17:00:00', NULL, 40000, 'piutang obat'),
+(11, 1, 7, '2021-09-30 17:00:00', 40000, NULL, 'piutang obat'),
+(12, 1, 4, '2021-09-30 17:00:00', 1000000, 0, 'pendapatan jasa medis'),
+(13, 1, 1, '2021-09-30 17:00:00', NULL, 1000000, 'pendapatan jasa medis'),
+(14, 1, 4, '2021-09-30 17:00:00', NULL, 40000, 'piutang obat'),
+(15, 1, 10, '2021-09-30 17:00:00', 40000, 0, 'piutang obat');
 
 -- --------------------------------------------------------
 
@@ -883,7 +891,7 @@ ALTER TABLE `antrean_admin`
 -- AUTO_INCREMENT for table `daftar_akun`
 --
 ALTER TABLE `daftar_akun`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `komentar`
@@ -925,7 +933,7 @@ ALTER TABLE `penjurnalan`
 -- AUTO_INCREMENT for table `penjurnalan_has_akun`
 --
 ALTER TABLE `penjurnalan_has_akun`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `resep_apoteker`

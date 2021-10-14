@@ -1682,7 +1682,7 @@
 						},
 						{
 							"key": "transaksi_array[transaksi_1][daftar_akun_id]",
-							"value": "1",
+							"value": "4",
 							"type": "text"
 						},
 						{
@@ -1712,7 +1712,7 @@
 						},
 						{
 							"key": "transaksi_array[transaksi_2][daftar_akun_id]",
-							"value": "4",
+							"value": "1",
 							"type": "text"
 						},
 						{
@@ -1742,7 +1742,7 @@
 						},
 						{
 							"key": "transaksi_array[transaksi_3][daftar_akun_id]",
-							"value": "2",
+							"value": "4",
 							"type": "text"
 						},
 						{
@@ -1772,7 +1772,7 @@
 						},
 						{
 							"key": "transaksi_array[transaksi_4][daftar_akun_id]",
-							"value": "6",
+							"value": "10",
 							"type": "text"
 						},
 						{
@@ -1809,6 +1809,52 @@
 					]
 				},
 				"description": "setelah mendapat resep_id dari \napoteker_input_resep\nmaka apoteker bisa mengisi obat sesuai yg diresepkan dokter pada:\napoteker_v_rsp_dr"
+			},
+			"response": []
+		},
+		{
+			"name": "akuntan_v_total_dbt_krdt",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "penjurnalan_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "tgl_catat",
+							"value": "2021",
+							"type": "text"
+						},
+						{
+							"key": "debet",
+							"value": "debet",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "kredit",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/akuntan_v_total_dbt_krdt.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"akuntan_v_total_dbt_krdt.php"
+					]
+				},
+				"description": "pilih salah satu:\nkredit or debet\nutk melihat total kredit atau debet"
 			},
 			"response": []
 		}
