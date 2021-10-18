@@ -4,21 +4,24 @@ error_reporting(E_ALL | E_PARSE);
 require 'connect.php';
 ?>
 <?php
-
-// $user_id = "%{$_POST['user_id']}%";
-// $tgl_visit = "%{$_POST['tgl_visit']}%";
-// echo $user_id . ' ' . $tgl_visit;
 $sql = "SELECT * from antrean_admin where user_klinik_id=1";
 $stmt = $con->prepare($sql);
-// $stmt->bind_param("ss", $user_id, $tgl_visit);
 $stmt->execute();
 $result = $stmt->get_result();
 $data = [];
 if ($result->num_rows > 0) {
-    while ($r = mysqli_fetch_assoc($result)) {
-        array_push($data, $r);
-    }
-    $arr = ["result" => "success", "data" => $data];
+    $r = mysqli_fetch_assoc($result);
+    // while ($r = mysqli_fetch_assoc($result)) {
+    //     array_push($data, $r);
+    // }
+    $arr =
+        [
+            "result" => "success",
+            "status_antrean" => $r['status_antrean'],
+            "antrean_sekarang" => $r['antrean_sekarang'],
+            "antrean_terakhir" => $r['antrean_terakhir'],
+            "batas_antrean" => $r['batas_antrean']
+        ];
 } else {
     $arr = ["result" => "error", "message" => "sql error: $sql"];
 }

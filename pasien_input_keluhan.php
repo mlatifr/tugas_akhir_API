@@ -8,7 +8,7 @@ $stmt = $con->prepare($sql);
 $stmt->bind_param("ss", $keluhan, $no_antrean);
 $stmt->execute();
 if ($stmt->affected_rows > 0) {
-    echo "sql 1 success \n";
+    // echo "sql 1 success \n";
     $visit_id = $con->insert_id;
     $sql2 = "INSERT INTO `visit_has_user` (`visit_id`, `user_klinik_id`) VALUES (?,?)";
     $stmt2 = $con->prepare($sql2);
