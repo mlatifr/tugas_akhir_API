@@ -20,7 +20,8 @@ vhu.user_klinik_id as pasien_id,
 FROM `visit`vst 
 INNER JOIN visit_has_user vhu on vst.id=vhu.visit_id 
 INNER JOIN user_klinik on vhu.user_klinik_id=user_klinik.id 
-where tgl_visit like ? AND user_klinik.username NOT LIKE '%dokter%' ";
+where tgl_visit like ? AND user_klinik.username NOT LIKE '%dokter%' 
+ORDER BY `vst`.`tgl_visit` ASC";
 $stmt = $con->prepare($sql);
 $stmt->bind_param("s", $tgl_visit);
 $stmt->execute();
