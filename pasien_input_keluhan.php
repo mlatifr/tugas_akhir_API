@@ -15,7 +15,7 @@ if ($stmt->affected_rows > 0) {
     $stmt2->bind_param("ss", $visit_id, $user_klinik_id);
     $stmt2->execute();
     if ($stmt2->affected_rows > 0) {
-        $no_antrean = $no_antrean + 1;
+        // $no_antrean = $no_antrean + 1;
         // echo "sql 2 success \n";
         $sql3 = "UPDATE antrean_admin SET antrean_terakhir = ? WHERE antrean_admin.id=1";
         $stmt3 = $con->prepare($sql3);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 20, 2021 at 12:16 AM
+-- Generation Time: Oct 25, 2021 at 06:48 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -200,7 +200,7 @@ CREATE TABLE `antrean_admin` (
 --
 
 INSERT INTO `antrean_admin` (`id`, `user_klinik_id`, `status_antrean`, `antrean_sekarang`, `antrean_terakhir`, `batas_antrean`) VALUES
-(1, 1, 'buka', 1, 10, 1);
+(1, 1, 'buka', 1, 5, 5);
 
 -- --------------------------------------------------------
 
@@ -645,11 +645,13 @@ INSERT INTO `user_klinik` (`id`, `username`, `sandi`) VALUES
 (3, 'pasien1', 'pasien1'),
 (4, 'pasien2', 'pasien2'),
 (5, 'pasien3', 'pasien3'),
-(6, 'apoteker', NULL),
-(7, 'kasir_visit', NULL),
-(8, 'kasir_obat', NULL),
-(9, 'pemilik', NULL),
-(10, 'akuntan', NULL);
+(6, 'apoteker', 'apoteker'),
+(7, 'kasir_visit', 'kasir_visit'),
+(8, 'kasir_obat', 'kasir_obat'),
+(9, 'pemilik', 'pemilik'),
+(10, 'akuntan', 'akuntan'),
+(11, 'pasien4', 'pasien4'),
+(12, 'pasien5', 'pasien5');
 
 -- --------------------------------------------------------
 
@@ -683,21 +685,11 @@ CREATE TABLE `visit` (
 --
 
 INSERT INTO `visit` (`id`, `nomor_antrean`, `status_antrean`, `perusahaan`, `tgl_visit`, `keluhan`, `vod`, `vos`, `tod`, `tos`, `palpebra`, `konjungtiva`, `kornea`, `bmd`, `lensa`, `fundus_od`, `diagnosa`, `terapi`) VALUES
-(1, 1, 'batal', 'perusahaan 1', '2021-10-01 05:13:31', '', '', '', '', '', '', '', '', '', '', '', '', 'belum ada'),
-(2, 2, 'belum', NULL, '2021-10-01 05:13:44', 'tidak ada', '', '', '', '', '', '', '', '', '', '', '', 'belum ada'),
-(3, 3, 'belum', NULL, '2021-10-01 05:13:54', '3 1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(4, 1, 'belum', NULL, '2021-10-02 05:14:40', '1 2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(5, 1, 'belum', NULL, '2021-10-03 05:15:17', '1 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(6, 1, 'belum', NULL, '2021-10-06 23:17:23', '1 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(7, 1, 'belum', NULL, '2021-10-07 02:30:24', '1 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(8, 1, 'belum', NULL, '2021-10-07 02:31:22', '1 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(9, 1, 'belum', NULL, '2021-10-07 02:31:33', '1 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(10, 1, 'belum', NULL, '2021-10-07 02:31:56', '1 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(11, 2, 'belum', NULL, '2021-10-07 02:35:54', '1 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(12, 10, 'belum', NULL, '2021-10-07 02:37:20', '1 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(13, 10, 'belum', NULL, '2021-10-07 02:41:11', '1 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(14, 10, 'belum', NULL, '2021-10-07 04:01:21', '1 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(15, 10, 'belum', NULL, '2021-10-07 04:01:28', '1 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(1, 1, 'belum', NULL, '2021-10-25 04:05:20', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 2, 'belum', NULL, '2021-10-25 04:05:53', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 3, 'belum', NULL, '2021-10-25 04:06:09', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(4, 4, 'batal', NULL, '2021-10-25 04:11:13', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(5, 5, 'belum', NULL, '2021-10-25 04:28:31', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -719,17 +711,8 @@ INSERT INTO `visit_has_user` (`id`, `visit_id`, `user_klinik_id`) VALUES
 (1, 1, 3),
 (2, 2, 4),
 (3, 3, 5),
-(4, 4, 2),
-(5, 5, 2),
-(6, 6, 2),
-(7, 8, 3),
-(8, 9, 3),
-(9, 10, 3),
-(10, 11, 3),
-(11, 12, 3),
-(12, 13, 3),
-(13, 14, 3),
-(14, 15, 3);
+(4, 4, 11),
+(5, 5, 12);
 
 --
 -- Indexes for dumped tables
@@ -957,19 +940,19 @@ ALTER TABLE `tindakan`
 -- AUTO_INCREMENT for table `user_klinik`
 --
 ALTER TABLE `user_klinik`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `visit`
 --
 ALTER TABLE `visit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `visit_has_user`
 --
 ALTER TABLE `visit_has_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
