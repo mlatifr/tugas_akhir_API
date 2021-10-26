@@ -15,12 +15,12 @@
 					"formdata": [
 						{
 							"key": "id",
-							"value": "admin_antrean",
+							"value": "pasien1",
 							"type": "text"
 						},
 						{
 							"key": "sandi",
-							"value": "admin_antrean",
+							"value": "pasien1",
 							"type": "text"
 						}
 					]
@@ -124,7 +124,7 @@
 						},
 						{
 							"key": "no_antrean",
-							"value": "10",
+							"value": "7",
 							"type": "text"
 						}
 					]
@@ -390,6 +390,36 @@
 					]
 				},
 				"description": "dokter mencari nama & stok obat untuk kemudian dimasukan ke dalam keranjang resep dokter(resep_has_obat)"
+			},
+			"response": []
+		},
+		{
+			"name": "dokter_v_list_tindakan",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nama_obat",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/dokter_v_list_tindakan.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"dokter_v_list_tindakan.php"
+					]
+				},
+				"description": "tujuan: \nmelihat daftar tindakan berdasarkan sis mata kanan/kiri\nUntuk:\nditampilkan ke dalam page list tindakan\n\nparameter: \nkanan: untuk list tindakan mata kanan\nkiri: untuk list tindakan mata kiri"
 			},
 			"response": []
 		},
@@ -885,13 +915,20 @@
 					"formdata": [
 						{
 							"key": "antrean_sekarang",
-							"value": "1",
+							"value": "0",
 							"type": "text"
 						},
 						{
 							"key": "batas_antrean",
-							"value": "1",
+							"value": "0",
 							"type": "text"
+						},
+						{
+							"key": "antrean_terakhir",
+							"value": "0",
+							"description": "dibuat 0 ketika hari baru",
+							"type": "text",
+							"disabled": true
 						}
 					]
 				},
@@ -907,6 +944,61 @@
 					]
 				},
 				"description": "antrean_sekarang: mengubah nomor antrean sekarang\nbatas_antrean: mengatur batas maksimal antrean\n\nbisa di isi keduanya, bisa di isi salah satu saja"
+			},
+			"response": []
+		},
+		{
+			"name": "admin_input_tindakan_array",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tindakan_array[tindakan_1][nama]",
+							"value": "b",
+							"type": "text"
+						},
+						{
+							"key": "tindakan_array[tindakan_1][mt_sisi]",
+							"value": "kanan",
+							"type": "text"
+						},
+						{
+							"key": "tindakan_array[tindakan_1][harga]",
+							"value": "d",
+							"type": "text"
+						},
+						{
+							"key": "tindakan_array[tindakan_2][nama]",
+							"value": "f",
+							"type": "text"
+						},
+						{
+							"key": "tindakan_array[tindakan_2][mt_sisi]",
+							"value": "kiri",
+							"type": "text"
+						},
+						{
+							"key": "tindakan_array[tindakan_2][harga]",
+							"value": "h",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/admin_input_tindakan_array.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"admin_input_tindakan_array.php"
+					]
+				},
+				"description": "dokter memasukan tindakan operasi pada suatu visit"
 			},
 			"response": []
 		},
