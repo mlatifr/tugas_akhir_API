@@ -3,12 +3,10 @@
 <?php
 extract($_POST);
 foreach ($tindakan_array as $row => $value) {
+    $tindakan_id = mysqli_real_escape_string($con, $value["tindakan_id"]);
     $visit_id = mysqli_real_escape_string($con, $value["visit_id"]);
-    $nama = mysqli_real_escape_string($con, $value["nama"]);
-    $mt_sisi = mysqli_real_escape_string($con, $value["mt_sisi"]);
-    $harga = mysqli_real_escape_string($con, $value["harga"]);
-    $sql = "INSERT INTO `tindakan` (`visit_id`, `nama`, `mt_sisi`, `harga`) 
-    VALUES ('" .  $visit_id . "',  '" . $nama . "', '" . $mt_sisi . "', '" . $harga . "')";
+    $sql = "INSERT INTO `visit_has_tindakan` (`tindakan_id`,`visit_id`) 
+    VALUES ('" . $tindakan_id . "','" .  $visit_id . "')";
     $stmt = $con->prepare($sql);
     $stmt->execute();
 };

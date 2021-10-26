@@ -402,8 +402,8 @@
 					"mode": "formdata",
 					"formdata": [
 						{
-							"key": "nama_obat",
-							"value": "",
+							"key": "mt_sisi",
+							"value": "kanan",
 							"type": "text"
 						}
 					]
@@ -437,38 +437,18 @@
 							"type": "text"
 						},
 						{
-							"key": "tindakan_array[tindakan_1][nama]",
-							"value": "b",
-							"type": "text"
-						},
-						{
-							"key": "tindakan_array[tindakan_1][mt_sisi]",
-							"value": "kanan",
-							"type": "text"
-						},
-						{
-							"key": "tindakan_array[tindakan_1][harga]",
-							"value": "d",
-							"type": "text"
-						},
-						{
-							"key": "tindakan_array[tindakan_2][visit_id]",
+							"key": "tindakan_array[tindakan_1][tindakan_id]",
 							"value": "1",
 							"type": "text"
 						},
 						{
-							"key": "tindakan_array[tindakan_2][nama]",
-							"value": "f",
+							"key": "tindakan_array[tindakan_1][visit_id]",
+							"value": "1",
 							"type": "text"
 						},
 						{
-							"key": "tindakan_array[tindakan_2][mt_sisi]",
-							"value": "kiri",
-							"type": "text"
-						},
-						{
-							"key": "tindakan_array[tindakan_2][harga]",
-							"value": "h",
+							"key": "tindakan_array[tindakan_1][tindakan_id]",
+							"value": "2",
 							"type": "text"
 						}
 					]
@@ -484,7 +464,7 @@
 						"dokter_input_tindakan_array.php"
 					]
 				},
-				"description": "dokter memasukan tindakan operasi pada suatu visit"
+				"description": "step:\n1. lihat list tindakan yg dibuat admin\n(dokter_v_list_tindakan)\n2. pilih id tindakan\n3. inputkan visit_id & tindakan_id"
 			},
 			"response": []
 		},
