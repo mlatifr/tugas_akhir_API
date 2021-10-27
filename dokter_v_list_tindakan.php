@@ -4,11 +4,9 @@ error_reporting(E_ALL | E_PARSE);
 require 'connect.php';
 ?>
 <?php
-$mt_sisi = "%{$_POST['mt_sisi']}%";
 $sql =
-    "SELECT id,nama,mt_sisi FROM `tindakan` WHERE mt_sisi LIKE ?";
+    "SELECT id,nama FROM `tindakan` ";
 $stmt = $con->prepare($sql);
-$stmt->bind_param("s", $mt_sisi);
 $stmt->execute();
 $result = $stmt->get_result();
 $data = [];
