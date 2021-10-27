@@ -5,7 +5,7 @@ require 'connect.php';
 ?>
 <?php
 $sql =
-    "SELECT id,nama FROM `tindakan` ";
+    "SELECT * FROM `tindakan` ";
 $stmt = $con->prepare($sql);
 $stmt->execute();
 $result = $stmt->get_result();
