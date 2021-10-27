@@ -442,13 +442,23 @@
 							"type": "text"
 						},
 						{
-							"key": "tindakan_array[tindakan_1][visit_id]",
+							"key": "tindakan_array[tindakan_1][mt_sisi]",
+							"value": "kanan",
+							"type": "text"
+						},
+						{
+							"key": "tindakan_array[tindakan_2][visit_id]",
 							"value": "1",
 							"type": "text"
 						},
 						{
-							"key": "tindakan_array[tindakan_1][tindakan_id]",
+							"key": "tindakan_array[tindakan_2][tindakan_id]",
 							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "tindakan_array[tindakan_2][mt_sisi]",
+							"value": "kiri",
 							"type": "text"
 						}
 					]

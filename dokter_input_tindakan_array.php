@@ -5,8 +5,9 @@ extract($_POST);
 foreach ($tindakan_array as $row => $value) {
     $tindakan_id = mysqli_real_escape_string($con, $value["tindakan_id"]);
     $visit_id = mysqli_real_escape_string($con, $value["visit_id"]);
-    $sql = "INSERT INTO `visit_has_tindakan` (`tindakan_id`,`visit_id`) 
-    VALUES ('" . $tindakan_id . "','" .  $visit_id . "')";
+    $mt_sisi = mysqli_real_escape_string($con, $value["mt_sisi"]);
+    $sql = "INSERT INTO `visit_has_tindakan` (`tindakan_id`,`visit_id`,`mt_sisi`) 
+    VALUES ('" . $tindakan_id . "','" .  $visit_id . "','" .  $mt_sisi . "')";
     $stmt = $con->prepare($sql);
     $stmt->execute();
 };
