@@ -425,6 +425,86 @@
 					"mode": "formdata",
 					"formdata": [
 						{
+							"key": "visit_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "tindakan_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "mt_sisi",
+							"value": "kanan",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/dokter_input_tindakan_array.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"dokter_input_tindakan_array.php"
+					]
+				},
+				"description": "step:\n1. lihat list tindakan yg dibuat admin\n(dokter_v_list_tindakan)\n2. pilih id tindakan\n3. inputkan visit_id & tindakan_id"
+			},
+			"response": []
+		},
+		{
+			"name": "dokter_input_tindakan_batal",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "visit_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "tindakan_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "mt_sisi",
+							"value": "kiri",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/dokter_input_tindakan_batal.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"dokter_input_tindakan_batal.php"
+					]
+				},
+				"description": "step:\n1. lihat list tindakan yg dibuat admin\n(dokter_v_list_tindakan)\n2. pilih id tindakan\n3. inputkan visit_id & tindakan_id"
+			},
+			"response": []
+		},
+		{
+			"name": "dokter_input_tindakan_array Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
 							"key": "tindakan_array[tindakan_1][visit_id]",
 							"value": "1",
 							"type": "text"
