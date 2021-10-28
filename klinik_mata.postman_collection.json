@@ -400,13 +400,7 @@
 				"header": [],
 				"body": {
 					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "mt_sisi",
-							"value": "kanan",
-							"type": "text"
-						}
-					]
+					"formdata": []
 				},
 				"url": {
 					"raw": "http://localhost/tugas_akhir/dokter_v_list_tindakan.php",
@@ -418,8 +412,7 @@
 						"tugas_akhir",
 						"dokter_v_list_tindakan.php"
 					]
-				},
-				"description": "tujuan: \nmelihat daftar tindakan berdasarkan sis mata kanan/kiri\nUntuk:\nditampilkan ke dalam page list tindakan\n\nparameter: \nkanan: untuk list tindakan mata kanan\nkiri: untuk list tindakan mata kiri"
+				}
 			},
 			"response": []
 		},
@@ -861,6 +854,30 @@
 			"response": []
 		},
 		{
+			"name": "admin_v_list_tindakan",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/dokter_v_list_tindakan.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"dokter_v_list_tindakan.php"
+					]
+				},
+				"description": "admin melihat antrean pasien berdasarkan tgl"
+			},
+			"response": []
+		},
+		{
 			"name": "admin_status_antrean",
 			"request": {
 				"method": "POST",
@@ -946,46 +963,50 @@
 					"mode": "formdata",
 					"formdata": [
 						{
-							"key": "tindakan_array[tindakan_1][nama]",
-							"value": "b",
+							"key": "nama",
+							"value": "explorasi",
 							"type": "text"
 						},
 						{
-							"key": "tindakan_array[tindakan_1][mt_sisi]",
-							"value": "kanan",
-							"type": "text"
-						},
-						{
-							"key": "tindakan_array[tindakan_1][harga]",
-							"value": "d",
+							"key": "harga",
+							"value": "3000000",
 							"type": "text"
 						},
 						{
 							"key": "tindakan_array[tindakan_2][nama]",
-							"value": "f",
-							"type": "text"
-						},
-						{
-							"key": "tindakan_array[tindakan_2][mt_sisi]",
-							"value": "kiri",
-							"type": "text"
+							"value": "katarak",
+							"type": "text",
+							"disabled": true
 						},
 						{
 							"key": "tindakan_array[tindakan_2][harga]",
-							"value": "h",
-							"type": "text"
+							"value": "5000000",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tindakan_array[tindakan_3][nama]",
+							"value": "endoskopi",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tindakan_array[tindakan_3][harga]",
+							"value": "6000000",
+							"type": "text",
+							"disabled": true
 						}
 					]
 				},
 				"url": {
-					"raw": "http://localhost/tugas_akhir/admin_input_tindakan_array.php",
+					"raw": "http://localhost/tugas_akhir/admin_input_tindakan.php",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"path": [
 						"tugas_akhir",
-						"admin_input_tindakan_array.php"
+						"admin_input_tindakan.php"
 					]
 				},
 				"description": "dokter memasukan tindakan operasi pada suatu visit"

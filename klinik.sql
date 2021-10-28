@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 25, 2021 at 06:48 AM
+-- Generation Time: Oct 28, 2021 at 04:45 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -200,7 +200,7 @@ CREATE TABLE `antrean_admin` (
 --
 
 INSERT INTO `antrean_admin` (`id`, `user_klinik_id`, `status_antrean`, `antrean_sekarang`, `antrean_terakhir`, `batas_antrean`) VALUES
-(1, 1, 'buka', 1, 5, 5);
+(1, 1, 'buka', 0, 5, 5);
 
 -- --------------------------------------------------------
 
@@ -605,9 +605,7 @@ CREATE TABLE `saldo_akun` (
 
 CREATE TABLE `tindakan` (
   `id` int(11) NOT NULL,
-  `visit_id` int(11) DEFAULT NULL,
   `nama` varchar(45) DEFAULT NULL,
-  `mt_sisi` enum('kanan','kiri','') DEFAULT NULL,
   `harga` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
@@ -615,13 +613,9 @@ CREATE TABLE `tindakan` (
 -- Dumping data for table `tindakan`
 --
 
-INSERT INTO `tindakan` (`id`, `visit_id`, `nama`, `mt_sisi`, `harga`) VALUES
-(1, 1, NULL, 'kanan', 1000),
-(2, 1, NULL, 'kiri', 2000),
-(3, 1, 'b', 'kanan', 0),
-(4, 1, 'f', 'kiri', 0),
-(5, 1, 'b', 'kanan', 0),
-(6, 1, 'f', 'kiri', 0);
+INSERT INTO `tindakan` (`id`, `nama`, `harga`) VALUES
+(1, 'explorasi1', 3000000),
+(2, 'explorasi2', 3000000);
 
 -- --------------------------------------------------------
 
@@ -685,11 +679,39 @@ CREATE TABLE `visit` (
 --
 
 INSERT INTO `visit` (`id`, `nomor_antrean`, `status_antrean`, `perusahaan`, `tgl_visit`, `keluhan`, `vod`, `vos`, `tod`, `tos`, `palpebra`, `konjungtiva`, `kornea`, `bmd`, `lensa`, `fundus_od`, `diagnosa`, `terapi`) VALUES
-(1, 1, 'belum', NULL, '2021-10-25 04:05:20', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 2, 'belum', NULL, '2021-10-25 04:05:53', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(3, 3, 'belum', NULL, '2021-10-25 04:06:09', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(4, 4, 'batal', NULL, '2021-10-25 04:11:13', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(5, 5, 'belum', NULL, '2021-10-25 04:28:31', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(1, 1, 'sudah', NULL, '2021-10-23 04:05:20', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 2, 'sudah', NULL, '2021-10-23 04:05:53', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 3, 'sudah', NULL, '2021-10-23 04:06:09', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(4, 4, 'batal', NULL, '2021-10-23 04:11:13', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(5, 5, 'sudah', NULL, '2021-10-23 04:28:31', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(6, 1, 'batal', NULL, '2021-10-25 04:55:10', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 2, 'sudah', NULL, '2021-10-25 04:55:52', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(8, 3, 'sudah', NULL, '2021-10-25 04:56:52', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(9, 4, 'sudah', NULL, '2021-10-25 04:58:25', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(10, 5, 'batal', NULL, '2021-10-25 04:58:31', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(11, 6, 'sudah', NULL, '2021-10-25 04:58:46', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(12, 7, 'belum', NULL, '2021-10-25 04:58:56', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(13, 8, 'belum', NULL, '2021-10-25 04:59:09', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(14, 9, 'belum', NULL, '2021-10-25 04:59:21', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(15, 10, 'belum', NULL, '2021-10-25 04:59:30', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(16, 1, 'belum', NULL, '2021-10-26 21:52:53', '1. 27 okt 2021', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(17, 2, 'belum', NULL, '2021-10-26 21:53:25', '2. 27 okt 2021', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(18, 3, 'belum', NULL, '2021-10-26 21:53:47', '3 27 10 2021', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(19, 4, 'belum', NULL, '2021-10-26 21:54:05', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(20, 5, 'belum', NULL, '2021-10-26 21:54:36', '5 27 10 2021', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `visit_has_tindakan`
+--
+
+CREATE TABLE `visit_has_tindakan` (
+  `id` int(11) NOT NULL,
+  `tindakan_id` int(11) DEFAULT NULL,
+  `visit_id` int(11) DEFAULT NULL,
+  `mt_sisi` enum('kanan','kiri','') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -712,7 +734,22 @@ INSERT INTO `visit_has_user` (`id`, `visit_id`, `user_klinik_id`) VALUES
 (2, 2, 4),
 (3, 3, 5),
 (4, 4, 11),
-(5, 5, 12);
+(5, 5, 12),
+(6, 6, 12),
+(7, 7, 5),
+(8, 8, 3),
+(9, 9, 4),
+(10, 10, 4),
+(11, 11, 5),
+(12, 12, 5),
+(13, 13, 11),
+(14, 14, 12),
+(15, 15, 12),
+(16, 16, 3),
+(17, 17, 4),
+(18, 18, 5),
+(19, 19, 11),
+(20, 20, 12);
 
 --
 -- Indexes for dumped tables
@@ -835,8 +872,7 @@ ALTER TABLE `saldo_akun`
 -- Indexes for table `tindakan`
 --
 ALTER TABLE `tindakan`
-  ADD PRIMARY KEY (`id`) USING BTREE,
-  ADD KEY `fk_tindakan_visit1_idx` (`visit_id`);
+  ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
 -- Indexes for table `user_klinik`
@@ -851,6 +887,14 @@ ALTER TABLE `user_klinik`
 ALTER TABLE `visit`
   ADD PRIMARY KEY (`id`) USING BTREE,
   ADD KEY `id` (`id`) USING BTREE;
+
+--
+-- Indexes for table `visit_has_tindakan`
+--
+ALTER TABLE `visit_has_tindakan`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_table1_tindakan1_idx` (`tindakan_id`),
+  ADD KEY `fk_table1_visit1_idx` (`visit_id`);
 
 --
 -- Indexes for table `visit_has_user`
@@ -934,7 +978,7 @@ ALTER TABLE `resep_has_obat`
 -- AUTO_INCREMENT for table `tindakan`
 --
 ALTER TABLE `tindakan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user_klinik`
@@ -946,13 +990,19 @@ ALTER TABLE `user_klinik`
 -- AUTO_INCREMENT for table `visit`
 --
 ALTER TABLE `visit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `visit_has_tindakan`
+--
+ALTER TABLE `visit_has_tindakan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `visit_has_user`
 --
 ALTER TABLE `visit_has_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Constraints for dumped tables
@@ -1050,10 +1100,11 @@ ALTER TABLE `saldo_akun`
   ADD CONSTRAINT `fk_saldo_akun_daftar_akun1` FOREIGN KEY (`daftar_akun_id`) REFERENCES `daftar_akun` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `tindakan`
+-- Constraints for table `visit_has_tindakan`
 --
-ALTER TABLE `tindakan`
-  ADD CONSTRAINT `fk_tindakan_visit1` FOREIGN KEY (`visit_id`) REFERENCES `visit` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `visit_has_tindakan`
+  ADD CONSTRAINT `fk_table1_tindakan1` FOREIGN KEY (`tindakan_id`) REFERENCES `tindakan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_table1_visit1` FOREIGN KEY (`visit_id`) REFERENCES `visit` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `visit_has_user`
