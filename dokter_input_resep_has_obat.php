@@ -3,10 +3,10 @@
 <?php
 // $visit_id;
 extract($_POST);
-echo $resep_id . ' ' . $obat_id . ' ' . $dosis;
-$sql = "INSERT INTO `resep_has_obat` (`resep_id`, `obat_id`,`dosis`) VALUES (?,?,?)";
+// echo  $obat_id . ' ' . $dosis . ' ' . $jumlah . ' ' . $visit_id;
+$sql = "INSERT INTO `resep_has_obat` (`obat_id`, `dosis`, `jumlah`, `visit_id`) VALUES (?,?,?,?)";
 $stmt = $con->prepare($sql);
-$stmt->bind_param("sss", $resep_id, $obat_id, $dosis);
+$stmt->bind_param("ssss", $obat_id, $dosis, $jumlah, $visit_id);
 $stmt->execute();
 if ($stmt->affected_rows > 0) {
     $visit_id = $con->insert_id;
