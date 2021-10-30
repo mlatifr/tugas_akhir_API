@@ -322,7 +322,7 @@
 			"response": []
 		},
 		{
-			"name": "dokter_v_resep_obat",
+			"name": "dokter_v_rekam_resep_obat",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -343,14 +343,14 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost/tugas_akhir/dokter_v_resep_obat.php",
+					"raw": "http://localhost/tugas_akhir/dokter_v_rekam_resep_obat.php",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"path": [
 						"tugas_akhir",
-						"dokter_v_resep_obat.php"
+						"dokter_v_rekam_resep_obat.php"
 					]
 				},
 				"description": "dokter melihat rekam medis resep obat pasien"
@@ -367,7 +367,7 @@
 					"formdata": [
 						{
 							"key": "nama_obat",
-							"value": "",
+							"value": "satu",
 							"type": "text"
 						},
 						{
@@ -413,6 +413,71 @@
 						"dokter_v_list_tindakan.php"
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "dokter_v_keranjang_resep_obat",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "visit_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/dokter_v_keranjang_resep_obat.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"dokter_v_keranjang_resep_obat.php"
+					]
+				},
+				"description": "Dokter melihat obat apa saja yg sudah dimasukan ke dalam resep saat pasien visit"
+			},
+			"response": []
+		},
+		{
+			"name": "dokter_v_keranjang_tindakan",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "mt_sisi",
+							"value": "k",
+							"type": "text"
+						},
+						{
+							"key": "visit_id",
+							"value": "16",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/dokter_v_keranjang_tindakan.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"dokter_v_keranjang_tindakan.php"
+					]
+				},
+				"description": "Dokter melihat obat apa saja yg sudah dimasukan ke dalam resep saat pasien visit"
 			},
 			"response": []
 		},
@@ -552,7 +617,52 @@
 			"response": []
 		},
 		{
-			"name": "dokter_input_resep_has_obat_array",
+			"name": "dokter_input_resep_has_obat",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "obat_id",
+							"value": "7",
+							"type": "text"
+						},
+						{
+							"key": "dosis",
+							"value": "3x1",
+							"type": "text"
+						},
+						{
+							"key": "jumlah",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "visit_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/dokter_input_resep_has_obat.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"dokter_input_resep_has_obat.php"
+					]
+				},
+				"description": "dokter memasukan resep pobat setelah melihat list obat pada dokter_v_list_obat"
+			},
+			"response": []
+		},
+		{
+			"name": "dokter_input_resep_has_obat_array Copy",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -2038,6 +2148,42 @@
 					]
 				},
 				"description": "pilih salah satu:\nkredit or debet\nutk melihat total kredit atau debet"
+			},
+			"response": []
+		},
+		{
+			"name": "dokter_v_keranjang_resep_obat Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "idPasien",
+							"value": "3",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "visit_id",
+							"value": "3",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/dokter_v_keranjang_resep_obat.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"dokter_v_keranjang_resep_obat.php"
+					]
+				},
+				"description": "Dokter melihat obat apa saja yg sudah dimasukan ke dalam resep saat pasien visit"
 			},
 			"response": []
 		}
