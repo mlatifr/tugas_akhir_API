@@ -22,6 +22,16 @@ if (isset($_POST['order_obat_id'])) {
         WHERE oo.id = ?";
     $stmt = $con->prepare($sql);
     $stmt->bind_param("s", $_POST['order_obat_id']);
+} else {
+    $format_tgl_now = date('Y-m-d');
+    $tgl_now = "'%$format_tgl_now%'";
+    // echo $tgl_now;
+    $sql =
+        "SELECT oo.id as order_obat_id, obt.id, obt.nama, obt.jumlah_order, oo.tgl_order
+            FROM order_obat oo
+            INNER JOIN obat obt ON oo.id=obt.order_obat_id
+            WHERE oo.tgl_order LIKE $tgl_now ";
+    $stmt = $con->prepare($sql);
 }
 $stmt->execute();
 $result = $stmt->get_result();
