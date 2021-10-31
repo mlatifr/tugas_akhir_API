@@ -1,16 +1,15 @@
 <?php require 'connect.php';
 ?>
 <?php
-$mt_sisi = "%{$_POST['mt_sisi']}%";
 $visit_id = "{$_POST['visit_id']}";
 $sql =
     "SELECT * FROM visit_has_tindakan vht
     INNER JOIN tindakan tdkn on vht.tindakan_id=tdkn.id
-    WHERE mt_sisi LIKE ?
-    AND visit_id = ?
+    WHERE visit_id = ?
+    ORDER BY tdkn.nama
 ";
 $stmt = $con->prepare($sql);
-$stmt->bind_param("ss", $mt_sisi, $visit_id);
+$stmt->bind_param("s", $visit_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $data = [];
