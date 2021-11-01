@@ -417,36 +417,6 @@
 			"response": []
 		},
 		{
-			"name": "dokter_v_keranjang_resep_obat",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "visit_id",
-							"value": "1",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://localhost/tugas_akhir/dokter_v_keranjang_resep_obat.php",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"tugas_akhir",
-						"dokter_v_keranjang_resep_obat.php"
-					]
-				},
-				"description": "Dokter melihat obat apa saja yg sudah dimasukan ke dalam resep saat pasien visit"
-			},
-			"response": []
-		},
-		{
 			"name": "dokter_v_keranjang_tindakan",
 			"request": {
 				"method": "POST",
@@ -475,6 +445,36 @@
 					"path": [
 						"tugas_akhir",
 						"dokter_v_keranjang_tindakan.php"
+					]
+				},
+				"description": "Dokter melihat obat apa saja yg sudah dimasukan ke dalam resep saat pasien visit"
+			},
+			"response": []
+		},
+		{
+			"name": "dokter_v_keranjang_resep_obat",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "visit_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/dokter_v_keranjang_resep_obat.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"dokter_v_keranjang_resep_obat.php"
 					]
 				},
 				"description": "Dokter melihat obat apa saja yg sudah dimasukan ke dalam resep saat pasien visit"
@@ -831,7 +831,7 @@
 					"formdata": [
 						{
 							"key": "visit_id",
-							"value": "1",
+							"value": "4",
 							"type": "text"
 						}
 					]
@@ -1434,7 +1434,7 @@
 			"response": []
 		},
 		{
-			"name": "pemilik_input_order",
+			"name": "pemilik_input_tgl_order",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -1448,20 +1448,20 @@
 						},
 						{
 							"key": "tgl_transaksi",
-							"value": "2021-10-05",
+							"value": "2021-10-31",
 							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "http://localhost/tugas_akhir/pemilik_input_order.php",
+					"raw": "http://localhost/tugas_akhir/pemilik_input_tgl_order.php",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"path": [
 						"tugas_akhir",
-						"pemilik_input_order.php"
+						"pemilik_input_tgl_order.php"
 					]
 				}
 			},
@@ -1469,6 +1469,50 @@
 		},
 		{
 			"name": "pemilik_input_order_item",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "order_obat_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "jumlah_order",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "nama",
+							"value": "Allegran Refresh",
+							"type": "text"
+						},
+						{
+							"key": "harga_beli",
+							"value": "84.000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/pemilik_input_order_item.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"pemilik_input_order_item.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pemilik_input_order_item Copy",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -2148,42 +2192,6 @@
 					]
 				},
 				"description": "pilih salah satu:\nkredit or debet\nutk melihat total kredit atau debet"
-			},
-			"response": []
-		},
-		{
-			"name": "dokter_v_keranjang_resep_obat Copy",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "idPasien",
-							"value": "3",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "visit_id",
-							"value": "3",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://localhost/tugas_akhir/dokter_v_keranjang_resep_obat.php",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"tugas_akhir",
-						"dokter_v_keranjang_resep_obat.php"
-					]
-				},
-				"description": "Dokter melihat obat apa saja yg sudah dimasukan ke dalam resep saat pasien visit"
 			},
 			"response": []
 		}
