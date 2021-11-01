@@ -882,7 +882,7 @@
 			"response": []
 		},
 		{
-			"name": "apoteker_input_resep",
+			"name": "apoteker_input_resep_non_visit.php",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -913,14 +913,14 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost/tugas_akhir/apoteker_input_resep.php",
+					"raw": "http://localhost/tugas_akhir/apoteker_input_resep_non_visit.php.php",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"path": [
 						"tugas_akhir",
-						"apoteker_input_resep.php"
+						"apoteker_input_resep_non_visit.php.php"
 					]
 				},
 				"description": "visit_id: jika pasien ber-visit\nnama_pembeli: kosong jika bukkan pasien isit\nnama_pembeli: di isi jika pasien tdk visit tpai beli obat"
@@ -928,7 +928,7 @@
 			"response": []
 		},
 		{
-			"name": "apoteker_input_obat_dosis",
+			"name": "apoteker_input_resep_visit.php",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -936,77 +936,78 @@
 					"mode": "formdata",
 					"formdata": [
 						{
-							"key": "obat_array[obat_1][resep_id]",
-							"value": "5",
+							"key": "visit_id",
+							"value": "1",
 							"description": "dikosongi jika pembeli tidak visit, langsung beli di apotek",
 							"type": "text"
 						},
 						{
-							"key": "obat_array[obat_1][obat_id]",
-							"value": "7",
+							"key": "user_id_apoteker",
+							"value": "6",
 							"type": "text"
 						},
 						{
-							"key": "obat_array[obat_1][jumlah]",
-							"value": "30",
-							"type": "text"
-						},
-						{
-							"key": "obat_array[obat_1][dosis]",
-							"value": "3x1",
-							"type": "text"
-						},
-						{
-							"key": "obat_array[obat_2][resep_id]",
-							"value": "2",
-							"type": "text"
-						},
-						{
-							"key": "obat_array[obat_2][obat_id]",
-							"value": "8",
-							"type": "text"
-						},
-						{
-							"key": "obat_array[obat_2][jumlah]",
-							"value": "30",
-							"type": "text"
-						},
-						{
-							"key": "obat_array[obat_2][dosis]",
-							"value": "3x1",
-							"type": "text"
-						},
-						{
-							"key": "obat_array[obat_3][resep_id]",
-							"value": "5",
-							"type": "text"
-						},
-						{
-							"key": "obat_array[obat_3][obat_id]",
-							"value": "9",
-							"type": "text"
-						},
-						{
-							"key": "obat_array[obat_3][jumlah]",
-							"value": "30",
-							"type": "text"
-						},
-						{
-							"key": "obat_array[obat_3][dosis]",
-							"value": "3x1",
+							"key": "tgl_penulisan_resep",
+							"value": "2021-11-01",
 							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "http://localhost/tugas_akhir/apoteker_input_obat_dosis.php",
+					"raw": "http://localhost/tugas_akhir/apoteker_input_resep_visit.php",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"path": [
 						"tugas_akhir",
-						"apoteker_input_obat_dosis.php"
+						"apoteker_input_resep_visit.php"
+					]
+				},
+				"description": "setelah mendapat resep_id dari \napoteker_input_resep\nmaka apoteker bisa mengisi obat sesuai yg diresepkan dokter pada:\napoteker_v_rsp_dr"
+			},
+			"response": []
+		},
+		{
+			"name": "apoteker_input_resep_has_obat.php",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "resep_apoteker_id",
+							"value": "1",
+							"description": "dikosongi jika pembeli tidak visit, langsung beli di apotek",
+							"type": "text"
+						},
+						{
+							"key": "obat_id",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "jumlah",
+							"value": "30",
+							"type": "text"
+						},
+						{
+							"key": "dosis",
+							"value": "3x1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/apoteker_input_resep_has_obat.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"apoteker_input_resep_has_obat.php"
 					]
 				},
 				"description": "setelah mendapat resep_id dari \napoteker_input_resep\nmaka apoteker bisa mengisi obat sesuai yg diresepkan dokter pada:\napoteker_v_rsp_dr"
