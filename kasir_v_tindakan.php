@@ -11,7 +11,9 @@ extract($_POST);
 // echo ' ' . $tgl_visit;
 $sql =
     "SELECT *
-    FROM `tindakan` WHERE visit_id = ? ";
+    FROM `visit_has_tindakan` WHERE visit_id = ? 
+    ORDER BY tindakan_id
+    ";
 $stmt = $con->prepare($sql);
 $stmt->bind_param("s", $visit_id);
 $stmt->execute();
