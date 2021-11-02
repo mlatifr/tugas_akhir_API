@@ -14,7 +14,7 @@ $stmt->execute();
 if ($stmt->affected_rows > 0) {
     require 'apoteker_v_keranjang_resep_obat.php';
 } else {
-    $arr = ["result" => "fail", "Error" => $con->error, 'jumlah_array' => count($obat_array)];
+    $arr = ["result" => "fail", "Error" => $con->error, 'sql' => $sql];
     echo json_encode($arr);
     $con->close();
 }

@@ -6,8 +6,9 @@ $visit_id = '';
 $user_id_apoteker = '';
 $tgl_penulisan_resep = '';
 extract($_POST);
-$sql = "INSERT INTO `resep_apoteker` (`visit_id`,  `user_id_apoteker`, `tgl_penulisan_resep`)
-            VALUES ('" . $visit_id . "','" .  $user_id_apoteker . "',  '" . $tgl_penulisan_resep . "')";
+$sql =
+    "INSERT INTO `resep_apoteker` (`visit_id`,  `user_id_apoteker`, `tgl_penulisan_resep`)
+VALUES ('" . $visit_id . "','" .  $user_id_apoteker . "',  '" . $tgl_penulisan_resep . "')";
 $stmt = $con->prepare($sql);
 $stmt->execute();
 if ($stmt->affected_rows > 0) {
