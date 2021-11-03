@@ -5,7 +5,7 @@ $last_id;
 $visit_id = '';
 extract($_POST);
 
-if (!$visit_id) {
+if (!$visit_id) { //untuk pembeli obat non-visit
     $sql =
         "INSERT INTO `nota_penjualan` 
     (`user_id`, `resep_apoteker_id`, `tgl_transaksi`,  `jasa_medis`,`biaya_admin`,`total_harga`) 
@@ -14,7 +14,7 @@ if (!$visit_id) {
     $stmt = $con->prepare($sql);
     $stmt->bind_param("ssss", $user_id,  $resep_apoteker_id, $jasa_medis, $biaya_admin, $total_harga);
 }
-if ($visit_id) {
+if ($visit_id) { //untuk pembeli obat yg merupakan pasien visit
     $sql =
         "INSERT INTO `nota_penjualan` 
         (`user_id`, `visit_id`, `resep_apoteker_id`, `tgl_transaksi`, `jasa_medis`,`biaya_admin`,`total_harga`) 
