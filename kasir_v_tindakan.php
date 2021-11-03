@@ -10,8 +10,10 @@ extract($_POST);
 // echo $user_id . ' ' . $tgl_visit;
 // echo ' ' . $tgl_visit;
 $sql =
-    "SELECT *
-    FROM `visit_has_tindakan` WHERE visit_id = ? 
+    "SELECT vht.id as visit_has_tindakan_id,tdkn.nama, tdkn.harga, vht.mt_sisi
+    FROM visit_has_tindakan vht 
+        INNER JOIN tindakan tdkn ON tdkn.id=vht.tindakan_id 
+    WHERE visit_id = ?
     ORDER BY tindakan_id
     ";
 $stmt = $con->prepare($sql);

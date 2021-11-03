@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2021 at 11:26 AM
+-- Generation Time: Nov 03, 2021 at 01:45 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -442,7 +442,7 @@ CREATE TABLE `penyakit` (
 CREATE TABLE `resep_apoteker` (
   `id` int(11) NOT NULL,
   `visit_id` int(11) DEFAULT NULL,
-  `nama_pembeli` varchar(50) DEFAULT 'pembeli_non_visit',
+  `nama_pembeli` varchar(50) DEFAULT NULL,
   `user_id_apoteker` int(11) DEFAULT NULL,
   `tgl_penulisan_resep` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -452,10 +452,16 @@ CREATE TABLE `resep_apoteker` (
 --
 
 INSERT INTO `resep_apoteker` (`id`, `visit_id`, `nama_pembeli`, `user_id_apoteker`, `tgl_penulisan_resep`) VALUES
-(1, 1, 'pembeli_non_visit', 6, '2021-10-31 17:00:00'),
-(2, 1, 'pembeli_non_visit', 6, '2021-10-31 17:00:00'),
-(3, 1, 'pembeli_non_visit', 6, '2021-10-31 17:00:00'),
-(4, 1, 'pembeli_non_visit', 6, '2021-10-31 17:00:00');
+(1, 4, NULL, 6, '2021-11-01 17:00:00'),
+(2, 4, NULL, 6, '2021-11-01 17:00:00'),
+(3, 4, NULL, 6, '2021-11-01 17:00:00'),
+(4, 4, NULL, 6, '2021-11-01 17:00:00'),
+(5, 4, NULL, 6, '2021-11-01 17:00:00'),
+(6, 4, NULL, 6, '2021-11-01 17:00:00'),
+(7, 4, NULL, 6, '2021-11-01 17:00:00'),
+(8, 4, NULL, 6, '2021-11-01 17:00:00'),
+(9, 5, NULL, 6, '2021-11-01 17:00:00'),
+(10, 4, NULL, 6, '2021-11-01 17:00:00');
 
 -- --------------------------------------------------------
 
@@ -476,48 +482,11 @@ CREATE TABLE `resep_has_obat` (
 --
 
 INSERT INTO `resep_has_obat` (`id`, `obat_id`, `dosis`, `jumlah`, `visit_id`) VALUES
-(44, 7, '3x1', '30', 1),
-(45, 8, '3x1', '30', 2),
-(46, 7, '3x1', '10', 1),
-(47, 8, '1x1', '20', 1),
-(48, 7, '3x1', '10', 1),
-(49, 8, '1x1', '20', 1),
-(50, 7, '3x1', '10', 1),
-(51, 8, '1x1', '20', 1),
-(52, 7, '3x1', '10', 1),
-(53, 8, '1x1', '20', 1),
-(54, 7, '3x1', '10', 1),
-(55, 8, '1x1', '20', 1),
-(56, 7, '3x1', '10', 1),
-(57, 8, '1x1', '20', 1),
-(58, NULL, NULL, NULL, NULL),
-(59, NULL, NULL, NULL, NULL),
-(60, NULL, NULL, NULL, NULL),
-(62, 7, '3x1', '10', 1),
-(63, 7, '3x1', '10', 1),
-(65, 75, '111', '111', 23),
-(66, 7, '111', '111', 23),
-(67, 8, '2x1', '222', 23),
-(68, 32, '3x3', '3', 25),
-(69, 32, '3x3', '3', 25),
-(70, 7, '3x1', '1', 25),
-(71, 7, '3x1', '1', 25),
-(72, 31, '1x2x3', '3', 26),
-(73, 31, '1x2x3', '3', 26),
-(74, 1, '2x1', '12', 4),
-(75, 1, '2x1', '12', 4),
-(76, 1, '3x1', '2', 5),
-(77, 1, '3x1', '12', 4),
-(78, 2, '2x1', '10', 4),
-(79, 3, '2x1', '10', 4),
-(80, 4, '2x1', '10', 4),
-(81, 2, '2', '2', 5),
-(82, 3, '3', '3', 5),
-(83, 1, '1', '1', 6),
-(84, 2, '2', '2', 6),
-(85, 3, '3', '3', 6),
-(86, 4, '4', '4', 6),
-(87, 4, '4', '4', 6);
+(1, 1, '1', '1', 4),
+(2, 2, '2', '2', 5),
+(3, 3, '3', '3', 6),
+(4, 1, '11', '11', 4),
+(5, 1, '11', '11', 4);
 
 -- --------------------------------------------------------
 
@@ -537,11 +506,17 @@ CREATE TABLE `rsp_aptkr_has_obat` (
 --
 
 INSERT INTO `rsp_aptkr_has_obat` (`resep_apoteker_id`, `obat_id`, `jumlah`, `dosis`) VALUES
-(1, 1, '30', '3x1'),
-(1, 2, '30', '3x1'),
-(1, 3, '30', '3x1'),
 (1, 4, '30', '3x1'),
-(1, 4, '30', '3x1');
+(3, 1, 'TextEditingController#afcb5(TextEditingValue(', 'TextEditingController#f2871(TextEditingValue('),
+(3, 2, '2', '2'),
+(3, 4, '1', '1'),
+(4, 4, '55', '55'),
+(4, 4, '55', '55'),
+(4, 4, '10', '3x1'),
+(4, 4, '10', '3x1'),
+(4, 4, '15', '1x1'),
+(4, 4, '15', '1x1'),
+(4, 1, '3131', '3x1');
 
 -- --------------------------------------------------------
 
@@ -617,7 +592,8 @@ INSERT INTO `user_klinik` (`id`, `username`, `sandi`) VALUES
 (9, 'pemilik', 'pemilik'),
 (10, 'akuntan', 'akuntan'),
 (11, 'pasien4', 'pasien4'),
-(12, 'pasien5', 'pasien5');
+(12, 'pasien5', 'pasien5'),
+(13, 'kasir', 'kasir');
 
 -- --------------------------------------------------------
 
@@ -670,6 +646,28 @@ CREATE TABLE `visit_has_tindakan` (
   `visit_id` int(11) DEFAULT NULL,
   `mt_sisi` enum('kanan','kiri','') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `visit_has_tindakan`
+--
+
+INSERT INTO `visit_has_tindakan` (`id`, `tindakan_id`, `visit_id`, `mt_sisi`) VALUES
+(1, 1, 4, 'kiri'),
+(2, 2, 4, 'kiri'),
+(3, 4, 4, 'kanan'),
+(4, 5, 4, 'kanan'),
+(5, 6, 4, 'kanan'),
+(6, 1, 5, 'kiri'),
+(7, 2, 5, 'kiri'),
+(8, 3, 5, 'kiri'),
+(9, 4, 5, 'kanan'),
+(10, 5, 5, 'kanan'),
+(11, 1, 6, 'kiri'),
+(13, 2, 6, 'kiri'),
+(14, 3, 6, 'kiri'),
+(15, 4, 6, 'kanan'),
+(16, 5, 6, 'kanan'),
+(17, 6, 6, 'kiri');
 
 -- --------------------------------------------------------
 
@@ -909,13 +907,13 @@ ALTER TABLE `penjurnalan_has_akun`
 -- AUTO_INCREMENT for table `resep_apoteker`
 --
 ALTER TABLE `resep_apoteker`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `resep_has_obat`
 --
 ALTER TABLE `resep_has_obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tindakan`
@@ -927,7 +925,7 @@ ALTER TABLE `tindakan`
 -- AUTO_INCREMENT for table `user_klinik`
 --
 ALTER TABLE `user_klinik`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `visit`
@@ -939,7 +937,7 @@ ALTER TABLE `visit`
 -- AUTO_INCREMENT for table `visit_has_tindakan`
 --
 ALTER TABLE `visit_has_tindakan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `visit_has_user`

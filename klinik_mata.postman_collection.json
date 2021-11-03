@@ -1015,6 +1015,36 @@
 			"response": []
 		},
 		{
+			"name": "apoteker_v_keranjang_resep_obat_apoteker",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "visit_id",
+							"value": "4",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/apoteker_v_keranjang_resep_obat_apoteker.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"apoteker_v_keranjang_resep_obat_apoteker.php"
+					]
+				},
+				"description": "apoteker melihat resep obat yg telah dibuat dokter berdasarkan visit_id"
+			},
+			"response": []
+		},
+		{
 			"name": "admin_v_antrean",
 			"request": {
 				"method": "POST",
@@ -1214,7 +1244,7 @@
 					"formdata": [
 						{
 							"key": "tgl_visit",
-							"value": "2021-10-01",
+							"value": "2021-11-01",
 							"type": "text"
 						}
 					]
@@ -1284,7 +1314,7 @@
 					"formdata": [
 						{
 							"key": "visit_id",
-							"value": "1",
+							"value": "4",
 							"type": "text"
 						}
 					]
