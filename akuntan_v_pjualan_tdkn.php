@@ -8,7 +8,8 @@ if (isset($_POST['tgl_visit_detail'])) {
     $sql =
         "SELECT *
         FROM tindakan tdk
-        INNER JOIN visit vst ON vst.id=tdk.visit_id
+        INNER JOIN visit_has_tindakan vht ON tdk.id=vht.visit_id
+        INNER JOIN visit vst ON vst.id=vht.visit_id
         WHERE vst.tgl_visit LIKE ? 
         &&  vst.perusahaan IS NULL";
     $stmt = $con->prepare($sql);
@@ -16,9 +17,10 @@ if (isset($_POST['tgl_visit_detail'])) {
 } elseif (isset($_POST['tgl_visit'])) {
     $tgl_visit = "%{$_POST['tgl_visit']}%";
     $sql =
-        "SELECT SUM(harga) as total_tdk, vst.tgl_visit as tgl_tdkan
+        "SELECT sum(harga) as total_tdk, vst.tgl_visit as tgl_tdkan
         FROM tindakan tdk
-        INNER JOIN visit vst ON vst.id=tdk.visit_id
+        INNER JOIN visit_has_tindakan vht ON tdk.id=vht.visit_id
+        INNER JOIN visit vst ON vst.id=vht.visit_id
         WHERE vst.tgl_visit LIKE ?
         &&  vst.perusahaan IS NULL";
     $stmt = $con->prepare($sql);

@@ -1274,18 +1274,20 @@
 					"formdata": [
 						{
 							"key": "visit_id",
-							"value": "",
+							"value": "4",
 							"type": "text"
 						},
 						{
 							"key": "nama_pembeli",
 							"value": "%pembeli%",
-							"type": "text"
+							"type": "text",
+							"disabled": true
 						},
 						{
 							"key": "tgl_beli",
 							"value": "",
-							"type": "text"
+							"type": "text",
+							"disabled": true
 						}
 					]
 				},
@@ -1723,14 +1725,14 @@
 					"formdata": [
 						{
 							"key": "tgl_visit",
-							"value": "2021-10",
-							"type": "text"
+							"value": "2021",
+							"type": "text",
+							"disabled": true
 						},
 						{
 							"key": "tgl_visit_detail",
 							"value": "2021",
-							"type": "text",
-							"disabled": true
+							"type": "text"
 						}
 					]
 				},
