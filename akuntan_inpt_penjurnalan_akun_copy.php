@@ -1,4 +1,7 @@
-<?php require 'connect.php';
+<?php
+
+error_reporting(E_ALL | E_PARSE);
+require 'connect.php';
 ?>
 <?php
 $arr = [];

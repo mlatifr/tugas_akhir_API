@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 03, 2021 at 01:45 AM
+-- Generation Time: Nov 08, 2021 at 11:03 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -20,153 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `klinik`
 --
-
-DELIMITER $$
---
--- Procedures
---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_cari_tindakan` (IN `p_tindakan_nama` VARCHAR(50))  begin
-SELECT * FROM klinik.tindakan
-where tindakan.tindakan_nama like CONCAT('%',p_tindakan_nama, '%');
-SELECT p_tindakan_nama;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_coba` (IN `p_nama` VARCHAR(50))  begin
-declare hitung int;
-SET hitung =(
-SELECT COUNT(*) 
-FROM klinik.pasien 
-WHERE pasien.pasien_nama
-like p_nama 
-    );
-	if hitung > 0 THEN 
-	begin
-		select hitung;
-        /*select p_nama;
-        select * from pasien;*/
-	end;
-	else
-		INSERT INTO `klinik`.`tindakan` (`tindakan_nama`) VALUES (p_nama);
-		select * from pasien;
-	end if;
-end$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insert_admin` (`p_nama` VARCHAR(45))  begin
-declare hitung int;
-SET hitung =(
-SELECT COUNT(*) 
-FROM klinik.admin
-WHERE admin.nama
-like p_nama 
-    );
-	if hitung > 0 THEN 
-	begin
-    select p_nama;
-		select hitung;
-    select * from admin;
-	end;
-	else
-	INSERT INTO `klinik`.`admin` (`nama`) VALUES (p_nama);
-	select*from admin;
-	end if;
-end$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insert_dokter` (`p_nama` VARCHAR(45))  BEGIN
-INSERT INTO `klinik`.`dokter` (`nama`) VALUES (p_nama);
-select*from dokter;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insert_kasir` (`p_nama` VARCHAR(45))  BEGIN
-INSERT INTO `klinik`.`kasir` (`nama`) VALUES (p_nama);
-select*from kasir;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insert_kasirr` (`p_nama` VARCHAR(45))  BEGIN
-INSERT INTO `klinik`.`kasir` (`nama`) VALUES (p_nama);
-select*from kasir;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insert_obat` (`p_nama` VARCHAR(45))  BEGIN
-INSERT INTO klinik.obat (obat_nama) VALUES (p_nama);
-select * from obat;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insert_pasien` (`p_nama` VARCHAR(45))  BEGIN
-INSERT INTO `klinik`.`pasien` (`pasien_nama`) VALUES (p_nama);
-select*from pasien;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insert_visit` (`p_dokter_id` INT, `p_kasir_id` INT, `p_pasien_id` INT)  BEGIN
-INSERT INTO `klinik`.`visit` (`dokter_id`, `kasir_id`, `pasien_id`) VALUES (p_dokter_id  , p_kasir_id  , p_pasien_id);
-select * from visit;	
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_new_pasien` (IN `p_nama` VARCHAR(50))  begin
-declare hitung int;
-SET hitung =(
-SELECT COUNT(*) 
-FROM klinik.pasien 
-WHERE pasien.pasien_nama
-like p_nama 
-    );
-	if hitung > 0 THEN 
-	begin
-		select p_nama;
-		select hitung;
-        select * from pasien;
-	end;
-	else
-		INSERT INTO `klinik`.`tindakan` (`tindakan_nama`) VALUES (p_nama);
-		select * from pasien;
-	end if;
-end$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_new_tindakan` (IN `p_tindakan_nama` VARCHAR(50))  begin
-declare hitung int;
-SET hitung =(
-SELECT COUNT(*) 
-FROM klinik.tindakan 
-WHERE tindakan.tindakan_nama
-like p_tindakan_nama 
-    );
-	if hitung > 0 THEN 
-	begin
-    select p_tindakan_nama;
-		select hitung;
-        select * from tindakan;
-	end;
-	else
-		INSERT INTO `klinik`.`tindakan` (`tindakan_nama`) VALUES (p_tindakan_nama);
-		select * from tindakan;
-	end if;
-end$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `total_procedure_db` ()  SELECT COUNT(*) ROUTINE_NAME
-FROM INFORMATION_SCHEMA.ROUTINES
-WHERE ROUTINE_TYPE="PROCEDURE" 
-AND ROUTINE_SCHEMA="k2"$$
-
---
--- Functions
---
-CREATE DEFINER=`root`@`localhost` FUNCTION `fn_cari_pasien` (`p_nama` VARCHAR(50)) RETURNS VARCHAR(50) CHARSET utf8mb4 BEGIN
-	DECLARE pesan varchar(50);
-	set pesan =p_nama;
-	if exists(
-    select * from pasien where pasien.pasien_nama=p_nama
-    )then
-		begin
-			set pesan='sukses';
-		end;
-	else 
-		begin
-			set pesan=CONCAT('pasien: ',p_nama, ' tidak ditemukan');
-		end;
-	END if; 
-	RETURN pesan;
-end$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -265,21 +118,8 @@ CREATE TABLE `nota_penjualan` (
 --
 
 INSERT INTO `nota_penjualan` (`id`, `user_id`, `visit_id`, `resep_apoteker_id`, `tgl_transaksi`, `jasa_medis`, `biaya_admin`, `total_harga`) VALUES
-(1, 7, 1, 1, '2021-09-30 17:00:00', 200000, 40000, 5000),
-(2, 7, 1, 1, '2021-10-01 17:00:00', 200000, 40000, 5000),
-(3, 7, 1, 1, '2021-10-01 17:00:00', 200000, 40000, 5000),
-(4, 7, 1, 1, '2021-09-30 17:00:00', 200000, 40000, 5000),
-(5, 7, 1, 1, '2021-09-30 17:00:00', 200000, 40000, 5000),
-(6, 7, 1, 1, '2021-09-30 17:00:00', 200000, 40000, 5000),
-(7, 7, NULL, 1, '2021-09-30 17:00:00', NULL, NULL, 5000),
-(8, 7, NULL, 1, '2021-09-30 17:00:00', NULL, NULL, 5000),
-(9, 7, NULL, 1, '2021-09-30 17:00:00', NULL, NULL, 5000),
-(10, 7, NULL, 1, '2021-09-30 17:00:00', NULL, NULL, 5000),
-(11, 7, NULL, 1, '2021-09-30 17:00:00', NULL, NULL, 5000),
-(12, 7, NULL, 1, '2021-09-30 17:00:00', NULL, NULL, 5000),
-(13, 7, 2, 1, '2021-09-30 17:00:00', NULL, NULL, 5000),
-(14, 7, 2, 1, '2021-09-30 17:00:00', 200000, 40000, 5000),
-(15, 7, 2, 1, '2021-09-30 17:00:00', 200000, 40000, 5000);
+(1, 13, 4, NULL, '2021-10-31 17:00:00', 8, 5, 1971013),
+(2, 13, 5, NULL, '2021-10-31 17:00:00', 0, 0, 15000);
 
 -- --------------------------------------------------------
 
@@ -304,10 +144,10 @@ CREATE TABLE `obat` (
 --
 
 INSERT INTO `obat` (`id`, `order_obat_id`, `jumlah_order`, `jumlah_diterima`, `nama`, `stok`, `kadaluarsa`, `harga_jual`, `harga_beli`) VALUES
-(1, 1, 1, NULL, 'Allegran Refresh', NULL, NULL, NULL, '84.000'),
-(2, 1, 2, NULL, 'Blink Contacts', NULL, NULL, NULL, '106.250'),
-(3, 1, 3, NULL, 'Calcium Pyruvat', NULL, NULL, NULL, '426.000'),
-(4, 1, 4, NULL, 'FOCUSON', NULL, NULL, NULL, '200.000');
+(1, 1, 1, NULL, 'Allegran Refresh', 5, NULL, '9000', '8800'),
+(2, 1, 2, NULL, 'Blink Contacts', 5, NULL, '6000', '5500'),
+(3, 1, 3, NULL, 'Calcium Pyruvat', 5, NULL, '5500', '5450'),
+(4, 1, 4, NULL, 'FOCUSON', 5, NULL, '13000', '12200');
 
 -- --------------------------------------------------------
 
@@ -405,21 +245,10 @@ CREATE TABLE `penjurnalan_has_akun` (
 --
 
 INSERT INTO `penjurnalan_has_akun` (`id`, `penjurnalan_id`, `daftar_akun_id`, `tgl_catat`, `debet`, `kredit`, `ket_transaksi`) VALUES
-(1, 1, 6, '2021-09-30 17:00:00', 40000, NULL, ''),
-(2, 1, 6, '2021-09-30 17:00:00', 40000, NULL, 'piutang obat'),
-(3, 1, 6, '2021-09-30 17:00:00', 40000, NULL, 'piutang obat'),
-(4, 1, 1, '2021-09-30 17:00:00', 1000000, NULL, 'pendapatan jasa medis'),
-(5, 1, 4, '2021-09-30 17:00:00', NULL, 1000000, 'pendapatan jasa medis'),
-(6, 1, 2, '2021-09-30 17:00:00', NULL, 40000, 'piutang obat'),
-(7, 1, 6, '2021-09-30 17:00:00', 40000, NULL, 'piutang obat'),
-(8, 1, 2, '2021-09-30 17:00:00', 1000000, NULL, 'pendapatan jasa medis'),
-(9, 1, 7, '2021-09-30 17:00:00', NULL, 1000000, 'pendapatan jasa medis'),
-(10, 1, 5, '2021-09-30 17:00:00', NULL, 40000, 'piutang obat'),
-(11, 1, 7, '2021-09-30 17:00:00', 40000, NULL, 'piutang obat'),
-(12, 1, 4, '2021-09-30 17:00:00', 1000000, 0, 'pendapatan jasa medis'),
-(13, 1, 1, '2021-09-30 17:00:00', NULL, 1000000, 'pendapatan jasa medis'),
-(14, 1, 4, '2021-09-30 17:00:00', NULL, 40000, 'piutang obat'),
-(15, 1, 10, '2021-09-30 17:00:00', 40000, 0, 'piutang obat');
+(1, 1, 4, '2021-09-30 17:00:00', 1000000, 0, 'pendapatan jasa medis'),
+(2, 1, 1, '2021-09-30 17:00:00', 0, 1000000, 'pendapatan jasa medis'),
+(3, 1, 4, '2021-09-30 17:00:00', 0, 40000, 'piutang obat'),
+(4, 1, 10, '2021-09-30 17:00:00', 40000, 0, 'piutang obat');
 
 -- --------------------------------------------------------
 
@@ -461,7 +290,28 @@ INSERT INTO `resep_apoteker` (`id`, `visit_id`, `nama_pembeli`, `user_id_apoteke
 (7, 4, NULL, 6, '2021-11-01 17:00:00'),
 (8, 4, NULL, 6, '2021-11-01 17:00:00'),
 (9, 5, NULL, 6, '2021-11-01 17:00:00'),
-(10, 4, NULL, 6, '2021-11-01 17:00:00');
+(10, 4, NULL, 6, '2021-11-01 17:00:00'),
+(11, 7, NULL, 6, '2021-11-03 17:00:00'),
+(12, 7, NULL, 6, '2021-11-03 17:00:00'),
+(13, 8, NULL, 6, '2021-11-03 17:00:00'),
+(14, 8, NULL, 6, '2021-11-03 17:00:00'),
+(15, 9, NULL, 6, '2021-11-03 17:00:00'),
+(16, 9, NULL, 6, '2021-11-03 17:00:00'),
+(17, 7, NULL, 6, '2021-11-03 17:00:00'),
+(18, 7, NULL, 6, '2021-11-03 17:00:00'),
+(19, 8, NULL, 6, '2021-11-03 17:00:00'),
+(20, 8, NULL, 6, '2021-11-03 17:00:00'),
+(21, 9, NULL, 6, '2021-11-03 17:00:00'),
+(22, 6, NULL, 6, '2021-11-04 17:00:00'),
+(23, 6, NULL, 6, '2021-11-04 17:00:00'),
+(24, 4, NULL, 6, '2021-11-04 17:00:00'),
+(25, 4, NULL, 6, '2021-11-04 17:00:00'),
+(26, 5, NULL, 6, '2021-11-04 17:00:00'),
+(27, 5, NULL, 6, '2021-11-04 17:00:00'),
+(28, 4, NULL, 6, '2021-11-04 17:00:00'),
+(29, 4, NULL, 6, '2021-11-04 17:00:00'),
+(30, 6, NULL, 6, '2021-11-04 17:00:00'),
+(31, 6, NULL, 6, '2021-11-04 17:00:00');
 
 -- --------------------------------------------------------
 
@@ -486,7 +336,10 @@ INSERT INTO `resep_has_obat` (`id`, `obat_id`, `dosis`, `jumlah`, `visit_id`) VA
 (2, 2, '2', '2', 5),
 (3, 3, '3', '3', 6),
 (4, 1, '11', '11', 4),
-(5, 1, '11', '11', 4);
+(5, 1, '11', '11', 4),
+(6, 1, '1x1', '1', 7),
+(7, 2, '1x1', '1', 7),
+(8, 3, '', '3', 9);
 
 -- --------------------------------------------------------
 
@@ -495,6 +348,7 @@ INSERT INTO `resep_has_obat` (`id`, `obat_id`, `dosis`, `jumlah`, `visit_id`) VA
 --
 
 CREATE TABLE `rsp_aptkr_has_obat` (
+  `id` int(11) NOT NULL,
   `resep_apoteker_id` int(11) DEFAULT NULL,
   `obat_id` int(11) DEFAULT NULL,
   `jumlah` varchar(45) DEFAULT NULL,
@@ -505,18 +359,17 @@ CREATE TABLE `rsp_aptkr_has_obat` (
 -- Dumping data for table `rsp_aptkr_has_obat`
 --
 
-INSERT INTO `rsp_aptkr_has_obat` (`resep_apoteker_id`, `obat_id`, `jumlah`, `dosis`) VALUES
-(1, 4, '30', '3x1'),
-(3, 1, 'TextEditingController#afcb5(TextEditingValue(', 'TextEditingController#f2871(TextEditingValue('),
-(3, 2, '2', '2'),
-(3, 4, '1', '1'),
-(4, 4, '55', '55'),
-(4, 4, '55', '55'),
-(4, 4, '10', '3x1'),
-(4, 4, '10', '3x1'),
-(4, 4, '15', '1x1'),
-(4, 4, '15', '1x1'),
-(4, 1, '3131', '3x1');
+INSERT INTO `rsp_aptkr_has_obat` (`id`, `resep_apoteker_id`, `obat_id`, `jumlah`, `dosis`) VALUES
+(1, 1, 4, '30', '3x1'),
+(2, 3, 1, '12', '2x1'),
+(3, 3, 2, '2', '2'),
+(4, 3, 4, '1', '1'),
+(5, 4, 4, '55', '55'),
+(6, 4, 4, '55', '55'),
+(12, 11, 1, '1', '1x1'),
+(13, 11, 2, '1', '1x1'),
+(14, 15, 3, '1', '1x1'),
+(15, 30, 3, '3', '3x3');
 
 -- --------------------------------------------------------
 
@@ -632,7 +485,10 @@ INSERT INTO `visit` (`id`, `nomor_antrean`, `status_antrean`, `perusahaan`, `tgl
 (3, 3, 'belum', NULL, '2021-10-31 02:57:12', 'p3 v1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (4, 1, 'belum', NULL, '2021-11-01 03:23:50', 'p1 v1 november', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (5, 2, 'belum', NULL, '2021-11-01 03:24:19', 'pasien 2 v1 nvmber', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(6, 3, 'belum', NULL, '2021-11-01 03:24:48', 'p3 v1 nvmbr', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(6, 3, 'belum', NULL, '2021-11-01 03:24:48', 'p3 v1 nvmbr', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 1, 'belum', NULL, '2021-11-04 01:56:50', 'input nota jual 1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(8, 2, 'belum', NULL, '2021-11-04 01:57:15', 'input nota jual 2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(9, 3, 'belum', NULL, '2021-11-04 01:57:42', 'input nota jual 3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -662,12 +518,8 @@ INSERT INTO `visit_has_tindakan` (`id`, `tindakan_id`, `visit_id`, `mt_sisi`) VA
 (8, 3, 5, 'kiri'),
 (9, 4, 5, 'kanan'),
 (10, 5, 5, 'kanan'),
-(11, 1, 6, 'kiri'),
-(13, 2, 6, 'kiri'),
-(14, 3, 6, 'kiri'),
-(15, 4, 6, 'kanan'),
-(16, 5, 6, 'kanan'),
-(17, 6, 6, 'kiri');
+(22, 2, 8, 'kiri'),
+(23, 2, 8, 'kanan');
 
 -- --------------------------------------------------------
 
@@ -691,7 +543,10 @@ INSERT INTO `visit_has_user` (`id`, `visit_id`, `user_klinik_id`) VALUES
 (3, 3, 5),
 (4, 4, 3),
 (5, 5, 4),
-(6, 6, 5);
+(6, 6, 5),
+(7, 7, 5),
+(8, 8, 11),
+(9, 9, 12);
 
 --
 -- Indexes for dumped tables
@@ -799,6 +654,7 @@ ALTER TABLE `resep_has_obat`
 -- Indexes for table `rsp_aptkr_has_obat`
 --
 ALTER TABLE `rsp_aptkr_has_obat`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_resep_apoteker_has_obat_obat1_idx` (`obat_id`),
   ADD KEY `fk_resep_apoteker_has_obat_resep_apoteker1_idx` (`resep_apoteker_id`);
 
@@ -871,7 +727,7 @@ ALTER TABLE `komentar`
 -- AUTO_INCREMENT for table `nota_penjualan`
 --
 ALTER TABLE `nota_penjualan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `obat`
@@ -901,19 +757,25 @@ ALTER TABLE `penjurnalan`
 -- AUTO_INCREMENT for table `penjurnalan_has_akun`
 --
 ALTER TABLE `penjurnalan_has_akun`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `resep_apoteker`
 --
 ALTER TABLE `resep_apoteker`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `resep_has_obat`
 --
 ALTER TABLE `resep_has_obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `rsp_aptkr_has_obat`
+--
+ALTER TABLE `rsp_aptkr_has_obat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tindakan`
@@ -931,19 +793,19 @@ ALTER TABLE `user_klinik`
 -- AUTO_INCREMENT for table `visit`
 --
 ALTER TABLE `visit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `visit_has_tindakan`
 --
 ALTER TABLE `visit_has_tindakan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `visit_has_user`
 --
 ALTER TABLE `visit_has_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables

@@ -2224,14 +2224,14 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost/tugas_akhir/akuntan_inpt_penjurnalan_akun.php",
+					"raw": "http://localhost/tugas_akhir/akuntan_inpt_penjurnalan_akun_copy.php",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"path": [
 						"tugas_akhir",
-						"akuntan_inpt_penjurnalan_akun.php"
+						"akuntan_inpt_penjurnalan_akun_copy.php"
 					]
 				},
 				"description": "setelah mendapat resep_id dari \napoteker_input_resep\nmaka apoteker bisa mengisi obat sesuai yg diresepkan dokter pada:\napoteker_v_rsp_dr"
