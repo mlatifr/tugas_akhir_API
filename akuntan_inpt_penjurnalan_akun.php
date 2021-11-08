@@ -20,7 +20,7 @@ $stmt->execute();
 if ($stmt->affected_rows > 0) {
     $arr = ["result" => "success", "penjurnalan_has_akun_id" => $con->insert_id];
 } else {
-    $arr = ["result" => "fail", "Error" => $con->error, 'jumlah_array' => count($transaksi_array)];
+    $arr = ["result" => "fail", "Error" => $con->error,];
 };
 echo json_encode($arr);
 

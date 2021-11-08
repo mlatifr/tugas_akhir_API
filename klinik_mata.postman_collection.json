@@ -2045,6 +2045,62 @@
 					"mode": "formdata",
 					"formdata": [
 						{
+							"key": "penjurnalan_id",
+							"value": "1",
+							"description": "dikosongi jika pembeli tidak visit, langsung beli di apotek",
+							"type": "text"
+						},
+						{
+							"key": "daftar_akun_id",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "tgl_catat",
+							"value": "2021-10-01",
+							"type": "text"
+						},
+						{
+							"key": "debet",
+							"value": "1000000",
+							"type": "text"
+						},
+						{
+							"key": "kredit",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "ket_transaksi",
+							"value": "pendapatan jasa medis",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/akuntan_inpt_penjurnalan_akun.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"akuntan_inpt_penjurnalan_akun.php"
+					]
+				},
+				"description": "setelah mendapat resep_id dari \napoteker_input_resep\nmaka apoteker bisa mengisi obat sesuai yg diresepkan dokter pada:\napoteker_v_rsp_dr"
+			},
+			"response": []
+		},
+		{
+			"name": "akuntan_inpt_penjurnalan_akun Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
 							"key": "transaksi_array[transaksi_1][penjurnalan_id]",
 							"value": "1",
 							"description": "dikosongi jika pembeli tidak visit, langsung beli di apotek",
