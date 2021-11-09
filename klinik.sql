@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 08, 2021 at 11:03 PM
+-- Generation Time: Nov 09, 2021 at 03:42 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -239,16 +239,6 @@ CREATE TABLE `penjurnalan_has_akun` (
   `kredit` int(11) DEFAULT NULL,
   `ket_transaksi` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `penjurnalan_has_akun`
---
-
-INSERT INTO `penjurnalan_has_akun` (`id`, `penjurnalan_id`, `daftar_akun_id`, `tgl_catat`, `debet`, `kredit`, `ket_transaksi`) VALUES
-(1, 1, 4, '2021-09-30 17:00:00', 1000000, 0, 'pendapatan jasa medis'),
-(2, 1, 1, '2021-09-30 17:00:00', 0, 1000000, 'pendapatan jasa medis'),
-(3, 1, 4, '2021-09-30 17:00:00', 0, 40000, 'piutang obat'),
-(4, 1, 10, '2021-09-30 17:00:00', 40000, 0, 'piutang obat');
 
 -- --------------------------------------------------------
 
@@ -757,7 +747,7 @@ ALTER TABLE `penjurnalan`
 -- AUTO_INCREMENT for table `penjurnalan_has_akun`
 --
 ALTER TABLE `penjurnalan_has_akun`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `resep_apoteker`
