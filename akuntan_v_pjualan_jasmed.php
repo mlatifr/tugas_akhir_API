@@ -6,8 +6,13 @@ $data = [];
 if (isset($_POST['tgl_transaksi'])) {
     $tgl_transaksi = "%{$_POST['tgl_transaksi']}%";
     $sql =
-        "SELECT DATE_FORMAT(np.tgl_transaksi,'%Y-%m') AS periode_transaksi,SUM(np.jasa_medis) as total_jasmed
+        "SELECT 
+            uk.username as nama_pasien,
+            DATE_FORMAT(np.tgl_transaksi,'%Y-%m-%d') AS periode_transaksi,
+            np.jasa_medis
         FROM nota_penjualan np
+        INNER JOIN visit_has_user vhs ON np.visit_id=vhs.visit_id
+        INNER JOIN user_klinik uk ON uk.id=vhs.user_klinik_id
         WHERE np.tgl_transaksi LIKE ?";
     $stmt = $con->prepare($sql);
     $stmt->bind_param("s", $tgl_transaksi);
