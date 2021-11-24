@@ -3,7 +3,7 @@
 <?php
 $arr = [];
 $data = [];
-// extract($_POST);
+// extract($_POST); tes
 if (isset($_POST['debet'])) {
     $penjurnalan_id = "{$_POST['penjurnalan_id']}";
     $tgl_catat = "%{$_POST['tgl_catat']}%";
