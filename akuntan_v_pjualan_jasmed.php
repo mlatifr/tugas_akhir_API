@@ -13,7 +13,9 @@ if (isset($_POST['tgl_transaksi'])) {
         FROM nota_penjualan np
         INNER JOIN visit_has_user vhs ON np.visit_id=vhs.visit_id
         INNER JOIN user_klinik uk ON uk.id=vhs.user_klinik_id
-        WHERE np.tgl_transaksi LIKE ?";
+        WHERE np.tgl_transaksi LIKE ?
+        AND np.jasa_medis > 0
+        ";
     $stmt = $con->prepare($sql);
     $stmt->bind_param("s", $tgl_transaksi);
 }
