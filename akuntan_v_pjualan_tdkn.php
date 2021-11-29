@@ -6,10 +6,12 @@ $data = [];
 if (isset($_POST['tgl_visit_detail'])) {
     $tgl_visit_detail = "%{$_POST['tgl_visit_detail']}%";
     $sql =
-        "SELECT *
+        "SELECT  vst.tgl_visit as tgl,psn.nama as nama_pasien, tdk.nama as tindakan, tdk.harga as harga
         FROM tindakan tdk
         INNER JOIN visit_has_tindakan vht ON tdk.id=vht.visit_id
         INNER JOIN visit vst ON vst.id=vht.visit_id
+        INNER JOIN visit_has_user vhu ON vst.id=vhu.visit_id
+        INNER JOIN pasien psn ON vhu.user_klinik_id=psn.user_klinik_id
         WHERE vst.tgl_visit LIKE ? 
         &&  vst.perusahaan IS NULL";
     $stmt = $con->prepare($sql);
