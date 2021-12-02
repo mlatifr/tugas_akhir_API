@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 26, 2021 at 11:37 PM
+-- Generation Time: Dec 02, 2021 at 07:32 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -53,7 +53,7 @@ CREATE TABLE `antrean_admin` (
 --
 
 INSERT INTO `antrean_admin` (`id`, `user_klinik_id`, `status_antrean`, `antrean_sekarang`, `antrean_terakhir`, `batas_antrean`) VALUES
-(1, 1, 'buka', 0, 1, 5);
+(1, 1, 'buka', 0, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -81,6 +81,30 @@ INSERT INTO `daftar_akun` (`id`, `nama`) VALUES
 (8, 'hutang barang habis pakai'),
 (9, 'admin'),
 (10, 'barang habis pakai');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `history_stok`
+--
+
+CREATE TABLE `history_stok` (
+  `id` int(11) NOT NULL,
+  `tgl_transaksi` timestamp NULL DEFAULT NULL,
+  `stok` int(11) DEFAULT NULL,
+  `obat_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `history_stok`
+--
+
+INSERT INTO `history_stok` (`id`, `tgl_transaksi`, `stok`, `obat_id`) VALUES
+(1, '2021-12-02 06:31:48', 5, 3),
+(2, '2021-12-02 06:31:52', 5, 4),
+(3, '2021-12-02 06:31:57', 100, 2),
+(4, '2021-12-02 06:32:03', 100, 1),
+(5, '2021-12-02 06:32:07', 500, 2);
 
 -- --------------------------------------------------------
 
@@ -124,7 +148,9 @@ INSERT INTO `nota_penjualan` (`id`, `user_id`, `visit_id`, `resep_apoteker_id`, 
 (4, 13, 4, NULL, '2021-11-24 17:00:00', 0, 0, 10000),
 (5, 13, 5, NULL, '2021-11-24 17:00:00', 0, 1000, 17000),
 (6, 13, 6, NULL, '2021-11-24 17:00:00', 2500, 0, 25000),
-(7, 13, 10, NULL, '2021-11-26 17:00:00', 17000, 6000, 100000);
+(7, 13, 10, NULL, '2021-11-26 17:00:00', 17000, 6000, 100000),
+(8, 13, 5, NULL, '2021-11-24 17:00:00', 0, 0, 16000),
+(9, 13, 11, NULL, '2021-12-01 17:00:00', 0, 0, 121000);
 
 -- --------------------------------------------------------
 
@@ -149,10 +175,22 @@ CREATE TABLE `obat` (
 --
 
 INSERT INTO `obat` (`id`, `order_obat_id`, `jumlah_order`, `jumlah_diterima`, `nama`, `stok`, `kadaluarsa`, `harga_jual`, `harga_beli`) VALUES
-(1, 1, 1, NULL, 'Allegran Refresh', 5, NULL, '9000', '8800'),
-(2, 1, 2, NULL, 'Blink Contacts', 5, NULL, '6000', '5500'),
-(3, 1, 3, NULL, 'Calcium Pyruvat', 5, NULL, '5500', '5450'),
-(4, 1, 4, NULL, 'FOCUSON', 5, NULL, '13000', '12200');
+(1, 1, 1, NULL, 'Allegran Refresh', 50, NULL, '9000', '8800'),
+(2, 1, 2, NULL, 'Blink Contacts', 50, NULL, '6000', '5500'),
+(3, 1, 3, NULL, 'Calcium Pyruvat', 50, NULL, '5500', '5450'),
+(4, 1, 4, NULL, 'FOCUSON', 50, NULL, '13000', '12200');
+
+--
+-- Triggers `obat`
+--
+DELIMITER $$
+CREATE TRIGGER `after_insert_obat` AFTER INSERT ON `obat` FOR EACH ROW INSERT INTO `history_stok` (`id`, `tgl_transaksi`, `stok`, `obat_id`) VALUES ('', current_timestamp(), new.stok, new.id)
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `after_update_obat` AFTER UPDATE ON `obat` FOR EACH ROW INSERT INTO `history_stok` (`id`, `tgl_transaksi`, `stok`, `obat_id`) VALUES (null, current_timestamp(), old.stok, old.id)
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -221,6 +259,33 @@ CREATE TABLE `penjurnalan` (
   `tgl_penjurnalan` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `penjurnalan`
+--
+
+INSERT INTO `penjurnalan` (`id`, `user_klinik_id`, `tgl_penjurnalan`) VALUES
+(1, 10, NULL),
+(2, 10, NULL),
+(3, 10, NULL),
+(4, 10, NULL),
+(5, 10, NULL),
+(6, 10, NULL),
+(7, 10, NULL),
+(8, 10, NULL),
+(9, 10, NULL),
+(10, 10, NULL),
+(11, 10, NULL),
+(12, 10, NULL),
+(13, 10, NULL),
+(14, 10, NULL),
+(15, 10, NULL),
+(16, 10, NULL),
+(17, 10, NULL),
+(18, 10, NULL),
+(19, 10, NULL),
+(20, 10, NULL),
+(21, 6, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -268,15 +333,18 @@ CREATE TABLE `resep_apoteker` (
 --
 
 INSERT INTO `resep_apoteker` (`id`, `visit_id`, `nama_pembeli`, `user_id_apoteker`, `tgl_penulisan_resep`) VALUES
-(1, 1, NULL, 6, '2021-11-23 17:00:00'),
-(2, 2, NULL, 6, '2021-11-23 17:00:00'),
-(3, 3, NULL, 6, '2021-11-23 17:00:00'),
-(4, 4, NULL, 6, '2021-11-24 17:00:00'),
-(5, 5, NULL, 6, '2021-11-24 17:00:00'),
-(6, 6, NULL, 6, '2021-11-24 17:00:00'),
-(7, 4, NULL, 6, '2021-11-24 17:00:00'),
-(8, 10, NULL, 6, '2021-11-26 17:00:00'),
-(9, 10, NULL, 6, '2021-11-26 17:00:00');
+(1, 4, NULL, 6, '2021-11-30 17:00:00'),
+(2, 5, NULL, 6, '2021-11-30 17:00:00'),
+(3, 4, NULL, 6, '2021-11-30 17:00:00'),
+(4, 4, NULL, 6, '2021-11-30 17:00:00'),
+(5, 4, NULL, 6, '2021-11-30 17:00:00'),
+(6, 5, NULL, 6, '2021-11-30 17:00:00'),
+(7, 4, NULL, 6, '2021-11-30 17:00:00'),
+(8, 5, NULL, 6, '2021-11-30 17:00:00'),
+(9, 11, NULL, 6, '2021-12-01 17:00:00'),
+(10, 12, NULL, 6, '2021-12-01 17:00:00'),
+(11, 12, NULL, 6, '2021-12-01 17:00:00'),
+(12, 11, NULL, 6, '2021-12-01 17:00:00');
 
 -- --------------------------------------------------------
 
@@ -304,7 +372,9 @@ INSERT INTO `resep_has_obat` (`id`, `obat_id`, `dosis`, `jumlah`, `visit_id`) VA
 (5, 2, '2x1', '2', 5),
 (6, 3, '3x1', '3', 6),
 (7, 1, '1x1', '1', 7),
-(8, 4, '5x1', '5', 10);
+(8, 4, '5x1', '5', 10),
+(9, 2, '2x1', '2', 11),
+(10, 3, '3x1', '15', 12);
 
 -- --------------------------------------------------------
 
@@ -325,13 +395,21 @@ CREATE TABLE `rsp_aptkr_has_obat` (
 --
 
 INSERT INTO `rsp_aptkr_has_obat` (`id`, `resep_apoteker_id`, `obat_id`, `jumlah`, `dosis`) VALUES
-(1, 1, 1, '1', '1x1'),
-(2, 2, 2, '2', '2x2'),
-(3, 3, 3, '3', '3x3'),
-(4, 4, 1, '1', '1x1'),
-(5, 5, 2, '2', '2x1'),
-(6, 6, 3, '3', '3x1'),
-(7, 8, 4, '5', '5x1');
+(4, 1, 1, '1', '1x1'),
+(8, 1, 1, '1', '1x1'),
+(9, 3, 1, '3', '3x3'),
+(10, 3, 2, '3', '3x3'),
+(11, 3, 3, '3', '3x3'),
+(12, 3, 4, '3', '3x3'),
+(13, 3, 3, '3', '3x3'),
+(14, 3, 1, '3', '3x3'),
+(15, 4, 1, '1', '1x1'),
+(16, 4, 2, '2', '1x1'),
+(17, 4, 4, '4', '1x1'),
+(18, 4, 3, '3', '1x1'),
+(19, 4, 1, '4', '1x1'),
+(20, 9, 2, '20', '2x1'),
+(21, 10, 3, '15', '3X1');
 
 -- --------------------------------------------------------
 
@@ -452,7 +530,9 @@ INSERT INTO `visit` (`id`, `nomor_antrean`, `status_antrean`, `perusahaan`, `tgl
 (7, 1, 'belum', NULL, '2021-11-26 09:14:43', 'pasien1 26 nov', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (8, 2, 'belum', NULL, '2021-11-26 09:15:04', 'pasien2 26 nov', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (9, 3, 'belum', NULL, '2021-11-26 09:15:26', 'mlatifr 26 nov', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(10, 1, 'belum', NULL, '2021-11-26 21:07:58', 'mlatifr 27 nov', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(10, 1, 'belum', NULL, '2021-11-26 21:07:58', 'mlatifr 27 nov', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(11, 1, 'belum', NULL, '2021-12-01 22:23:42', 'keluhan pasien 1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(12, 2, 'belum', NULL, '2021-12-01 22:24:00', 'keluhan pasien 2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -482,7 +562,9 @@ INSERT INTO `visit_has_tindakan` (`id`, `tindakan_id`, `visit_id`, `mt_sisi`) VA
 (8, 3, 6, 'kanan'),
 (9, 1, 7, 'kiri'),
 (10, 6, 10, 'kiri'),
-(11, 6, 10, 'kanan');
+(11, 6, 10, 'kanan'),
+(12, 1, 11, 'kiri'),
+(13, 2, 12, 'kanan');
 
 -- --------------------------------------------------------
 
@@ -510,7 +592,9 @@ INSERT INTO `visit_has_user` (`id`, `visit_id`, `user_klinik_id`) VALUES
 (7, 7, 3),
 (8, 8, 4),
 (9, 9, 17),
-(10, 10, 17);
+(10, 10, 17),
+(11, 11, 3),
+(12, 12, 4);
 
 --
 -- Indexes for dumped tables
@@ -535,6 +619,13 @@ ALTER TABLE `antrean_admin`
 --
 ALTER TABLE `daftar_akun`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `history_stok`
+--
+ALTER TABLE `history_stok`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_history_stok_obat1_idx` (`obat_id`);
 
 --
 -- Indexes for table `komentar`
@@ -682,6 +773,12 @@ ALTER TABLE `daftar_akun`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- AUTO_INCREMENT for table `history_stok`
+--
+ALTER TABLE `history_stok`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `komentar`
 --
 ALTER TABLE `komentar`
@@ -691,13 +788,13 @@ ALTER TABLE `komentar`
 -- AUTO_INCREMENT for table `nota_penjualan`
 --
 ALTER TABLE `nota_penjualan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `obat`
 --
 ALTER TABLE `obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `order_obat`
@@ -715,7 +812,7 @@ ALTER TABLE `pasien`
 -- AUTO_INCREMENT for table `penjurnalan`
 --
 ALTER TABLE `penjurnalan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `penjurnalan_has_akun`
@@ -727,19 +824,19 @@ ALTER TABLE `penjurnalan_has_akun`
 -- AUTO_INCREMENT for table `resep_apoteker`
 --
 ALTER TABLE `resep_apoteker`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `resep_has_obat`
 --
 ALTER TABLE `resep_has_obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `rsp_aptkr_has_obat`
 --
 ALTER TABLE `rsp_aptkr_has_obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `tindakan`
@@ -757,19 +854,19 @@ ALTER TABLE `user_klinik`
 -- AUTO_INCREMENT for table `visit`
 --
 ALTER TABLE `visit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `visit_has_tindakan`
 --
 ALTER TABLE `visit_has_tindakan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `visit_has_user`
 --
 ALTER TABLE `visit_has_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
@@ -786,6 +883,12 @@ ALTER TABLE `alergi`
 --
 ALTER TABLE `antrean_admin`
   ADD CONSTRAINT `fk_antrean_admin_user_klinik1` FOREIGN KEY (`user_klinik_id`) REFERENCES `user_klinik` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `history_stok`
+--
+ALTER TABLE `history_stok`
+  ADD CONSTRAINT `fk_history_stok_obat1` FOREIGN KEY (`obat_id`) REFERENCES `obat` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `komentar`

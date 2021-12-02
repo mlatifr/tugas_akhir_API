@@ -24,7 +24,7 @@ if ($visit_id) { //untuk pembeli obat yg merupakan pasien visit
     $stmt->bind_param("ssssss", $user_id, $visit_id,  $tgl_transaksi, $jasa_medis, $biaya_admin, $total_harga);
 }
 
-
+    
 $stmt->execute();
 if ($stmt->affected_rows > 0) {
     $last_id = $con->insert_id;
