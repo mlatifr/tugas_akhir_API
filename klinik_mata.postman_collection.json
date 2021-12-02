@@ -1606,8 +1606,8 @@
 							"type": "text"
 						},
 						{
-							"key": "stok_baru",
-							"value": "100",
+							"key": "stok_obat_baru",
+							"value": "500",
 							"type": "text"
 						}
 					]
