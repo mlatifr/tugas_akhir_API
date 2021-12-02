@@ -3,12 +3,12 @@
 <?php
 $arr = [];
 $obat_id;
-$stok_baru;
+$stok_obat_baru;
 extract($_POST);
-echo($obat_id.'|'.$stok_baru);
-    $sql = "UPDATE `obat` SET `stok` = ? WHERE `obat`.`id` = ?";
+// echo($obat_id.'|'.$stok_baru);
+    $sql = "UPDATE `obat` SET `stok` = ?  WHERE `obat`.`id` = ?";
     $stmt = $con->prepare($sql);
-    $stmt->bind_param("ss", $stok_baru, $obat_id);
+    $stmt->bind_param("ss", $stok_obat_baru, $obat_id);
     $stmt->execute();
     if ($stmt->affected_rows > 0) {
         $arr = ["result" => "success", "data" => $obat_array];
