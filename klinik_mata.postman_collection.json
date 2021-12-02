@@ -71,6 +71,131 @@
 			"response": []
 		},
 		{
+			"name": "pasien_daftar_user_baru",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "coba",
+							"type": "text"
+						},
+						{
+							"key": "sandi",
+							"value": "coba",
+							"type": "text"
+						},
+						{
+							"key": "NIK",
+							"value": "NIK",
+							"type": "text"
+						},
+						{
+							"key": "nama",
+							"value": "nama",
+							"type": "text"
+						},
+						{
+							"key": "tempat_lahir",
+							"value": "tempat_lahir",
+							"type": "text"
+						},
+						{
+							"key": "tgl_lahir",
+							"value": "1996-10-05",
+							"type": "text"
+						},
+						{
+							"key": "kelamin",
+							"value": "kelamin",
+							"type": "text"
+						},
+						{
+							"key": "golongan_darah",
+							"value": "golongan_darah",
+							"type": "text"
+						},
+						{
+							"key": "alamat",
+							"value": "alamat",
+							"type": "text"
+						},
+						{
+							"key": "agama",
+							"value": "agama",
+							"type": "text"
+						},
+						{
+							"key": "status_kawin",
+							"value": "status_kawin",
+							"type": "text"
+						},
+						{
+							"key": "pekerjaan",
+							"value": "pekerjaan",
+							"type": "text"
+						},
+						{
+							"key": "kewarganegaraan",
+							"value": "kewarganegaraan",
+							"type": "text"
+						},
+						{
+							"key": "tlp",
+							"value": "tlp",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/pasien_daftar_user_baru.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"pasien_daftar_user_baru.php"
+					]
+				},
+				"description": "mencari biodata pasien berdasarkan nama pasien"
+			},
+			"response": []
+		},
+		{
+			"name": "pasien_v_username_available",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "pasien",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/pasien_v_username_available.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"pasien_v_username_available.php"
+					]
+				},
+				"description": "mencari biodata pasien berdasarkan nama pasien"
+			},
+			"response": []
+		},
+		{
 			"name": "pasien_view_antrean_sekarang",
 			"event": [
 				{
@@ -1467,6 +1592,41 @@
 			"response": []
 		},
 		{
+			"name": "kasir_update_stok_obat",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "obat_id",
+							"value": "1",
+							"description": "dikosongi jika pembeli tidak visit, langsung beli di apotek",
+							"type": "text"
+						},
+						{
+							"key": "stok_baru",
+							"value": "100",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/kasir_update_stok_obat.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"kasir_update_stok_obat.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "pemilik_input_tgl_order",
 			"request": {
 				"method": "POST",
@@ -1688,15 +1848,21 @@
 					"mode": "formdata",
 					"formdata": [
 						{
-							"key": "tgl_resep",
+							"key": "tgl_resep_visit",
 							"value": "2021-10",
-							"type": "text"
+							"type": "text",
+							"disabled": true
 						},
 						{
 							"key": "tgl_resep_detail",
 							"value": "2021-10",
 							"type": "text",
 							"disabled": true
+						},
+						{
+							"key": "tgl_resep_non_visit",
+							"value": "2021-11",
+							"type": "text"
 						}
 					]
 				},
@@ -1709,6 +1875,90 @@
 					"path": [
 						"tugas_akhir",
 						"akuntan_v_pjualan_obat.php"
+					]
+				},
+				"description": "tgl_resep: melihat penjualan obat pada tgl tertentu\ntgl_resep_detail: jika send tgl_resep_detail, maka diberi rincian, \n\njika tidak, hanya diberi total pendapatan uang obat pada tgl tersebut"
+			},
+			"response": []
+		},
+		{
+			"name": "akuntan_v_kas",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tgl_transaksi",
+							"value": "2021-11",
+							"type": "text"
+						},
+						{
+							"key": "tgl_resep_detail",
+							"value": "2021-10",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tgl_resep_non_visit",
+							"value": "2021-11",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/akuntan_v_kas.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"akuntan_v_kas.php"
+					]
+				},
+				"description": "tgl_resep: melihat penjualan obat pada tgl tertentu\ntgl_resep_detail: jika send tgl_resep_detail, maka diberi rincian, \n\njika tidak, hanya diberi total pendapatan uang obat pada tgl tersebut"
+			},
+			"response": []
+		},
+		{
+			"name": "akuntan_v_pjualan_obat_hpp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tgl_resep_visit",
+							"value": "2021-10",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tgl_resep_detail",
+							"value": "2021-10",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tgl_resep_non_visit",
+							"value": "2021-11",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/akuntan_v_pjualan_obat_hpp.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"akuntan_v_pjualan_obat_hpp.php"
 					]
 				},
 				"description": "tgl_resep: melihat penjualan obat pada tgl tertentu\ntgl_resep_detail: jika send tgl_resep_detail, maka diberi rincian, \n\njika tidak, hanya diberi total pendapatan uang obat pada tgl tersebut"
@@ -1731,7 +1981,7 @@
 						},
 						{
 							"key": "tgl_visit_detail",
-							"value": "2021",
+							"value": "2021-11-25",
 							"type": "text"
 						}
 					]
@@ -1761,7 +2011,7 @@
 					"formdata": [
 						{
 							"key": "tgl_transaksi",
-							"value": "2021-10",
+							"value": "2021-11-",
 							"type": "text"
 						}
 					]
