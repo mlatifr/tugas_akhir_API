@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 02, 2021 at 07:32 AM
+-- Generation Time: Dec 03, 2021 at 01:18 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -104,7 +104,11 @@ INSERT INTO `history_stok` (`id`, `tgl_transaksi`, `stok`, `obat_id`) VALUES
 (2, '2021-12-02 06:31:52', 5, 4),
 (3, '2021-12-02 06:31:57', 100, 2),
 (4, '2021-12-02 06:32:03', 100, 1),
-(5, '2021-12-02 06:32:07', 500, 2);
+(5, '2021-12-02 06:32:07', 500, 2),
+(6, '2021-12-03 00:17:45', 50, 1),
+(7, '2021-12-03 00:17:49', 50, 2),
+(8, '2021-12-03 00:17:56', 50, 3),
+(9, '2021-12-03 00:18:00', 50, 4);
 
 -- --------------------------------------------------------
 
@@ -175,16 +179,16 @@ CREATE TABLE `obat` (
 --
 
 INSERT INTO `obat` (`id`, `order_obat_id`, `jumlah_order`, `jumlah_diterima`, `nama`, `stok`, `kadaluarsa`, `harga_jual`, `harga_beli`) VALUES
-(1, 1, 1, NULL, 'Allegran Refresh', 50, NULL, '9000', '8800'),
-(2, 1, 2, NULL, 'Blink Contacts', 50, NULL, '6000', '5500'),
-(3, 1, 3, NULL, 'Calcium Pyruvat', 50, NULL, '5500', '5450'),
-(4, 1, 4, NULL, 'FOCUSON', 50, NULL, '13000', '12200');
+(1, 1, 1, NULL, 'Allegran Refresh', 500, NULL, '9000', '8800'),
+(2, 1, 2, NULL, 'Blink Contacts', 500, NULL, '6000', '5500'),
+(3, 1, 3, NULL, 'Calcium Pyruvat', 500, NULL, '5500', '5450'),
+(4, 1, 4, NULL, 'FOCUSON', 500, NULL, '13000', '12200');
 
 --
 -- Triggers `obat`
 --
 DELIMITER $$
-CREATE TRIGGER `after_insert_obat` AFTER INSERT ON `obat` FOR EACH ROW INSERT INTO `history_stok` (`id`, `tgl_transaksi`, `stok`, `obat_id`) VALUES ('', current_timestamp(), new.stok, new.id)
+CREATE TRIGGER `after_insert_obat` AFTER INSERT ON `obat` FOR EACH ROW INSERT INTO `history_stok` (`id`, `tgl_transaksi`, `stok`, `obat_id`) VALUES (null, current_timestamp(), new.stok, new.id)
 $$
 DELIMITER ;
 DELIMITER $$
@@ -776,7 +780,7 @@ ALTER TABLE `daftar_akun`
 -- AUTO_INCREMENT for table `history_stok`
 --
 ALTER TABLE `history_stok`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `komentar`
