@@ -15,22 +15,6 @@ if (isset($_POST['tgl_transaksi'])) {
         INNER JOIN pasien psn ON vhu.user_klinik_id=psn.user_klinik_id
         WHERE tgl_transaksi LIKE ?";
 }
-// if (isset($_POST['tgl_transaksi_detail'])) {
-//     $tgl_transaksi = "%{$_POST['tgl_transaksi_detail']}%";
-//     $sql =
-//         "SELECT 
-//         ob.id, 
-//         ob.nama, 
-//         ob.jumlah_order, 
-//         ob.harga_beli,
-//         (ob.jumlah_order * ob.harga_beli)AS total,
-//         oo.tgl_order,
-//         ob.jumlah_diterima
-//         FROM obat ob 
-//         INNER JOIN order_obat oo on ob.order_obat_id=oo.id
-//         WHERE oo.tgl_order LIKE ?
-//         && ob.jumlah_diterima IS NULL";
-// }
 $stmt = $con->prepare($sql);
 $stmt->bind_param("s", $tgl_transaksi);
 $stmt->execute();
