@@ -4,9 +4,11 @@
 $arr = [];
 $data = [];
 if (isset($_POST['tgl_order'])) {
-    $tgl_order = "%{$_POST['tgl_order']}%";
+       $tgl_order = "%{$_POST['tgl_order']}%"; 
+    //    echo $tgl_order.'|tanggal order DB';
     $sql =
         "SELECT 
+		oobt.id as order_id,
         oobt.tgl_order,
         obt.id,
         obt.jumlah_order,
@@ -16,9 +18,10 @@ if (isset($_POST['tgl_order'])) {
         obt.status_order
         FROM order_obat oobt
         INNER JOIN obat obt ON oobt.id=obt.order_obat_id
-        WHERE obt.status_order like '%pemesanan%'
+        WHERE obt.status_order like '%pemesanan%'  
         AND oobt.tgl_order LIKE ?
         ";
+        // echo $sql;
 }
 $stmt = $con->prepare($sql);
 $stmt->bind_param("s", $tgl_order);

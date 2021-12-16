@@ -20,11 +20,12 @@ $stmt->execute();
 $obat_array = $con->insert_id;
 echo $obat_id;
 if ($stmt->affected_rows > 0) {
-    require 'connect.php';
+    $arr = ["result" => "success", "data" => $obat_array,];
+   
 } else {
     $arr = ["result" => "fail", "Error" => $con->error,];
-    echo json_encode($arr);
-    $con->close();
+   
 };
-
+ echo json_encode($arr);
+  $con->close();
 ?>
