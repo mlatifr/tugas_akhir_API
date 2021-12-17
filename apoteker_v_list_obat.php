@@ -2,10 +2,15 @@
 ?>
 <?php
 $nama_obat = "%{$_POST['nama_obat']}%";
-$sql = "SELECT 
+$sql = 
+"SELECT 
 obat.id, nama, obat.stok as stok, obat.kadaluarsa
 FROM obat 
-where nama like ?";
+WHERE nama like ?
+AND kadaluarsa IS NOT NULL
+GROUP BY obat.nama
+ORDER BY `obat`.`kadaluarsa` ASC
+";
 $stmt = $con->prepare($sql);
 $stmt->bind_param("s", $nama_obat);
 $stmt->execute();
