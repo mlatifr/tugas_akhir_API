@@ -7,20 +7,17 @@ if (isset($_POST['tgl_visit_detail'])) {
     $tgl_visit_detail = "%{$_POST['tgl_visit_detail']}%";
     $sql =
         "SELECT 
-        vst.tgl_visit as tgl,
-        tdk.nama as tindakan,
-        tdk.harga as harga,
-        vhu.id,
-        vhu.user_klinik_id,
-        psn.nama as nama_pasien
-        FROM visit_has_tindakan vht
-        INNER JOIN visit vst ON vht.visit_id=vst.id
-        INNER JOIN tindakan tdk ON vht.tindakan_id=tdk.id
-        INNER JOIN visit_has_user vhu ON vst.id=vhu.visit_id
-        INNER JOIN user_klinik uk ON uk.id=vhu.user_klinik_id
-        INNER JOIN pasien psn ON vhu.user_klinik_id=psn.user_klinik_id
-        WHERE vst.tgl_visit LIKE ? 
-        &&  vst.perusahaan IS NULL
+        tindakan.nama as namaTindakan,
+        tindakan.harga as harga,
+        nota_penjualan.tgl_transaksi as tglTransaksi
+        FROM tindakan 
+        INNER JOIN visit_has_tindakan 
+        ON visit_has_tindakan.tindakan_id=tindakan.id
+        INNER JOIN nota_penjualan 
+        ON nota_penjualan.visit_id=visit_has_tindakan.visit_id
+        WHERE nota_penjualan.tgl_transaksi LIKE ?
+        GROUP BY nota_penjualan.tgl_transaksi
+        ORDER BY `nota_penjualan`.`tgl_transaksi` ASC; 
         ";
     $stmt = $con->prepare($sql);
     $stmt->bind_param("s", $tgl_visit_detail);
