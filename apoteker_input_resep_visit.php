@@ -6,9 +6,17 @@ $visit_id = '';
 $user_id_apoteker = '';
 $tgl_penulisan_resep = '';
 extract($_POST);
-$sql =
+if($visit_id!=''){
+    $sql =
     "INSERT INTO `resep_apoteker` (`visit_id`,  `user_id_apoteker`, `tgl_penulisan_resep`)
 VALUES ('" . $visit_id . "','" .  $user_id_apoteker . "',  '" . $tgl_penulisan_resep . "')";
+}else {
+    $sql =
+    "INSERT INTO `resep_apoteker` 
+    (`nama_pembeli`, `user_id_apoteker`, `tgl_penulisan_resep`) 
+    VALUES ('aldi','" .  $user_id_apoteker . "', '" . $tgl_penulisan_resep . "')";
+}
+
 $stmt = $con->prepare($sql);
 $stmt->execute();
 if ($stmt->affected_rows > 0) {
