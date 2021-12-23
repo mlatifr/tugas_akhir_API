@@ -5,6 +5,7 @@ $arr = [];
 $visit_id = '';
 $user_id_apoteker = '';
 $tgl_penulisan_resep = '';
+$nama_pembeli = '';
 extract($_POST);
 if($visit_id!=''){
     $sql =
@@ -14,7 +15,7 @@ VALUES ('" . $visit_id . "','" .  $user_id_apoteker . "',  '" . $tgl_penulisan_r
     $sql =
     "INSERT INTO `resep_apoteker` 
     (`nama_pembeli`, `user_id_apoteker`, `tgl_penulisan_resep`) 
-    VALUES ('aldi','" .  $user_id_apoteker . "', '" . $tgl_penulisan_resep . "')";
+    VALUES ('" .  $nama_pembeli . "','" .  $user_id_apoteker . "', '" . $tgl_penulisan_resep . "')";
 }
 
 $stmt = $con->prepare($sql);
