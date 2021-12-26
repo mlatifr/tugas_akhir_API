@@ -22,8 +22,13 @@ $sql =
     FROM `visit` vst 
     JOIN visit_has_user vhu ON vst.id=vhu.visit_id 
     JOIN user_klinik ON vhu.user_klinik_id=user_klinik.id 
+    LEFT JOIN visit_has_tindakan vht ON vht.visit_id=vst.id
+    LEFT JOIN resep_has_obat rho ON rho.visit_id=vst.id
     WHERE tgl_visit LIKE ?
-        AND user_klinik.username NOT LIKE '%dokter%'";
+    AND user_klinik.username NOT LIKE '%dokter%'
+    AND rho.id  IS NULL
+    AND vht.id IS NULL
+    GROUP BY vst.id";
 $stmt = $con->prepare($sql);
 $stmt->bind_param("s", $tgl_visit);
 $stmt->execute();
