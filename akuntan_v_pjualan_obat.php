@@ -36,17 +36,17 @@ elseif (isset($_POST['tgl_resep_nota'])) {
     $tgl_penjualan = "%{$_POST['tgl_penjualan']}%";
     $sql =
         "SELECT 
-        np.tgl_transaksi as tgl_transaksi,
-        ra.id as resep_id,
-        obt.id as obat_id,
-        obt.nama,
-        raho.jumlah,
-        obt.harga_jual as harga,
-        (raho.jumlah*obt.harga_jual) as total_harga
-        FROM rsp_aptkr_has_obat raho
+            np.tgl_transaksi as tgl_transaksi,
+            ra.id as resep_id,
+            obt.id as obat_id,
+            obt.nama,
+            raho.jumlah,
+            obt.harga_jual as harga,
+            (raho.jumlah*obt.harga_jual) as total_harga
+        FROM nota_penjualan np
+        INNER JOIN resep_apoteker ra ON np.resep_apoteker_id=ra.id
+        INNER JOIN rsp_aptkr_has_obat raho ON raho.resep_apoteker_id=ra.id
         INNER JOIN obat obt ON obt.id=raho.obat_id
-        INNER JOIN resep_apoteker ra ON ra.id=raho.resep_apoteker_id 
-        INNER JOIN nota_penjualan np ON np.visit_id=ra.visit_id 
         WHERE np.tgl_transaksi LIKE ?
         GROUP BY np.tgl_transaksi
         ORDER BY `np`.`tgl_transaksi` ASC;
