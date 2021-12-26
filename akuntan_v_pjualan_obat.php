@@ -27,7 +27,6 @@ elseif (isset($_POST['tgl_resep_nota'])) {
         "SELECT 
         nota_penjualan.id as nota_id,
         nota_penjualan.user_id as user_kasir,
-        nota_penjualan.visit_id as visit_id
         FROM `nota_penjualan` 
         WHERE tgl_transaksi LIKE ?";
     $stmt = $con->prepare($sql);
