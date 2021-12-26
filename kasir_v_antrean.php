@@ -39,9 +39,8 @@ elseif (isset($_POST['tgl_penulisan_resep'])) {
     ra.tgl_penulisan_resep,
     ra.nama_pembeli
     FROM resep_apoteker ra 
-    INNER JOIN rsp_aptkr_has_obat raho
-    ON ra.id=raho.resep_apoteker_id  
-    INNER JOIN nota_penjualan np ON np.id=ra.id
+    INNER JOIN rsp_aptkr_has_obat raho ON ra.id=raho.resep_apoteker_id  
+    LEFT JOIN nota_penjualan np ON np.resep_apoteker_id=ra.id
     WHERE ra.tgl_penulisan_resep LIKE ?
     AND np.id IS NULL
     GROUP BY ra.id  
@@ -55,15 +54,16 @@ elseif (isset($_POST['resep_id_non_visit'])) {
     ra.id as resep_id,
     ra.tgl_penulisan_resep,
     ra.nama_pembeli,
+    obat.id as obat_id,
     obat.nama,
+    obat.stok,
     raho.jumlah,
     obat.harga_jual
     FROM resep_apoteker ra 
     INNER JOIN rsp_aptkr_has_obat raho ON ra.id = raho.resep_apoteker_id
     INNER JOIN obat ON raho.obat_id=obat.id  
-    INNER JOIN nota_penjualan np ON np.id=ra.id
     WHERE ra.id=?
-    AND np.id IS NULL";
+    ";
 $stmt = $con->prepare($sql);
 $stmt->bind_param("s", $resep_id_non_visit);
 }
