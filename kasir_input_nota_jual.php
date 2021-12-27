@@ -17,11 +17,11 @@ if (!$visit_id) { //untuk pembeli obat non-visit
 if ($visit_id) { //untuk pembeli obat yg merupakan pasien visit
     $sql =
         "INSERT INTO `nota_penjualan` 
-        (`user_id`, `visit_id`, `tgl_transaksi`, `jasa_medis`,`biaya_admin`,`total_harga`) 
+        (`user_id`,resep_apoteker_id, `visit_id`, `tgl_transaksi`, `jasa_medis`,`biaya_admin`,`total_harga`) 
         VALUES 
-        (?,?,?,?,?,?)";
+        (?,?,?,?,?,?,?)";
     $stmt = $con->prepare($sql);
-    $stmt->bind_param("ssssss", $user_id, $visit_id,  $tgl_transaksi, $jasa_medis, $biaya_admin, $total_harga);
+    $stmt->bind_param("sssssss", $user_id, $resep_apoteker_id,$visit_id,  $tgl_transaksi, $jasa_medis, $biaya_admin, $total_harga);
 }
 
     
