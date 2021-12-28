@@ -36,12 +36,7 @@ elseif (isset($_POST['tgl_resep_nota'])) {
     $sql =
         "SELECT 
             np.tgl_transaksi as tgl_transaksi,
-            ra.id as resep_id,
-            obt.id as obat_id,
-            obt.nama,
-            raho.jumlah,
-            obt.harga_jual as harga,
-            (raho.jumlah*obt.harga_jual) as total_harga
+            SUM((raho.jumlah*obt.harga_jual) )as total_harga
         FROM nota_penjualan np
         INNER JOIN resep_apoteker ra ON np.resep_apoteker_id=ra.id
         INNER JOIN rsp_aptkr_has_obat raho ON raho.resep_apoteker_id=ra.id
@@ -52,6 +47,19 @@ elseif (isset($_POST['tgl_resep_nota'])) {
         ";
     $stmt = $con->prepare($sql);
     $stmt->bind_param("s", $tgl_penjualan);
+}elseif (isset($_POST['tgl_penjualan_total'])) {
+    $tgl_penjualan_total = "%{$_POST['tgl_penjualan_total']}%";
+    $sql =
+        "SELECT 
+        SUM((raho.jumlah*obat.harga_jual)) as total_penjualan_obat
+        FROM `nota_penjualan` np
+        INNER JOIN resep_apoteker ra ON np.resep_apoteker_id=ra.id
+        INNER JOIN rsp_aptkr_has_obat raho ON raho.resep_apoteker_id=ra.id
+        INNER JOIN obat ON obat.id=raho.obat_id
+        WHERE np.tgl_transaksi LIKE ?
+        ";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("s", $tgl_penjualan_total);
 }
 $stmt->execute();
 $result = $stmt->get_result();

@@ -15,7 +15,7 @@ if (isset($_POST['tgl_nota'])) {
         INNER JOIN resep_apoteker ra ON np.visit_id=ra.visit_id
         INNER JOIN user_klinik us ON us.id=np.user_id  
         WHERE np.tgl_transaksi LIKE ?
-        GROUP BY np.tgl_transaksi  
+        GROUP BY np.id  
         ORDER BY `np`.`tgl_transaksi`  ASC
         ";
     $stmt = $con->prepare($sql);
