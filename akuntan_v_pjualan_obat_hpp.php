@@ -35,8 +35,8 @@ elseif (isset($_POST['tgl_resep_visit'])) {
         &&  vst.perusahaan IS NULL";
     $stmt = $con->prepare($sql);
     $stmt->bind_param("s", $tgl_resep_visit);
-} elseif (isset($_POST['tgl_resep_non_visit'])) {
-    $tgl_resep_non_visit = "%{$_POST['tgl_resep_non_visit']}%";
+} elseif (isset($_POST['tgl_hpp_obat'])) {
+    $tgl_hpp_obat = "%{$_POST['tgl_hpp_obat']}%";
     $sql =
         "SELECT 
         np.tgl_transaksi as tgl_transaksi,
@@ -52,7 +52,20 @@ elseif (isset($_POST['tgl_resep_visit'])) {
         ORDER BY `np`.`tgl_transaksi` ASC;
         ";
     $stmt = $con->prepare($sql);
-    $stmt->bind_param("s", $tgl_resep_non_visit);
+    $stmt->bind_param("s", $tgl_hpp_obat);
+}elseif (isset($_POST['tgl_total_hpp_obat'])) {
+    $tgl_total_hpp_obat = "%{$_POST['tgl_total_hpp_obat']}%";
+    $sql =
+        "SELECT 
+        SUM(raho.jumlah * obat.harga_beli) as hpp_total
+        FROM nota_penjualan np
+        INNER JOIN resep_apoteker ra ON np.tgl_transaksi
+        INNER JOIN rsp_aptkr_has_obat raho ON raho.resep_apoteker_id=ra.id
+        INNER JOIN obat ON raho.obat_id=obat.id
+        WHERE np.tgl_transaksi LIKE ?
+        ";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("s", $tgl_total_hpp_obat);
 }
 $stmt->execute();
 $result = $stmt->get_result();
