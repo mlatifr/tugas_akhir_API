@@ -40,9 +40,7 @@ elseif (isset($_POST['tgl_resep_visit'])) {
     $sql =
         "SELECT 
         np.tgl_transaksi as tgl_transaksi,
-        raho.jumlah,
-        obt.harga_beli as harga,
-        (raho.jumlah*obt.harga_beli) as total_harga
+        SUM(raho.jumlah*obt.harga_beli) as total_harga
         FROM rsp_aptkr_has_obat raho
         INNER JOIN obat obt ON obt.id=raho.obat_id
         INNER JOIN resep_apoteker ra ON ra.id=raho.resep_apoteker_id 
@@ -59,7 +57,7 @@ elseif (isset($_POST['tgl_resep_visit'])) {
         "SELECT 
         SUM(raho.jumlah * obat.harga_beli) as hpp_total
         FROM nota_penjualan np
-        INNER JOIN resep_apoteker ra ON np.tgl_transaksi
+        INNER JOIN resep_apoteker ra ON np.resep_apoteker_id=ra.id
         INNER JOIN rsp_aptkr_has_obat raho ON raho.resep_apoteker_id=ra.id
         INNER JOIN obat ON raho.obat_id=obat.id
         WHERE np.tgl_transaksi LIKE ?
