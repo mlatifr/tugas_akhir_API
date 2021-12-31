@@ -3,7 +3,22 @@
 <?php
 $arr = [];
 $data = [];
-if (isset($_POST['tgl_list_nota'])) {
+if (isset($_POST['no_nota'])) {
+    $no_nota = "{$_POST['no_nota']}";
+    $sql =
+        "SELECT 
+        vht.mt_sisi,
+        tdk.nama,
+        tdk.harga
+        FROM nota_penjualan np
+        INNER JOIN visit ON np.visit_id=visit.id
+        INNER JOIN visit_has_tindakan vht on vht.visit_id=visit.id
+        INNER JOIN tindakan tdk ON tdk.id=vht.tindakan_id
+        WHERE np.id = ?
+        ";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("s", $no_nota);
+} elseif (isset($_POST['tgl_list_nota'])) {
     $tgl_list_nota = "%{$_POST['tgl_list_nota']}%";
     $sql =
         "SELECT 
