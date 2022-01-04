@@ -8,12 +8,9 @@ if (isset($_POST['tgl_transaksi'])) {
     $sql =
         "SELECT 
         np.tgl_transaksi,
-        psn.nama,
-        np.total_harga
+        SUM(np.total_harga) AS total_harga
         FROM nota_penjualan np
-        INNER JOIN visit_has_user vhu ON np.visit_id=vhu.visit_id
-        INNER JOIN pasien psn ON vhu.user_klinik_id=psn.user_klinik_id
-        WHERE tgl_transaksi LIKE ?";
+        WHERE np.tgl_transaksi LIKE ?";
 }
 $stmt = $con->prepare($sql);
 $stmt->bind_param("s", $tgl_transaksi);
