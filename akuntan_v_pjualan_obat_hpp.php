@@ -30,8 +30,10 @@ elseif (isset($_POST['tgl_list'])) {
         INNER JOIN obat obt ON obt.id=raho.obat_id
         INNER JOIN resep_apoteker ra ON ra.id=raho.resep_apoteker_id 
         INNER JOIN visit vst ON ra.visit_id=vst.id
+        INNER JOIN nota_penjualan np ON np.resep_apoteker_id=ra.id
         WHERE ra.tgl_penulisan_resep LIKE ?
-        &&  vst.perusahaan IS NULL";
+        -- &&  vst.perusahaan IS NULL
+        ";
     $stmt = $con->prepare($sql);
     $stmt->bind_param("s", $tgl_list);
 } elseif (isset($_POST['tgl_hpp_nota_obat'])) {

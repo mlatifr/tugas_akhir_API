@@ -25,10 +25,13 @@ elseif (isset($_POST['tgl_resep_nota'])) {
     $tgl_resep_nota = "%{$_POST['tgl_resep_nota']}%";
     $sql =
         "SELECT 
-        nota_penjualan.id as nota_id,
-        nota_penjualan.user_id as user_kasir,
-        FROM `nota_penjualan` 
-        WHERE tgl_transaksi LIKE ?";
+        np.id as nota_id,
+        (raho.jumlah*obt.harga_jual)as total_harga
+        FROM nota_penjualan np
+        INNER JOIN resep_apoteker ra ON np.resep_apoteker_id=ra.id
+        INNER JOIN rsp_aptkr_has_obat raho ON raho.resep_apoteker_id=ra.id
+        INNER JOIN obat obt ON obt.id=raho.obat_id
+        WHERE np.tgl_transaksi LIKE ?";
     $stmt = $con->prepare($sql);
     $stmt->bind_param("s", $tgl_resep_nota);
 } elseif (isset($_POST['tgl_penjualan'])) {

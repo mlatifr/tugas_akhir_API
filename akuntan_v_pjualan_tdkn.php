@@ -23,22 +23,31 @@ if (isset($_POST['no_nota'])) {
     $sql =
         "SELECT 
         np.id as nota_id,
-            (SELECT 
-            SUM(tdk.harga) as harga
-            FROM nota_penjualan np
-            INNER JOIN visit vst ON np.visit_id=vst.id
-            INNER JOIN visit_has_tindakan vht ON vht.visit_id=vst.id
-            INNER JOIN tindakan tdk ON tdk.id=vht.tindakan_id
-            WHERE np.tgl_transaksi LIKE ?)as total_harga
+         SUM(tdk.harga) as total_harga
         FROM nota_penjualan np
         INNER JOIN visit vst ON np.visit_id=vst.id
         INNER JOIN visit_has_tindakan vht ON vht.visit_id=vst.id
         INNER JOIN tindakan tdk ON tdk.id=vht.tindakan_id
         WHERE np.tgl_transaksi LIKE ?
-        GROUP BY np.id
-        ";
+        GROUP BY np.id";
+        // "SELECT 
+        // np.id as nota_id,
+        //     (SELECT 
+        //     SUM(tdk.harga) as harga
+        //     FROM nota_penjualan np
+        //     INNER JOIN visit vst ON np.visit_id=vst.id
+        //     INNER JOIN visit_has_tindakan vht ON vht.visit_id=vst.id
+        //     INNER JOIN tindakan tdk ON tdk.id=vht.tindakan_id
+        //     WHERE np.tgl_transaksi LIKE ?)as total_harga
+        // FROM nota_penjualan np
+        // INNER JOIN visit vst ON np.visit_id=vst.id
+        // INNER JOIN visit_has_tindakan vht ON vht.visit_id=vst.id
+        // INNER JOIN tindakan tdk ON tdk.id=vht.tindakan_id
+        // WHERE np.tgl_transaksi LIKE ?
+        // GROUP BY np.id
+        // ";
     $stmt = $con->prepare($sql);
-    $stmt->bind_param("ss", $tgl_list_nota,$tgl_list_nota);
+    $stmt->bind_param("s", $tgl_list_nota);
 } elseif (isset($_POST['tgl_transaksi'])) {
     $tgl_transaksi = "%{$_POST['tgl_transaksi']}%";
     $sql =
