@@ -7,8 +7,8 @@ $sql =
 obat.id, nama, obat.stok as stok, obat.kadaluarsa
 FROM obat 
 WHERE nama like ?
-AND kadaluarsa IS NOT NULL
-GROUP BY obat.nama
+AND kadaluarsa IS NOT NULL AND obat.stok > 0
+-- GROUP BY obat.nama
 ORDER BY `obat`.`kadaluarsa` ASC
 ";
 $stmt = $con->prepare($sql);

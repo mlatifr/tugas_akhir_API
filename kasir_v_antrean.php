@@ -21,23 +21,24 @@ pasien.nama AS nama,
 `keluhan`,
 np.total_harga
 FROM
-    `visit` vst
+`visit` vst
 INNER JOIN visit_has_user vhu ON
-    vst.id = vhu.visit_id
+vst.id = vhu.visit_id
 INNER JOIN user_klinik ON vhu.user_klinik_id = user_klinik.id
 INNER JOIN pasien ON user_klinik.id = pasien.user_klinik_id
 LEFT JOIN nota_penjualan np ON
-    np.visit_id = vst.id
+np.visit_id = vst.id
 LEFT JOIN visit_has_tindakan vht ON
-    vht.visit_id = vst.id
-LEFT JOIN resep_has_obat rho ON
-    rho.visit_id = vst.id
+vht.visit_id = vst.id
+LEFT JOIN resep_apoteker ra ON
+ra.visit_id = vst.id
 WHERE
-    tgl_visit LIKE ? AND user_klinik.username NOT LIKE '%dokter%' AND np.total_harga IS NULL AND(
-        vht.id IS NOT NULL OR rho.id IS NOT NULL
-    )
+tgl_visit LIKE ? AND user_klinik.username NOT LIKE '%dokter%' AND np.total_harga IS NULL AND(
+    vht.id IS NOT NULL OR ra.id IS NOT NULL
+)
+GROUP BY pasien.nama
 ORDER BY
-    `vst`.`nomor_antrean` ASC";
+`vst`.`nomor_antrean` ASC";
 //     "SELECT 
 //     vst.id as visit_id, 
 //     vhu.id as vhu_id, 
