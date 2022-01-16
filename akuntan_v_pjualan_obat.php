@@ -24,33 +24,59 @@ if (isset($_POST['tgl_resep_detail'])) {
 elseif (isset($_POST['tgl_resep_nota'])) {
     $tgl_resep_nota = "%{$_POST['tgl_resep_nota']}%";
     $sql =
-        "SELECT 
-        np.id as nota_id,
-        (raho.jumlah*obt.harga_jual)as total_harga
-        FROM nota_penjualan np
-        INNER JOIN resep_apoteker ra ON np.resep_apoteker_id=ra.id
-        INNER JOIN rsp_aptkr_has_obat raho ON raho.resep_apoteker_id=ra.id
-        INNER JOIN obat obt ON obt.id=raho.obat_id
-        WHERE np.tgl_transaksi LIKE ?";
+        "SELECT
+        np.id AS nota_id,
+        np.tgl_transaksi,
+        SUM(raho.jumlah * obt.harga_jual) AS total_penjualan
+    FROM
+        nota_penjualan np
+    INNER JOIN resep_apoteker ra ON
+        np.resep_apoteker_id = ra.id
+    INNER JOIN rsp_aptkr_has_obat raho ON
+        raho.resep_apoteker_id = ra.id
+    INNER JOIN obat obt ON
+        obt.id = raho.obat_id
+    WHERE
+        np.tgl_transaksi LIKE ?
+    GROUP BY
+        np.id";
     $stmt = $con->prepare($sql);
     $stmt->bind_param("s", $tgl_resep_nota);
 } elseif (isset($_POST['tgl_penjualan'])) {
     $tgl_penjualan = "%{$_POST['tgl_penjualan']}%";
     $sql =
-        "SELECT 
-            np.tgl_transaksi as tgl_transaksi,
-            SUM((raho.jumlah*obt.harga_jual) )as total_harga
-        FROM nota_penjualan np
-        INNER JOIN resep_apoteker ra ON np.resep_apoteker_id=ra.id
-        INNER JOIN rsp_aptkr_has_obat raho ON raho.resep_apoteker_id=ra.id
-        INNER JOIN obat obt ON obt.id=raho.obat_id
-        WHERE np.tgl_transaksi LIKE ?
-        GROUP BY np.tgl_transaksi
-        ORDER BY `np`.`tgl_transaksi` ASC;
+        "SELECT
+        np.tgl_transaksi AS tgl_transaksi,
+        SUM((raho.jumlah * obt.harga_jual)) AS total_harga,
+        (
+        SELECT
+            COUNT(nota_penjualan.id)
+        FROM
+            `nota_penjualan`
+        INNER JOIN resep_apoteker ra ON
+            nota_penjualan.resep_apoteker_id = ra.id
+        WHERE
+            nota_penjualan.tgl_transaksi LIKE np.tgl_transaksi AND ra.id IS NOT NULL
+        ) AS total_nota
+        FROM
+            nota_penjualan np
+        INNER JOIN resep_apoteker ra ON
+            np.resep_apoteker_id = ra.id
+        INNER JOIN rsp_aptkr_has_obat raho ON
+            raho.resep_apoteker_id = ra.id
+        INNER JOIN obat obt ON
+            obt.id = raho.obat_id
+        WHERE
+            np.tgl_transaksi LIKE ?
+        GROUP BY
+            np.tgl_transaksi
+        ORDER BY
+            `np`.`tgl_transaksi` ASC
         ";
     $stmt = $con->prepare($sql);
     $stmt->bind_param("s", $tgl_penjualan);
-}elseif (isset($_POST['tgl_penjualan_total'])) {
+}
+elseif (isset($_POST['tgl_penjualan_total'])) {
     $tgl_penjualan_total = "%{$_POST['tgl_penjualan_total']}%";
     $sql =
         "SELECT 
