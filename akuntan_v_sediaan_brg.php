@@ -18,11 +18,25 @@ if (isset($_POST['tgl_transaksi'])) {
     // echo($sql);
 }else {
     $sql =
-    "SELECT 
-    `nama`,
-    `stok`,
-    `harga_beli`
-FROM `obat` ";
+    "SELECT
+    obt.nama AS nama,
+    SUM(obt.stok) AS stok,
+    (
+    SELECT
+        SUM(obt1.stok * obt1.harga_beli)
+    FROM
+        obat obt1
+    WHERE
+        obt.nama = obt1.nama
+    ) AS total_harga
+    FROM
+        obat AS obt
+    WHERE
+        (obt.stok) > 0
+    GROUP BY
+        obt.nama
+    ORDER BY
+        obt.nama ASC";
 }    
 $stmt = $con->prepare($sql);
 $stmt->execute();
