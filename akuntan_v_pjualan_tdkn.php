@@ -59,6 +59,7 @@ if (isset($_POST['no_nota'])) {
         INNER JOIN visit_has_tindakan vht ON vht.visit_id=vst.id
         INNER JOIN tindakan tdk ON tdk.id=vht.tindakan_id
         WHERE np.tgl_transaksi LIKE ?
+        GROUP BY np.tgl_transaksi
         ";
     $stmt = $con->prepare($sql);
     $stmt->bind_param("s", $tgl_transaksi);
