@@ -5,17 +5,42 @@ $arr = [];
 $data = [];
 if (isset($_POST['tgl_transaksi'])) {    
     $tgl_transaksi = "%{$_POST['tgl_transaksi']}%";
-    $sql="SELECT
+    $sql=
+    "SELECT
     obat.nama,
-    history_stok.stok,
+    SUM(history_stok.stok) AS stok,
     obat.harga_beli,
-    (history_stok.stok*obat.harga_beli)AS total_harga
+    (
+    SELECT
+        SUM(
+            history_stok.stok * obt1.harga_beli
+        ) AS stok
     FROM
-    `history_stok`
+        `history_stok`
+    INNER JOIN obat obt1 ON
+        obt1.id = history_stok.obat_id
+    WHERE
+        obt1.nama LIKE obat.nama
+    ) AS total_harga
+    FROM
+        `history_stok`
     RIGHT JOIN obat ON history_stok.obat_id = obat.id
-    WHERE history_stok.stok IS NOT NULL
-    AND history_stok.tgl_transaksi LIKE '$tgl_transaksi'";
-    // echo($sql);
+    WHERE
+        history_stok.stok IS NOT NULL AND history_stok.tgl_transaksi LIKE '%2022-01-18 %'
+    GROUP BY
+        obat.nama
+    ";
+    // "SELECT
+    // obat.nama,
+    // history_stok.stok,
+    // obat.harga_beli,
+    // (history_stok.stok*obat.harga_beli)AS total_harga
+    // FROM
+    // `history_stok`
+    // RIGHT JOIN obat ON history_stok.obat_id = obat.id
+    // WHERE history_stok.stok IS NOT NULL
+    // AND history_stok.tgl_transaksi LIKE '$tgl_transaksi'";
+    // // echo($sql);
 }else {
     $sql =
     "SELECT
