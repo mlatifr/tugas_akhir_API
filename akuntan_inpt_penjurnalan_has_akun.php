@@ -3,7 +3,7 @@
 <?php
 $arr = [];
 extract($_POST);
-$penjurnalan_id = ($_POST['penjurnalan_id']);
+$id = ($_POST['id']);
 $daftar_akun_id = $_POST['daftar_akun_id'];
 $tgl_catat = $_POST['tgl_catat'];
 $debet = $_POST['debet'];
@@ -13,8 +13,9 @@ $sql =
     "INSERT INTO `penjurnalan_has_akun` 
         (`penjurnalan_id`, `daftar_akun_id`, `tgl_catat`, `debet`, `kredit`, `ket_transaksi`)  
         VALUES 
-        ('" . $penjurnalan_id . "','" . $daftar_akun_id . "','" . $tgl_catat . "','" . $debet . "','" . $kredit . "','" . $ket_transaksi . "')";
+        ('" . $id . "','" . $daftar_akun_id . "','" . $tgl_catat . "','" . $debet . "','" . $kredit . "','" . $ket_transaksi . "')";
 $stmt = $con->prepare($sql);
+// echo ('stmt nya adalah:' . $sql);
 $stmt->execute();
 
 if ($stmt->affected_rows > 0) {

@@ -8,10 +8,10 @@ $stmt = $con->prepare($sql);
 $stmt->bind_param("ss", $user_klinik, $tgl_penjurnalan);
 $stmt->execute();
 if ($stmt->affected_rows > 0) {
-    $penjurnalan_id = $con->insert_id;
-    $arr = ["result" => "success", "penjurnalan_id" => $con->insert_id];
+    $id = $con->insert_id;
+    $arr = ["result" => "success", "id" => $con->insert_id];
 } else {
-    $arr = ["result" => "fail", "penjurnalan_id" => $penjurnalan_id, "Error" => $con->error];
+    $arr = ["result" => "fail", "id" => $id, "Error" => $con->error];
 }
 echo json_encode($arr);
 
