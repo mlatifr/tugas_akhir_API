@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "14a9e505-25dc-4193-9072-a4ec4a80b292",
 		"name": "klinik_mata",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15570191"
 	},
 	"item": [
 		{
@@ -64,6 +65,131 @@
 					"path": [
 						"tugas_akhir",
 						"pasien_biodata.php"
+					]
+				},
+				"description": "mencari biodata pasien berdasarkan nama pasien"
+			},
+			"response": []
+		},
+		{
+			"name": "pasien_daftar_user_baru",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "coba",
+							"type": "text"
+						},
+						{
+							"key": "sandi",
+							"value": "coba",
+							"type": "text"
+						},
+						{
+							"key": "NIK",
+							"value": "NIK",
+							"type": "text"
+						},
+						{
+							"key": "nama",
+							"value": "nama",
+							"type": "text"
+						},
+						{
+							"key": "tempat_lahir",
+							"value": "tempat_lahir",
+							"type": "text"
+						},
+						{
+							"key": "tgl_lahir",
+							"value": "1996-10-05",
+							"type": "text"
+						},
+						{
+							"key": "kelamin",
+							"value": "kelamin",
+							"type": "text"
+						},
+						{
+							"key": "golongan_darah",
+							"value": "golongan_darah",
+							"type": "text"
+						},
+						{
+							"key": "alamat",
+							"value": "alamat",
+							"type": "text"
+						},
+						{
+							"key": "agama",
+							"value": "agama",
+							"type": "text"
+						},
+						{
+							"key": "status_kawin",
+							"value": "status_kawin",
+							"type": "text"
+						},
+						{
+							"key": "pekerjaan",
+							"value": "pekerjaan",
+							"type": "text"
+						},
+						{
+							"key": "kewarganegaraan",
+							"value": "kewarganegaraan",
+							"type": "text"
+						},
+						{
+							"key": "tlp",
+							"value": "tlp",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/pasien_daftar_user_baru.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"pasien_daftar_user_baru.php"
+					]
+				},
+				"description": "mencari biodata pasien berdasarkan nama pasien"
+			},
+			"response": []
+		},
+		{
+			"name": "pasien_v_username_available",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "pasien",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/pasien_v_username_available.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"pasien_v_username_available.php"
 					]
 				},
 				"description": "mencari biodata pasien berdasarkan nama pasien"
@@ -203,6 +329,40 @@
 					"path": [
 						"tugas_akhir",
 						"pasien_v_tindakan.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pasien_v_visit_id_now",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_id",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "tgl_visit",
+							"value": "2021-11-25",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/pasien_v_visit_id_now.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"pasien_v_visit_id_now.php"
 					]
 				}
 			},
@@ -395,13 +555,19 @@
 		},
 		{
 			"name": "dokter_v_list_tindakan",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
 			"request": {
 				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": []
-				},
+				"header": [
+					{
+						"key": "tindakan_nama",
+						"value": "3",
+						"type": "text",
+						"disabled": true
+					}
+				],
 				"url": {
 					"raw": "http://localhost/tugas_akhir/dokter_v_list_tindakan.php",
 					"protocol": "http",
@@ -831,17 +997,21 @@
 					"formdata": [
 						{
 							"key": "visit_id",
-							"value": "4",
+							"value": "8",
 							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "http://localhost/tugas_akhir/apoteker_v_rsp_dr.php",
+					"raw": "http://192.168.1.96:8080/tugas_akhir/apoteker_v_rsp_dr.php",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"192",
+						"168",
+						"1",
+						"96"
 					],
+					"port": "8080",
 					"path": [
 						"tugas_akhir",
 						"apoteker_v_rsp_dr.php"
@@ -1045,6 +1215,30 @@
 			"response": []
 		},
 		{
+			"name": "apoteker_v_antrean",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/apoteker_v_antrean.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"apoteker_v_antrean.php"
+					]
+				},
+				"description": "apoteker melihat resep obat yg telah dibuat dokter berdasarkan visit_id"
+			},
+			"response": []
+		},
+		{
 			"name": "admin_v_antrean",
 			"request": {
 				"method": "POST",
@@ -1068,6 +1262,147 @@
 					"path": [
 						"tugas_akhir",
 						"admin_v_antrean.php"
+					]
+				},
+				"description": "admin melihat antrean pasien berdasarkan tgl"
+			},
+			"response": []
+		},
+		{
+			"name": "admin_upd_obat_stok",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "jumlah_diterima",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "stok",
+							"value": "30",
+							"type": "text"
+						},
+						{
+							"key": "kadaluarsa",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "status_order",
+							"value": "pemesanan",
+							"type": "text"
+						},
+						{
+							"key": "obat_id",
+							"value": "13",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/admin_upd_obat_stok.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"admin_upd_obat_stok.php"
+					]
+				},
+				"description": "admin melihat antrean pasien berdasarkan tgl"
+			},
+			"response": []
+		},
+		{
+			"name": "admin_v_order_tgl",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tgl_order",
+							"value": "2021",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/admin_v_order_tgl.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"admin_v_order_tgl.php"
+					]
+				},
+				"description": "admin melihat antrean pasien berdasarkan tgl"
+			},
+			"response": []
+		},
+		{
+			"name": "admin_v_order_nota",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tgl_order",
+							"value": "2021",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/admin_v_order_nota.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"admin_v_order_nota.php"
+					]
+				},
+				"description": "admin melihat antrean pasien berdasarkan tgl"
+			},
+			"response": []
+		},
+		{
+			"name": "admin_v_order_list_obat",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "order_id",
+							"value": "20",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/admin_v_order_list_obat.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"admin_v_order_list_obat.php"
 					]
 				},
 				"description": "admin melihat antrean pasien berdasarkan tgl"
@@ -1244,14 +1579,21 @@
 					"formdata": [
 						{
 							"key": "tgl_visit",
-							"value": "2021-11-01",
+							"value": "2022",
 							"type": "text"
+						},
+						{
+							"key": "tgl_penulisan_resep",
+							"value": "202",
+							"description": "untuk pasien yg langsung beli di apoteker",
+							"type": "text",
+							"disabled": true
 						}
 					]
 				},
 				"url": {
-					"raw": "http://localhost/tugas_akhir/kasir_v_antrean.php",
-					"protocol": "http",
+					"raw": "https://localhost/tugas_akhir/kasir_v_antrean.php",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
@@ -1467,6 +1809,111 @@
 			"response": []
 		},
 		{
+			"name": "kasir_update_stok_obat",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "obat_id",
+							"value": "1",
+							"description": "dikosongi jika pembeli tidak visit, langsung beli di apotek",
+							"type": "text"
+						},
+						{
+							"key": "stok_obat_baru",
+							"value": "485",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/kasir_update_stok_obat.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"kasir_update_stok_obat.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pemilik_add_pegawai",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "coba",
+							"type": "text"
+						},
+						{
+							"key": "sandi",
+							"value": "coba",
+							"type": "text"
+						},
+						{
+							"key": "nama",
+							"value": "nama",
+							"type": "text"
+						},
+						{
+							"key": "tlp",
+							"value": "tlp ",
+							"type": "text"
+						},
+						{
+							"key": "alamat",
+							"value": "alamat",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/pemilik_add_pegawai.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"pemilik_add_pegawai.php"
+					]
+				},
+				"description": "mencari biodata pasien berdasarkan nama pasien"
+			},
+			"response": []
+		},
+		{
+			"name": "pemilik_v_pegawai",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/tugas_akhir/pemilik_v_pegawai.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"pemilik_v_pegawai.php"
+					]
+				},
+				"description": "isi salah satu:\ntgl_order: berdasarkan tgl order dengan operator LIKE %tgl_order%\norder_obat_id: WHERE order_id = ?(id_ordernya)"
+			},
+			"response": []
+		},
+		{
 			"name": "pemilik_input_tgl_order",
 			"request": {
 				"method": "POST",
@@ -1480,8 +1927,8 @@
 							"type": "text"
 						},
 						{
-							"key": "tgl_transaksi",
-							"value": "2021-10-31",
+							"key": "tgl_order",
+							"value": "2021-12-8",
 							"type": "text"
 						}
 					]
@@ -1680,6 +2127,36 @@
 			"response": []
 		},
 		{
+			"name": "pemilik_v_kas",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tahun",
+							"value": "2022",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/pemilik_v_kas.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"pemilik_v_kas.php"
+					]
+				},
+				"description": "isi salah satu:\ntgl_order: berdasarkan tgl order dengan operator LIKE %tgl_order%\norder_obat_id: WHERE order_id = ?(id_ordernya)"
+			},
+			"response": []
+		},
+		{
 			"name": "akuntan_v_pjualan_obat",
 			"request": {
 				"method": "POST",
@@ -1688,15 +2165,21 @@
 					"mode": "formdata",
 					"formdata": [
 						{
-							"key": "tgl_resep",
+							"key": "tgl_resep_visit",
 							"value": "2021-10",
-							"type": "text"
+							"type": "text",
+							"disabled": true
 						},
 						{
 							"key": "tgl_resep_detail",
 							"value": "2021-10",
 							"type": "text",
 							"disabled": true
+						},
+						{
+							"key": "tgl_resep_non_visit",
+							"value": "2021-11",
+							"type": "text"
 						}
 					]
 				},
@@ -1709,6 +2192,120 @@
 					"path": [
 						"tugas_akhir",
 						"akuntan_v_pjualan_obat.php"
+					]
+				},
+				"description": "tgl_resep: melihat penjualan obat pada tgl tertentu\ntgl_resep_detail: jika send tgl_resep_detail, maka diberi rincian, \n\njika tidak, hanya diberi total pendapatan uang obat pada tgl tersebut"
+			},
+			"response": []
+		},
+		{
+			"name": "akuntan_v_kas",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tgl_transaksi",
+							"value": "2021-11",
+							"type": "text"
+						},
+						{
+							"key": "tgl_resep_detail",
+							"value": "2021-10",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tgl_resep_non_visit",
+							"value": "2021-11",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/akuntan_v_kas.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"akuntan_v_kas.php"
+					]
+				},
+				"description": "tgl_resep: melihat penjualan obat pada tgl tertentu\ntgl_resep_detail: jika send tgl_resep_detail, maka diberi rincian, \n\njika tidak, hanya diberi total pendapatan uang obat pada tgl tersebut"
+			},
+			"response": []
+		},
+		{
+			"name": "akuntan_v_dftr_akun",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tgl_transaksi",
+							"value": "2021-11",
+							"type": "text"
+						},
+						{
+							"key": "tgl_resep_detail",
+							"value": "2021-10",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tgl_resep_non_visit",
+							"value": "2021-11",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/akuntan_v_dftr_akun.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"akuntan_v_dftr_akun.php"
+					]
+				},
+				"description": "tgl_resep: melihat penjualan obat pada tgl tertentu\ntgl_resep_detail: jika send tgl_resep_detail, maka diberi rincian, \n\njika tidak, hanya diberi total pendapatan uang obat pada tgl tersebut"
+			},
+			"response": []
+		},
+		{
+			"name": "akuntan_v_pjualan_obat_hpp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tgl_total_hpp_obat",
+							"value": "0",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/akuntan_v_pjualan_obat_hpp.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"akuntan_v_pjualan_obat_hpp.php"
 					]
 				},
 				"description": "tgl_resep: melihat penjualan obat pada tgl tertentu\ntgl_resep_detail: jika send tgl_resep_detail, maka diberi rincian, \n\njika tidak, hanya diberi total pendapatan uang obat pada tgl tersebut"
@@ -1731,7 +2328,7 @@
 						},
 						{
 							"key": "tgl_visit_detail",
-							"value": "2021",
+							"value": "2021-12",
 							"type": "text"
 						}
 					]
@@ -1752,6 +2349,36 @@
 			"response": []
 		},
 		{
+			"name": "akuntan_v_pjualan_nota",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tgl_nota",
+							"value": "2021",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/akuntan_v_pjualan_nota.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"akuntan_v_pjualan_nota.php"
+					]
+				},
+				"description": "tgl_resep: melihat penjualan obat pada tgl tertentu\ntgl_resep_detail: jika send tgl_resep_detail, maka diberi rincian, \n\njika tidak, hanya diberi total pendapatan uang obat pada tgl tersebut"
+			},
+			"response": []
+		},
+		{
 			"name": "akuntan_v_pjualan_jasmed",
 			"request": {
 				"method": "POST",
@@ -1761,7 +2388,7 @@
 					"formdata": [
 						{
 							"key": "tgl_transaksi",
-							"value": "2021-10",
+							"value": "2021-11-",
 							"type": "text"
 						}
 					]
@@ -1846,6 +2473,36 @@
 					"path": [
 						"tugas_akhir",
 						"akuntan_v_piutang_obat.php"
+					]
+				},
+				"description": "tgl_resep: melihat penjualan obat pada tgl tertentu\ntgl_resep_detail: jika send tgl_resep_detail, maka diberi rincian, \n\njika tidak, hanya diberi total pendapatan uang obat pada tgl tersebut"
+			},
+			"response": []
+		},
+		{
+			"name": "akuntan_v_sediaan_barang",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tgl_transaksi",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/akuntan_v_sediaan_brg.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"akuntan_v_sediaan_brg.php"
 					]
 				},
 				"description": "tgl_resep: melihat penjualan obat pada tgl tertentu\ntgl_resep_detail: jika send tgl_resep_detail, maka diberi rincian, \n\njika tidak, hanya diberi total pendapatan uang obat pada tgl tersebut"
@@ -2002,6 +2659,41 @@
 			"response": []
 		},
 		{
+			"name": "akuntan_add_akunCoA",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "no",
+							"value": "507",
+							"type": "text"
+						},
+						{
+							"key": "nama",
+							"value": "biaya belanja snack",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/akuntan_add_akunCoA.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"akuntan_add_akunCoA.php"
+					]
+				},
+				"description": "setelah mendapat resep_id dari \napoteker_input_resep\nmaka apoteker bisa mengisi obat sesuai yg diresepkan dokter pada:\napoteker_v_rsp_dr"
+			},
+			"response": []
+		},
+		{
 			"name": "akuntan_inpt_penjurnalan",
 			"request": {
 				"method": "POST",
@@ -2037,7 +2729,7 @@
 			"response": []
 		},
 		{
-			"name": "akuntan_inpt_penjurnalan_akun",
+			"name": "akuntan_inpt_penjurnalan_has_akun",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -2045,8 +2737,8 @@
 					"mode": "formdata",
 					"formdata": [
 						{
-							"key": "penjurnalan_id",
-							"value": "1",
+							"key": "id",
+							"value": "15",
 							"description": "dikosongi jika pembeli tidak visit, langsung beli di apotek",
 							"type": "text"
 						},
@@ -2078,14 +2770,14 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost/tugas_akhir/akuntan_inpt_penjurnalan_akun.php",
+					"raw": "http://localhost/tugas_akhir/akuntan_inpt_penjurnalan_has_akun.php",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"path": [
 						"tugas_akhir",
-						"akuntan_inpt_penjurnalan_akun.php"
+						"akuntan_inpt_penjurnalan_has_akun.php"
 					]
 				},
 				"description": "setelah mendapat resep_id dari \napoteker_input_resep\nmaka apoteker bisa mengisi obat sesuai yg diresepkan dokter pada:\napoteker_v_rsp_dr"
@@ -2281,6 +2973,81 @@
 					]
 				},
 				"description": "pilih salah satu:\nkredit or debet\nutk melihat total kredit atau debet"
+			},
+			"response": []
+		},
+		{
+			"name": "dokter_input_resep_has_obat Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "obat_id",
+							"value": "7",
+							"type": "text"
+						},
+						{
+							"key": "dosis",
+							"value": "3x1",
+							"type": "text"
+						},
+						{
+							"key": "jumlah",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "visit_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/dokter_input_resep_has_obat.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"dokter_input_resep_has_obat.php"
+					]
+				},
+				"description": "dokter memasukan resep pobat setelah melihat list obat pada dokter_v_list_obat"
+			},
+			"response": []
+		},
+		{
+			"name": "get_data_cek_url_youtube",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.youtube.com/oembed?format=json&url=https://www.youtube.com/watch?v=h4TYgGCG4p4",
+					"protocol": "https",
+					"host": [
+						"www",
+						"youtube",
+						"com"
+					],
+					"path": [
+						"oembed"
+					],
+					"query": [
+						{
+							"key": "format",
+							"value": "json"
+						},
+						{
+							"key": "url",
+							"value": "https://www.youtube.com/watch?v=h4TYgGCG4p4"
+						}
+					]
+				}
 			},
 			"response": []
 		}
