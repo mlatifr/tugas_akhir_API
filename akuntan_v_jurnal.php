@@ -9,20 +9,19 @@ $tgl_transaksi = "%{$_POST['tgl_transaksi']}%";
 $sql = "SELECT
         pj.id,
         da.nama,
-        pj.tgl_penjurnalan,
-        pha.debet,
-        pha.kredit
+        pj.tgl_catat,
+        pj.debet,
+        pj.kredit
         FROM
         `penjurnalan` pj
-        INNER JOIN penjurnalan_has_akun pha ON
-        pj.id = pha.penjurnalan_id
         INNER JOIN daftar_akun da ON
-        pha.daftar_akun_id = da.id
+        pj.daftar_akun_id = da.id
         WHERE
-        pj.tgl_penjurnalan LIKE ?
+        pj.tgl_catat LIKE ?
         ORDER BY
-        `pj`.`tgl_penjurnalan` ASC";
-        echo('sql nya:'.$tgl_transaksi);
+        `pj`.`tgl_catat` ASC
+        ";
+// echo ('sql nya:' . $tgl_transaksi);
 $stmt = $con->prepare($sql);
 $stmt->bind_param("s", $tgl_transaksi);
 $stmt->execute();
