@@ -1,18 +1,28 @@
 <?php require 'connect.php';
 ?>
 <?php
-// $visit_id;
+$arr = [];
 extract($_POST);
-$sql = "INSERT INTO `penjurnalan` (`user_klinik_id`, `tgl_penjurnalan`)VALUES (?,?)";
+$user_klinik_id = ($_POST['user_klinik_id']);
+$daftar_akun_id = $_POST['daftar_akun_id'];
+$tgl_catat = $_POST['tgl_catat'];
+$debet = $_POST['debet'];
+$kredit = $_POST['kredit'];
+$ket_transaksi = $_POST['ket_transaksi'];
+$sql =
+    "INSERT INTO `penjurnalan` 
+    (`user_klinik_id`, `daftar_akun_id`, `tgl_catat`, `debet`, `kredit`, `ket_transaksi`) 
+    VALUES 
+    ($user_klinik_id,$daftar_akun_id,$tgl_catat,$debet,$kredit,'$ket_transaksi')";
 $stmt = $con->prepare($sql);
-$stmt->bind_param("ss", $user_klinik, $tgl_penjurnalan);
+echo ('stmt nya adalah:' . $sql);
 $stmt->execute();
+
 if ($stmt->affected_rows > 0) {
-    $id = $con->insert_id;
-    $arr = ["result" => "success", "id" => $con->insert_id];
+    $arr = ["result" => "success", "penjurnalan_has_akun_id" => $con->insert_id];
 } else {
-    $arr = ["result" => "fail", "id" => $id, "Error" => $con->error];
-}
+    $arr = ["result" => "fail", "Error" => $con->error,];
+};
 echo json_encode($arr);
 
 $con->close();
