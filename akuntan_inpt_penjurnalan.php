@@ -19,7 +19,7 @@ echo ('stmt nya adalah:' . $sql);
 $stmt->execute();
 
 if ($stmt->affected_rows > 0) {
-    $arr = ["result" => "success", "penjurnalan_has_akun_id" => $con->insert_id];
+    $arr = ["result" => "success", "penjurnalan_id" => $con->insert_id];
 } else {
     $arr = ["result" => "fail", "Error" => $con->error,];
 };
