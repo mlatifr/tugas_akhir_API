@@ -13,13 +13,13 @@ $sql =
     "INSERT INTO `penjurnalan` 
     (`user_klinik_id`, `daftar_akun_id`, `tgl_catat`, `debet`, `kredit`, `ket_transaksi`) 
     VALUES 
-    ($user_klinik_id,$daftar_akun_id,$tgl_catat,$debet,$kredit,'$ket_transaksi')";
+    ($user_klinik_id,$daftar_akun_id,'$tgl_catat',$debet,$kredit,'$ket_transaksi')";
 $stmt = $con->prepare($sql);
-echo ('stmt nya adalah:' . $sql);
+// echo ('stmt nya adalah:' . $sql);
 $stmt->execute();
 
 if ($stmt->affected_rows > 0) {
-    $arr = ["result" => "success", "penjurnalan_id" => $con->insert_id];
+    $arr = ["result" => "success", "penjurnalan_id" => $con->insert_id, "tgl_catat" => $tgl_catat];
 } else {
     $arr = ["result" => "fail", "Error" => $con->error,];
 };

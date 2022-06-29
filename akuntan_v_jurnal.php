@@ -11,7 +11,8 @@ $sql = "SELECT
         da.nama,
         pj.tgl_catat,
         pj.debet,
-        pj.kredit
+        pj.kredit,
+        pj.ket_transaksi
         FROM
         `penjurnalan` pj
         INNER JOIN daftar_akun da ON
