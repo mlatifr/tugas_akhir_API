@@ -7,7 +7,7 @@ $arr = [];
 $data = [];
 $tgl_transaksi = "%{$_POST['tgl_transaksi']}%";
 $sql = "SELECT
-        pj.id,
+        da.id as noAkun,
         da.nama,
         pj.tgl_catat,
         pj.debet,
