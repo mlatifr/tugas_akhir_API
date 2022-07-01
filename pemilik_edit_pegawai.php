@@ -13,16 +13,11 @@ $tlp = isset($_POST['tlp']) ? $_POST['tlp'] : '';
 $alamat = isset($_POST['alamat']) ? $_POST['alamat'] : '';
 if (isset($_POST['id_pegawai']) && isset($_POST['status']) && empty(($_POST['nama']))) {
     $sql =
-        "UPDATE
-            `info_pegawai`
-        SET 
-            status = '$status',
-        WHERE
-            info_pegawai.id = $id_pegawai
+        "UPDATE `info_pegawai` SET `status` = '$status' WHERE `info_pegawai`.`id` =$id_pegawai
         ";
 }
 //update data pegawai
-if (isset($_POST['nama']) && isset($_POST['tlp']) && isset($_POST['alamat']) && isset($_POST['unit_kerja'])) {
+if (isset($_POST['id_pegawai']) && isset($_POST['nama']) && isset($_POST['tlp']) && isset($_POST['alamat']) && isset($_POST['unit_kerja'])) {
     $sql =
         "UPDATE
         `info_pegawai`
@@ -35,11 +30,11 @@ if (isset($_POST['nama']) && isset($_POST['tlp']) && isset($_POST['alamat']) && 
         info_pegawai.id = $id_pegawai
     ";
 }
-// if ($con->query($sql) === TRUE) {
-//     $arr = ["result" => "success yes", "data" => $sql];
-// } else {
-//     $arr = ["result" => "error", "message" => "sql error: $sql"];
-// }
-// echo json_encode($arr);
-echo ($sql);
+if ($con->query($sql) === TRUE) {
+    $arr = ["result" => "success yes", "data" => $sql];
+} else {
+    $arr = ["result" => "error", "message" => "sql error: $sql"];
+}
+echo json_encode($arr);
+// echo ($sql);
 $con->close();
