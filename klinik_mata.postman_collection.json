@@ -1914,6 +1914,61 @@
 			"response": []
 		},
 		{
+			"name": "pemilik_edit_pegawai",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id_pegawai",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "non-aktif",
+							"type": "text"
+						},
+						{
+							"key": "nama",
+							"value": "nama",
+							"type": "text"
+						},
+						{
+							"key": "unit_kerja",
+							"value": "nol",
+							"type": "text"
+						},
+						{
+							"key": "tlp",
+							"value": "081231",
+							"type": "text"
+						},
+						{
+							"key": "alamat",
+							"value": "nolll",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/pemilik_edit_pegawai.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"pemilik_edit_pegawai.php"
+					]
+				},
+				"description": "isi salah satu:\ntgl_order: berdasarkan tgl order dengan operator LIKE %tgl_order%\norder_obat_id: WHERE order_id = ?(id_ordernya)"
+			},
+			"response": []
+		},
+		{
 			"name": "pemilik_input_tgl_order",
 			"request": {
 				"method": "POST",
@@ -2276,6 +2331,36 @@
 					"path": [
 						"tugas_akhir",
 						"akuntan_v_dftr_akun.php"
+					]
+				},
+				"description": "tgl_resep: melihat penjualan obat pada tgl tertentu\ntgl_resep_detail: jika send tgl_resep_detail, maka diberi rincian, \n\njika tidak, hanya diberi total pendapatan uang obat pada tgl tersebut"
+			},
+			"response": []
+		},
+		{
+			"name": "akuntan_v_jurnal",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tgl_transaksi",
+							"value": "2022",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/tugas_akhir/akuntan_v_jurnal.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"tugas_akhir",
+						"akuntan_v_jurnal.php"
 					]
 				},
 				"description": "tgl_resep: melihat penjualan obat pada tgl tertentu\ntgl_resep_detail: jika send tgl_resep_detail, maka diberi rincian, \n\njika tidak, hanya diberi total pendapatan uang obat pada tgl tersebut"
@@ -2694,7 +2779,7 @@
 			"response": []
 		},
 		{
-			"name": "akuntan_inpt_penjurnalan",
+			"name": "akuntan_inpt_penjurnalan_unused",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -2729,7 +2814,7 @@
 			"response": []
 		},
 		{
-			"name": "akuntan_inpt_penjurnalan_has_akun",
+			"name": "akuntan_inpt_penjurnalan",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -2737,7 +2822,7 @@
 					"mode": "formdata",
 					"formdata": [
 						{
-							"key": "id",
+							"key": "user_klinik_id",
 							"value": "15",
 							"description": "dikosongi jika pembeli tidak visit, langsung beli di apotek",
 							"type": "text"
@@ -2759,7 +2844,7 @@
 						},
 						{
 							"key": "kredit",
-							"value": "",
+							"value": "0",
 							"type": "text"
 						},
 						{
@@ -2770,14 +2855,14 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost/tugas_akhir/akuntan_inpt_penjurnalan_has_akun.php",
+					"raw": "http://localhost/tugas_akhir/akuntan_inpt_penjurnalan.php",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"path": [
 						"tugas_akhir",
-						"akuntan_inpt_penjurnalan_has_akun.php"
+						"akuntan_inpt_penjurnalan.php"
 					]
 				},
 				"description": "setelah mendapat resep_id dari \napoteker_input_resep\nmaka apoteker bisa mengisi obat sesuai yg diresepkan dokter pada:\napoteker_v_rsp_dr"
