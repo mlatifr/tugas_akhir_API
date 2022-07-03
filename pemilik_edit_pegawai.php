@@ -26,7 +26,7 @@ if (isset($_POST['id_pegawai']) && isset($_POST['status']) && isset($_POST['nama
             `nama` = '$nama',
             `status` = '$status',
             `unit_kerja` = '$unit_kerja',
-            `tlp` = '1$tlp',
+            `tlp` = '$tlp',
             `alamat` = '$alamat'
         WHERE
             `info_pegawai`.`id` = $id_pegawai
@@ -34,7 +34,7 @@ if (isset($_POST['id_pegawai']) && isset($_POST['status']) && isset($_POST['nama
     // echo "sql: " . $sql;
 }
 if ($con->query($sql) === TRUE) {
-    $arr = ["result" => "success", "data" => $nama . ' ' . $status . ' ' . $unit_kerja . ' ' . $tlp . ' ' . $alamat];
+    $arr = ["result" => "success", "sql" => $sql, "data" => $nama . ' ' . $status . ' ' . $unit_kerja . ' ' . $tlp . ' ' . $alamat];
 } else {
     $arr = ["result" => "error", "message" => "sql error: $sql"];
 }
