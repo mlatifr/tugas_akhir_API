@@ -20,7 +20,7 @@ echo $obat_id;
 if ($stmt->affected_rows > 0) {
     require 'connect.php';
 } else {
-    $arr = ["result" => "fail", "Error" => $con->error,];
+    $arr = ["result" => "fail pemilik_input_order_item.php", "sql" => "$sql", "Error" => $con->error,];
     echo json_encode($arr);
     $con->close();
 };
