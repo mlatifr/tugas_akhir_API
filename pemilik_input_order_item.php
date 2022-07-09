@@ -10,9 +10,9 @@ $obat_id = '';
 extract($_POST);
 $sql =
     "INSERT INTO `obat` 
-        (`order_obat_id`, `jumlah_order`, `nama`, `harga_beli`)
+        (`order_obat_id`, `jumlah_order`, `nama`, `harga_beli`,`harga_jual`,`status_order`)
         VALUES 
-        ('" . $order_obat_id . "','" .  $jumlah_order . "','" . $nama . "', '" . $harga_beli . "')";
+        ('" . $order_obat_id . "','" .  $jumlah_order . "','" . $nama . "', '" . $harga_beli . "', '" . $harga_jual . "', '" . $status_order . "')";
 $stmt = $con->prepare($sql);
 $stmt->execute();
 $obat_array = $con->insert_id;

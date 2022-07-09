@@ -11,7 +11,7 @@ $stmt = $con->prepare($sql);
 $stmt->execute();
 if ($stmt->affected_rows > 0) {
     $last_id = $con->insert_id;
-    $arr = ["result" => "success", "sql" => "$sql",  "id_order_obat_tgl" => $last_id];
+    $arr = ["result" => "success", "sql" => "$sql",  "order_obat_id" => $last_id];
 } else {
     $arr = ["result" => "fail", "Error" => $con->error, 'jumlah_array' => count($obat_array)];
 }

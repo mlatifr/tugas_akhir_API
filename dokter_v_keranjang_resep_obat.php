@@ -3,7 +3,7 @@
 <?php
 $visit_id = "{$_POST['visit_id']}";
 $sql =
-    "SELECT obt.nama,rho.jumlah,rho.dosis 
+    "SELECT obt.id,obt.nama,rho.jumlah,rho.dosis 
     FROM resep_has_obat rho
     INNER JOIN obat obt ON rho.obat_id=obt.id
     WHERE visit_id = ?
