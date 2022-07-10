@@ -3,12 +3,12 @@
 <?php
 // $visit_id;
 extract($_POST);
-echo  $obat_id . ' ' . $dosis . ' ' . $jumlah . ' ' . $visit_id;
+// echo  $obat_id . ' ' . $dosis . ' ' . $jumlah . ' ' . $visit_id;
 $sql = '';
 // $sql = "INSERT INTO `resep_has_obat` (`obat_id`, `dosis`, `jumlah`, `visit_id`) VALUES (`$obat_id`, `$dosis`, `$jumlah`, `$visit_id`)";
 // $sql = "INSERT INTO `resep_has_obat` (`id`, `obat_id`, `dosis`, `jumlah`, `visit_id`) VALUES (NULL, '20', '3x1', '1', '1')";
 $sql = "INSERT INTO `resep_has_obat` (`id`, `obat_id`, `dosis`, `jumlah`, `visit_id`) VALUES (NULL, $obat_id, '$dosis', $jumlah, $visit_id)";
-echo '<br>' . $sql;
+// echo '<br>' . $sql;
 $stmt = $con->prepare($sql);
 $stmt->execute();
 if ($stmt->affected_rows > 0) {

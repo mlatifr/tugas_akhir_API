@@ -12,7 +12,7 @@ $tgl_visit = "%{$_POST['tgl_visit']}%";
 $sql =
     "SELECT
     visit.id AS visit_id,
-    pasien.nama AS nama_pasien
+    uk.username AS nama_pasien
     FROM
     `visit`
     INNER JOIN resep_has_obat rho ON
@@ -23,38 +23,38 @@ $sql =
     vhu.visit_id = visit.id
     INNER JOIN user_klinik uk ON
     vhu.user_klinik_id = uk.id
-    INNER JOIN pasien ON pasien.user_klinik_id = uk.id
+    -- INNER JOIN pasien ON pasien.user_klinik_id = uk.id
     WHERE visit.tgl_visit LIKE ? AND ra.id IS NULL
     GROUP BY visit.id";
-    // "SELECT
-    // visit.id AS visit_id,
-    // pasien.nama as nama_pasien
-    // FROM
-    // `visit`
-    // INNER JOIN resep_has_obat rho ON
-    // rho.visit_id = visit.id
-    // INNER JOIN visit_has_user vhu ON
-    // visit.id = vhu.visit_id
-    // INNER JOIN pasien ON pasien.user_klinik_id = vhu.user_klinik_id
-    // WHERE visit.tgl_visit LIKE ?
-    // GROUP BY pasien.nama";
-    // "SELECT 
-	// 	vst.id AS visit_id,
-    //     vhu.id AS vhu_id,
-    //     vhu.user_klinik_id AS pasien_id,
-    //     `tgl_visit`,
-    //     user_klinik.username AS username,
-    //     `nomor_antrean`,
-    //     `status_antrean`,
-    //     `keluhan`
-    // FROM `visit` vst 
-    // INNER JOIN visit_has_user vhu ON vst.id=vhu.visit_id 
-    // INNER JOIN user_klinik ON vhu.user_klinik_id=user_klinik.id 
-    // LEFT JOIN resep_apoteker ra ON ra.visit_id=vst.id 
-	// WHERE tgl_visit LIKE ?
-    // AND user_klinik.username NOT LIKE '%dokter%'
-    // AND ra.id IS NULL
-    // ";
+// "SELECT
+// visit.id AS visit_id,
+// pasien.nama as nama_pasien
+// FROM
+// `visit`
+// INNER JOIN resep_has_obat rho ON
+// rho.visit_id = visit.id
+// INNER JOIN visit_has_user vhu ON
+// visit.id = vhu.visit_id
+// INNER JOIN pasien ON pasien.user_klinik_id = vhu.user_klinik_id
+// WHERE visit.tgl_visit LIKE ?
+// GROUP BY pasien.nama";
+// "SELECT 
+// 	vst.id AS visit_id,
+//     vhu.id AS vhu_id,
+//     vhu.user_klinik_id AS pasien_id,
+//     `tgl_visit`,
+//     user_klinik.username AS username,
+//     `nomor_antrean`,
+//     `status_antrean`,
+//     `keluhan`
+// FROM `visit` vst 
+// INNER JOIN visit_has_user vhu ON vst.id=vhu.visit_id 
+// INNER JOIN user_klinik ON vhu.user_klinik_id=user_klinik.id 
+// LEFT JOIN resep_apoteker ra ON ra.visit_id=vst.id 
+// WHERE tgl_visit LIKE ?
+// AND user_klinik.username NOT LIKE '%dokter%'
+// AND ra.id IS NULL
+// ";
 $stmt = $con->prepare($sql);
 $stmt->bind_param("s", $tgl_visit);
 $stmt->execute();
