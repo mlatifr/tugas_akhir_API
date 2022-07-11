@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 10, 2022 at 03:29 AM
+-- Generation Time: Jul 11, 2022 at 07:49 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -188,7 +188,7 @@ CREATE TABLE `antrean_admin` (
 --
 
 INSERT INTO `antrean_admin` (`id`, `user_klinik_id`, `status_antrean`, `antrean_sekarang`, `antrean_terakhir`, `batas_antrean`) VALUES
-(1, 1, 'buka', 0, 1, 5);
+(1, 1, 'buka', 0, 3, 5);
 
 -- --------------------------------------------------------
 
@@ -320,7 +320,10 @@ INSERT INTO `nota_penjualan` (`id`, `user_id`, `visit_id`, `resep_apoteker_id`, 
 (4, 13, 12, NULL, '2021-11-10 17:00:00', 1, 0, 1),
 (5, 13, 12, NULL, '2021-11-10 17:00:00', 4000, 1000, 33000),
 (6, 13, 1, NULL, '2021-11-11 17:00:00', 10000, 4000, 37000),
-(7, 13, 2, NULL, '2021-11-13 17:00:00', 111, 444, 42555);
+(7, 13, 2, NULL, '2021-11-13 17:00:00', 111, 444, 42555),
+(8, 13, 7, NULL, '2022-07-09 17:00:00', 0, 0, 891),
+(9, 13, 7, NULL, '2022-07-09 17:00:00', 0, 0, 891),
+(10, 13, 8, NULL, '2022-07-10 17:00:00', 0, 0, 16000);
 
 -- --------------------------------------------------------
 
@@ -347,7 +350,7 @@ CREATE TABLE `obat` (
 
 INSERT INTO `obat` (`id`, `order_obat_id`, `jumlah_order`, `jumlah_diterima`, `nama`, `stok`, `kadaluarsa`, `harga_jual`, `harga_beli`, `status_order`) VALUES
 (1, 1, 1, NULL, 'Allegran Refresh', 10, '2021-11-01 01:57:19', '9000', '8800', ''),
-(2, 1, 2, NULL, 'Blink Contacts', 5, '2021-11-02 01:57:25', '6000', '5500', ''),
+(2, 1, 2, NULL, 'Blink Contacts', 3, '2021-11-02 01:57:25', '6000', '5500', ''),
 (3, 1, 3, NULL, 'Calcium Pyruvat', 5, '2021-11-03 01:57:28', '5500', '5450', ''),
 (4, 1, 4, NULL, 'FOCUSON', 5, '2021-11-04 01:57:32', '13000', '12200', ''),
 (5, NULL, 5, 5, 'Masker', 5, '2021-11-05 01:57:36', '5000', NULL, ''),
@@ -358,7 +361,7 @@ INSERT INTO `obat` (`id`, `order_obat_id`, `jumlah_order`, `jumlah_diterima`, `n
 (17, 18, 220, NULL, 'Blink Contacts', NULL, NULL, NULL, '2200', ''),
 (18, 19, 22, 11, 'Blink Contacts', 11, '2022-07-07 17:00:00', '2200', '2200', 'diterima'),
 (19, 19, 22, 11, 'Blink Contacts', 11, '2022-07-08 17:00:00', '2200', '2200', 'diterima'),
-(20, 9, 99, 99, '99', 99, '2022-07-08 07:50:37', '99', '99', 'pemesanan');
+(20, 9, 99, 99, '99', 80, '2022-07-08 07:50:37', '99', '99', 'pemesanan');
 
 --
 -- Triggers `obat`
@@ -368,7 +371,7 @@ CREATE TRIGGER `after_insert` AFTER INSERT ON `obat` FOR EACH ROW INSERT INTO ob
 $$
 DELIMITER ;
 DELIMITER $$
-CREATE TRIGGER `after_update_obat` AFTER UPDATE ON `obat` FOR EACH ROW INSERT INTO obat_history (`obat_id`, `order_obat_id`, `jumlah_order`, `jumlah_diterima`, `nama`, `stok`, `kadaluarsa`, `harga_jual`, `harga_beli`, `status_order`, `tanggal`) VALUES  (new.id,new.order_obat_id, new.jumlah_order, new.jumlah_diterima, new.nama, new.stok, new.kadaluarsa, new.harga_jual, new.harga_beli,'penjualan', NOW())
+CREATE TRIGGER `after_update_obat` AFTER UPDATE ON `obat` FOR EACH ROW INSERT INTO obat_history (`obat_id`, `order_obat_id`, `jumlah_order`, `jumlah_diterima`, `nama`, `stok`,`terjual`, `kadaluarsa`, `harga_jual`, `harga_beli`, `status_order`, `tanggal`) VALUES  (new.id,new.order_obat_id, new.jumlah_order, new.jumlah_diterima, new.nama, new.stok,(old.stok-new.stok), new.kadaluarsa, new.harga_jual, new.harga_beli,'penjualan', NOW())
 $$
 DELIMITER ;
 
@@ -386,6 +389,7 @@ CREATE TABLE `obat_history` (
   `jumlah_diterima` int(11) DEFAULT NULL,
   `nama` varchar(45) DEFAULT NULL,
   `stok` int(11) DEFAULT NULL,
+  `terjual` int(11) DEFAULT NULL,
   `kadaluarsa` timestamp NULL DEFAULT NULL,
   `harga_jual` varchar(45) DEFAULT NULL,
   `harga_beli` varchar(45) DEFAULT NULL,
@@ -397,11 +401,15 @@ CREATE TABLE `obat_history` (
 -- Dumping data for table `obat_history`
 --
 
-INSERT INTO `obat_history` (`id`, `obat_id`, `order_obat_id`, `jumlah_order`, `jumlah_diterima`, `nama`, `stok`, `kadaluarsa`, `harga_jual`, `harga_beli`, `status_order`, `tanggal`) VALUES
-(8, 8, 8, 88, 88, '888', 888, '2022-07-08 07:22:46', '888', '888', 'pemesanan', '2022-07-08 14:27:34'),
-(20, 20, 9, 99, 99, '99', 99, '2022-07-08 07:50:37', '99', '99', 'pemesanan', '2022-07-08 14:51:04'),
-(21, 8, 8, 88, 88, 'delapan delapan', 888, '2022-07-08 07:22:46', '888', '888', 'pemesanan', '2022-07-08 14:52:03'),
-(22, 8, 8, 88, 88, 'delapan delapan', 887, '2022-07-08 07:22:46', '888', '888', 'penjualan', '2022-07-08 14:54:24');
+INSERT INTO `obat_history` (`id`, `obat_id`, `order_obat_id`, `jumlah_order`, `jumlah_diterima`, `nama`, `stok`, `terjual`, `kadaluarsa`, `harga_jual`, `harga_beli`, `status_order`, `tanggal`) VALUES
+(8, 8, 8, 88, 88, '888', 888, 0, '2022-07-08 07:22:46', '888', '888', 'pemesanan', '2022-07-08 14:27:34'),
+(20, 20, 9, 99, 99, '99', 99, 0, '2022-07-08 07:50:37', '99', '99', 'pemesanan', '2022-07-08 14:51:04'),
+(21, 8, 8, 88, 88, 'delapan delapan', 888, 0, '2022-07-08 07:22:46', '888', '888', 'pemesanan', '2022-07-08 14:52:03'),
+(22, 8, 8, 88, 88, 'delapan delapan', 887, 1, '2022-07-08 07:22:46', '888', '888', 'penjualan', '2022-07-08 14:54:24'),
+(23, 20, 9, 99, 99, '99', 90, 9, '2022-07-08 07:50:37', '99', '99', 'penjualan', '2022-07-11 07:10:42'),
+(24, 20, 9, 99, 99, '99', 81, 9, '2022-07-08 07:50:37', '99', '99', 'penjualan', '2022-07-11 07:12:02'),
+(25, 20, 9, 99, 99, '99', 80, 1, '2022-07-08 07:50:37', '99', '99', 'penjualan', '2022-07-11 07:36:23'),
+(26, 2, 1, 2, NULL, 'Blink Contacts', 3, 2, '2021-11-02 01:57:25', '6000', '5500', 'penjualan', '2022-07-11 07:48:41');
 
 -- --------------------------------------------------------
 
@@ -557,7 +565,8 @@ INSERT INTO `resep_apoteker` (`id`, `visit_id`, `nama_pembeli`, `user_id_apoteke
 (4, 2, NULL, 6, '2021-11-13 17:00:00'),
 (5, 3, NULL, 6, '2021-11-15 17:00:00'),
 (6, 3, NULL, 6, '2021-11-15 17:00:00'),
-(7, 7, NULL, 6, '2022-07-09 17:00:00');
+(7, 7, NULL, 6, '2022-07-09 17:00:00'),
+(8, 8, NULL, 6, '2022-07-10 17:00:00');
 
 -- --------------------------------------------------------
 
@@ -596,7 +605,8 @@ INSERT INTO `resep_has_obat` (`id`, `obat_id`, `dosis`, `jumlah`, `visit_id`) VA
 (28, 2, '1x1', '2', 5),
 (29, 4, '2x1', '2', 5),
 (30, 1, '2x2', '2', 6),
-(31, 20, '9x9', '9', 7);
+(31, 20, '9x9', '9', 7),
+(32, 2, '2x1', '2', 8);
 
 -- --------------------------------------------------------
 
@@ -621,7 +631,8 @@ INSERT INTO `rsp_aptkr_has_obat` (`id`, `resep_apoteker_id`, `obat_id`, `jumlah`
 (2, 1, 2, '2', '2x1'),
 (3, 3, 4, '3', '3x1'),
 (5, 5, 4, '3', '3x1'),
-(6, 7, 20, '9', '99');
+(6, 7, 20, '9', '99'),
+(7, 8, 2, '2', '2x1');
 
 -- --------------------------------------------------------
 
@@ -752,7 +763,9 @@ INSERT INTO `visit` (`id`, `nomor_antrean`, `status_antrean`, `perusahaan`, `tgl
 (4, 2, 'belum', NULL, '2021-11-16 09:56:07', 'operasi pasien 2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (5, 1, 'belum', NULL, '2022-07-09 22:56:54', 'berobat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (6, 2, 'belum', NULL, '2022-07-09 22:59:53', 'berobat2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(7, 1, 'belum', NULL, '2022-07-10 01:08:57', 'berobat pasien 1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(7, 1, 'belum', NULL, '2022-07-10 01:08:57', 'berobat pasien 1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(8, 2, 'belum', NULL, '2022-07-11 00:46:00', 'pasien 2 berobat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(9, 3, 'belum', NULL, '2022-07-11 00:51:13', 'p3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -781,7 +794,9 @@ INSERT INTO `visit_has_tindakan` (`id`, `tindakan_id`, `visit_id`, `mt_sisi`) VA
 (20, 1, 5, 'kiri'),
 (21, 1, 5, 'kanan'),
 (22, 2, 6, 'kiri'),
-(23, 2, 6, 'kanan');
+(23, 2, 6, 'kanan'),
+(24, 2, 8, 'kanan'),
+(25, 2, 8, 'kiri');
 
 -- --------------------------------------------------------
 
@@ -806,7 +821,9 @@ INSERT INTO `visit_has_user` (`id`, `visit_id`, `user_klinik_id`) VALUES
 (4, 4, 4),
 (5, 5, 33),
 (6, 6, 33),
-(7, 7, 3);
+(7, 7, 3),
+(8, 8, 4),
+(9, 9, 5);
 
 --
 -- Indexes for dumped tables
@@ -994,7 +1011,7 @@ ALTER TABLE `komentar`
 -- AUTO_INCREMENT for table `nota_penjualan`
 --
 ALTER TABLE `nota_penjualan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `obat`
@@ -1006,7 +1023,7 @@ ALTER TABLE `obat`
 -- AUTO_INCREMENT for table `obat_history`
 --
 ALTER TABLE `obat_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `order_obat`
@@ -1030,19 +1047,19 @@ ALTER TABLE `penjurnalan`
 -- AUTO_INCREMENT for table `resep_apoteker`
 --
 ALTER TABLE `resep_apoteker`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `resep_has_obat`
 --
 ALTER TABLE `resep_has_obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `rsp_aptkr_has_obat`
 --
 ALTER TABLE `rsp_aptkr_has_obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tindakan`
@@ -1060,19 +1077,19 @@ ALTER TABLE `user_klinik`
 -- AUTO_INCREMENT for table `visit`
 --
 ALTER TABLE `visit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `visit_has_tindakan`
 --
 ALTER TABLE `visit_has_tindakan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `visit_has_user`
 --
 ALTER TABLE `visit_has_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables

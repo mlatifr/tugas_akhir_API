@@ -12,14 +12,14 @@ $sql =
         vhu.user_klinik_id as pasien_id, 
         `tgl_visit`, 
         user_klinik.username as username, 
-        pasien.nama as nama, 
+        -- pasien.nama as nama, 
         `nomor_antrean`, 
         `status_antrean`, 
         `keluhan` 
     FROM `visit`vst 
         join visit_has_user vhu on vst.id=vhu.visit_id 
         join user_klinik on vhu.user_klinik_id=user_klinik.id 
-        join pasien on user_klinik.id=pasien.user_klinik_id 
+        -- join pasien on user_klinik.id=pasien.user_klinik_id 
     WHERE tgl_visit like ?
         AND user_klinik.username NOT LIKE '%dokter%' 
     ORDER BY `vst`.`nomor_antrean` ASC";
